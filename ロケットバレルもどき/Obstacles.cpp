@@ -28,14 +28,14 @@ void Obstacles::Update()
 		x += vx;
 	}
 
-	// å½“ãŸã‚Šåˆ¤å®šç”¨ã«æ›´æ–°ï¼ˆç”»åƒã‚µã‚¤ã‚ºã«åˆã‚ã›ã¦èª¿æ•´ã—ã¦ãã ã•ã„ï¼‰
-	// ä¸Š
+	// “–‚½‚è”»’è—p‚ÉXVi‰æ‘œƒTƒCƒY‚É‡‚í‚¹‚Ä’²®‚µ‚Ä‚­‚¾‚³‚¢j
+	// ã
 	box1.Update(x+310, y + 250 , 300, 100);
 
-	// çœŸã‚“ä¸­
+	// ^‚ñ’†
 	box2.Update(x + 300, y + 280, 345, 100);
 
-	// ä¸‹
+	// ‰º
 	box3.Update(x + 239, y + 320, 450, 95);
 
 
@@ -54,12 +54,12 @@ void Obstacles::Draw()
 
 	DrawRotaGraph3(x, y, 0, 0, size, size, 0, playerImg, TRUE, TRUE);
 
-	//å½“ãŸã‚Šåˆ¤å®šã®ä½ç½®
-	//DrawBox(box1.x1, box1.y1, box1.x2, box1.y2, GetColor(255, 0, 0), FALSE);   // èµ¤
-	//DrawBox(box2.x1, box2.y1, box2.x2, box2.y2, GetColor(0, 255, 0), FALSE);   // ç·‘
-	//DrawBox(box3.x1, box3.y1, box3.x2, box3.y2, GetColor(0, 0, 255), FALSE);   // é’ 
-	//DrawBox(box4.x1, box4.y1, box4.x2, box4.y2, GetColor(0, 255, 255), FALSE); // ã‚·ã‚¢ãƒ³
-	//DrawBox(box5.x1, box5.y1, box5.x2, box5.y2, GetColor(255, 0, 255), FALSE); // ãƒžã‚¼ãƒ³ã‚¿
-	//DrawBox(box6.x1, box6.y1, box6.x2, box6.y2, GetColor(255, 255, 0), FALSE); // é»„
+	//“–‚½‚è”»’è‚ÌˆÊ’u
+	DrawBox(box1.x1, box1.y1, box1.x2, box1.y2, GetColor(255, 0, 0), FALSE);   // Ô
+	DrawBox(box2.x1, box2.y1, box2.x2, box2.y2, GetColor(0, 255, 0), FALSE);   // —Î
+	DrawBox(box3.x1, box3.y1, box3.x2, box3.y2, GetColor(0, 0, 255), FALSE);   // Â 
+	DrawBox(box4.x1, box4.y1, box4.x2, box4.y2, GetColor(0, 255, 255), FALSE); // ƒVƒAƒ“
+	DrawBox(box5.x1, box5.y1, box5.x2, box5.y2, GetColor(255, 0, 255), FALSE); // ƒ}ƒ[ƒ“ƒ^
+	DrawBox(box6.x1, box6.y1, box6.x2, box6.y2, GetColor(255, 255, 0), FALSE); // ‰©
 
 }
