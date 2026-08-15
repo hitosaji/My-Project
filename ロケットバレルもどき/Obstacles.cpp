@@ -55,11 +55,11 @@ void Obstacles::Draw()
 	DrawRotaGraph3(x, y, 0, 0, size, size, 0, playerImg, TRUE, TRUE);
 
 	//当たり判定の位置
-	//DrawBox(box1.x1, box1.y1, box1.x2, box1.y2, GetColor(255, 0, 0), FALSE);   // 赤
-	//DrawBox(box2.x1, box2.y1, box2.x2, box2.y2, GetColor(0, 255, 0), FALSE);   // 緑
-	//DrawBox(box3.x1, box3.y1, box3.x2, box3.y2, GetColor(0, 0, 255), FALSE);   // 青 
-	//DrawBox(box4.x1, box4.y1, box4.x2, box4.y2, GetColor(0, 255, 255), FALSE); // シアン
-	//DrawBox(box5.x1, box5.y1, box5.x2, box5.y2, GetColor(255, 0, 255), FALSE); // マゼンタ
-	//DrawBox(box6.x1, box6.y1, box6.x2, box6.y2, GetColor(255, 255, 0), FALSE); // 黄
+	DrawBox(box1.x1, box1.y1, box1.x2, box1.y2, GetColor(255, 0, 0), FALSE);   // 赤
+	DrawBox(box2.x1, box2.y1, box2.x2, box2.y2, GetColor(0, 255, 0), FALSE);   // 緑
+	DrawBox(box3.x1, box3.y1, box3.x2, box3.y2, GetColor(0, 0, 255), FALSE);   // 青 
+	DrawBox(box4.x1, box4.y1, box4.x2, box4.y2, GetColor(0, 255, 255), FALSE); // シアン
+	DrawBox(box5.x1, box5.y1, box5.x2, box5.y2, GetColor(255, 0, 255), FALSE); // マゼンタ
+	DrawBox(box6.x1, box6.y1, box6.x2, box6.y2, GetColor(255, 255, 0), FALSE); // 黄
 
 }

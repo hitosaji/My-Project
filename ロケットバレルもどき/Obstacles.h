@@ -27,5 +27,6 @@ public:
 	int vy;
 	int vx;
 	int playerImg;
+	int player_Life=3;
 
 };

@@ -7,11 +7,12 @@
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
-    ChangeWindowMode(TRUE);// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ¢ãƒ¼ãƒ‰
+    ChangeWindowMode(TRUE);
     SetGraphMode(640, 440, 32);
-    DxLib_Init();           // DxLibåˆæœŸåŒ– 
-    SetDrawScreen(DX_SCREEN_BACK);
+
     if (DxLib_Init() == -1) return -1;
+
+    SetDrawScreen(DX_SCREEN_BACK);
 
     Player player;
    
@@ -25,15 +26,15 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
     allObstacles.push_back(Obstacles(2300, 70));
     allObstacles.push_back(Obstacles(2600, 50));
     allObstacles.push_back(Obstacles(2700, 25));
-   /* allObstacles.push_back(Obstacles(300, -250));*/  //ç¢ºèªç”¨
+   /* allObstacles.push_back(Obstacles(300, -250));*/  //Šm”F—p
 
     bool gameOver = false;
 	bool Dead = false;
-	int playerLife = 3; // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ãƒ©ã‚¤ãƒ•ã‚’3ã«è¨­å®š
+	int playerLife = 3; // ƒvƒŒƒCƒ„[‚Ìƒ‰ƒCƒt‚ğ3‚Éİ’è
 
     while (ProcessMessage() == 0)
     {
-        // æç”» 
+        // •`‰æ 
         ClearDrawScreen();
 
         if (!gameOver)
@@ -56,19 +57,20 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
                     Dead = true;
                     break;
                 }
+                else if (Dead)
+                {
+                  /* playerLife--;*/
+                   Dead = false;
+                   break;
+                }
+		        else if (playerLife<=0)
+                {
+                     DrawString(200, 200, "Game Over", GetColor(255, 0, 0));
+                    gameOver = true;
+                }
             }
         }
-        else if (Dead)
-        {
-            playerLife--;
-            Dead = false;
-            break;
-        }
-		else if (playerLife <= 0)
-        {
-            DrawString(200, 200, "Game Over", GetColor(255, 0, 0));
-            gameOver = true;
-        }
+       
         
   
         background.Draw();
@@ -90,7 +92,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
        
        
-        DrawBox(0, 0, 640, 440, GetColor(255, 255, 255), FALSE); //ã‚²ãƒ¼ãƒ ç”»é¢ã®æ 
+        DrawBox(0, 0, 640, 440, GetColor(255, 255, 255), FALSE); //ƒQ[ƒ€‰æ–Ê‚Ì˜g
 
 
 
