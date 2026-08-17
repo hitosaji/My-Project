@@ -1,10 +1,11 @@
 #include "DxLib.h"
 #include "player.h"
 #include"startsetting.h"
+#include"Config.h"
 
 Player::Player()
 {
-    playerImg = LoadGraph("Picture/Player.png");//ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ç”»åƒã®èª­ã¿è¾¼ã¿
+    playerImg = LoadGraph("Picture/Player.png");//ƒvƒŒƒCƒ„[‰æ‘œ‚Ì“Ç‚İ‚İ
 }
 void Player::Update()
 {
@@ -13,22 +14,22 @@ void Player::Update()
 
     if (startsetting.isPlaying == TRUE)
     {
-        if (CheckHitKey(KEY_INPUT_SPACE))    //ã‚­ãƒ¼ã®å‰²ã‚Šå½“ã¦
+        if (CheckHitKey(KEY_INPUT_SPACE))    //ƒL[‚ÌŠ„‚è“–‚Ä
         {
-            vy -= 0.2f; // ä¸Šã«åŠ é€Ÿï¼ˆãƒ­ã‚±ãƒƒãƒˆæ¨é€²ï¼‰
+            vy -= ConstNumber::PLAYER_V;    // ã‚É‰Á‘¬iƒƒPƒbƒg„ij
         }
-        vy += 0.1f;      // é‡åŠ›
+        vy += ConstNumber::PLAYER_GRAVITY;     // d—Í
 
-        y += vy;      // ä½ç½®æ›´æ–°
+        y += vy;      // ˆÊ’uXV
 
-        // ç”»é¢å¤–ã«å‡ºãªã„ã‚ˆã†ã«åˆ¶é™
-        if (y < 0)      // ä¸Š
+        // ‰æ–ÊŠO‚Éo‚È‚¢‚æ‚¤‚É§ŒÀ
+        if (y < ConstNumber::PLAYER_LANDSCAPE_UP)      // ã
         {
-            y = 0;
-            vy = 2;
+            y = 0.0f;
+            vy = 2.0f;
         }
 
-        if (y > 480 - 64)      // ä¸‹
+        if (y > 480 - 64)      // ‰º
         {
             y = 480 - 64;
             if (vy > 0) vy = 0;
@@ -38,17 +39,17 @@ void Player::Update()
     else
     {
         y = startsetting.y;
-        if (CheckHitKey(KEY_INPUT_SPACE))      //ã‚­ãƒ¼ã®å‰²ã‚Šå½“ã¦
+        if (CheckHitKey(KEY_INPUT_SPACE))      //ƒL[‚ÌŠ„‚è“–‚Ä
         {
-            y -= 1.0f; // ä¸Šã«åŠ é€Ÿï¼ˆãƒ­ã‚±ãƒƒãƒˆæ¨é€²ï¼‰
+            y -= 1.0f; // ã‚É‰Á‘¬iƒƒPƒbƒg„ij
         }
     }
 }
 void Player::Draw()
 {
-    int size = 64;      //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ç”»åƒã®å¤§ãã•
+    int size = 64;      //ƒvƒŒƒCƒ„[‰æ‘œ‚Ì‘å‚«‚³
 
-    DrawExtendGraph(100, (int)y, 100 + size, (int)y + size, playerImg, TRUE);      //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ç”»åƒã®æç”»
+    DrawExtendGraph(100, (int)y, 100 + size, (int)y + size, playerImg, TRUE);      //ƒvƒŒƒCƒ„[‰æ‘œ‚Ì•`‰æ
 
     DrawBox(
         boxcolider.x1,

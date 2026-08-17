@@ -28,14 +28,14 @@ void Background::Update()
         back2 -= ConstNumber::BACKGROUND_SPEED;
 
         // 画面外に出たらループ
-        if (back1 <= -2172) back1 = back2 + 2172;
-        if (back2 <= -2172) back2 = back1 + 2172;
+        if (back1 <= -ConstNumber::BACKGROUND_2) back1 = back2 + ConstNumber::BACKGROUND_2;
+        if (back2 <= -ConstNumber::BACKGROUND_2) back2 = back1 + ConstNumber::BACKGROUND_2;
     }
 }
 
 void Background::Draw()
 {
     //背景画像２枚のループ
-    DrawGraph((int)back1, 0, handle1, TRUE);
-    DrawGraph((int)back2, 0, handle1, TRUE);
+    DrawGraph((int)back1, ConstNumber::BACKGROUND_1, handle1, TRUE);
+    DrawGraph((int)back2, ConstNumber::BACKGROUND_1, handle1, TRUE);
 }
