@@ -1,6 +1,7 @@
 #include "DxLib.h"
 #include "player.h"
 #include"startsetting.h"
+#include"Config.h"
 
 Player::Player()
 {
@@ -10,9 +11,15 @@ Player::Player()
 }
 void Player::Update(bool isPlaying, float startY)
 {
+    // Update が呼ばれたことを示すフラグを立てる（Draw で表示する）
+    updated = true;
+
     if (isPlaying)
     {
-        if (CheckHitKey(KEY_INPUT_SPACE))    //キーの割り当て
+        // キー状態を取得して保存
+        int key = CheckHitKey(KEY_INPUT_SPACE);
+        lastKey = key;
+        if (key)    // スペース押下中
         {
             vy -= ConstNumber::PLAYER_V;    // 上に加速（ロケット推進）
         }
@@ -27,8 +34,7 @@ void Player::Update(bool isPlaying, float startY)
             vy = 2.0f;
         }
 
-        // 下端は完全には固定せず、少しめり込める余裕を与える
-        // これにより「少しめり込み始める」タイミングでゲームオーバー判定を出せる
+     
         const float bottomAllowance = 8.0f; // 余裕ピクセル数
         const float maxY = 440 - 64 + bottomAllowance;
         if (y > maxY) // 下
@@ -42,7 +48,9 @@ void Player::Update(bool isPlaying, float startY)
     else
     {
         y = startY;
-        if (CheckHitKey(KEY_INPUT_SPACE))      //キーの割り当て
+        int key = CheckHitKey(KEY_INPUT_SPACE);
+        lastKey = key;
+        if (key)      //キーの割り当て
         {
             y -= 1.0f; // 上に加速（ロケット推進）
         }
@@ -62,4 +70,21 @@ void Player::Draw()
         GetColor(255, 255, 0),
         FALSE
     );
+
+    // デバッグ表示: 位置と速度
+    char buf[128];
+    sprintf_s(buf, "y=%.2f vy=%.2f", y, vy);
+    DrawString(10, 10, buf, GetColor(255, 255, 255));
+
+    // Update 呼ばれたか表示
+    char buf2[64];
+    sprintf_s(buf2, "updated=%d", updated ? 1 : 0);
+    DrawString(10, 30, buf2, GetColor(255, 255, 255));
+    // 次フレームのためにリセット
+    updated = false;
+
+    // デバッグ: キー状態と定数表示
+    char buf3[128];
+    sprintf_s(buf3, "key=%d V=%.2f G=%.2f", lastKey, ConstNumber::PLAYER_V, ConstNumber::PLAYER_GRAVITY);
+    DrawString(10, 50, buf3, GetColor(255, 255, 255));
 }

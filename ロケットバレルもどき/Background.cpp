@@ -22,9 +22,8 @@ void Background::Update(int currentFrame)
     back2 -= ConstNumber::BACKGROUND_SPEED;
 
         // 画面外に出たらループ
-        if (back1 <= -ConstNumber::BACKGROUND_2) back1 = back2 + ConstNumber::BACKGROUND_2;
-        if (back2 <= -ConstNumber::BACKGROUND_2) back2 = back1 + ConstNumber::BACKGROUND_2;
-    }
+    if (back1 <= -ConstNumber::BACKGROUND_2) back1 = back2 + ConstNumber::BACKGROUND_2;
+    if (back2 <= -ConstNumber::BACKGROUND_2) back2 = back1 + ConstNumber::BACKGROUND_2;
 }
 
 void Background::Draw()
