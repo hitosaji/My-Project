@@ -21,14 +21,15 @@ void Background::Update(int currentFrame)
     back1 -= ConstNumber::BACKGROUND_SPEED;
     back2 -= ConstNumber::BACKGROUND_SPEED;
 
-    // ループ処理（画像幅に依存）
-    if (back1 <= -2172) back1 = back2 + 2172;
-    if (back2 <= -2172) back2 = back1 + 2172;
+        // 画面外に出たらループ
+        if (back1 <= -ConstNumber::BACKGROUND_2) back1 = back2 + ConstNumber::BACKGROUND_2;
+        if (back2 <= -ConstNumber::BACKGROUND_2) back2 = back1 + ConstNumber::BACKGROUND_2;
+    }
 }
 
 void Background::Draw()
 {
-    // 背景画像の描画
-    DrawGraph((int)back1, 0, handle1, TRUE);
-    DrawGraph((int)back2, 0, handle1, TRUE);
+    //背景画像２枚のループ
+    DrawGraph((int)back1, ConstNumber::BACKGROUND_1, handle1, TRUE);
+    DrawGraph((int)back2, ConstNumber::BACKGROUND_1, handle1, TRUE);
 }
