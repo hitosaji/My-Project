@@ -140,6 +140,7 @@
   <ItemGroup>
     <ClInclude Include="Background.h" />
     <ClInclude Include="Boxcolider.h" />
+    <ClInclude Include="Config.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="Obstacles.h" />

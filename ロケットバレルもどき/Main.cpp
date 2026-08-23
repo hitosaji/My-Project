@@ -30,7 +30,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
     bool gameOver = false;
 	bool Dead = false;
-	int playerLife = 3; // プレイヤーのライフを3に設定
+    int playerLife = 3; // プレイヤーのライフを3に設定
 
     while (ProcessMessage() == 0)
     {
@@ -57,20 +57,19 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
                     Dead = true;
                     break;
                 }
-                else if (Dead)
-                {
-                  /* playerLife--;*/
-                   Dead = false;
-                   break;
-                }
-		        else if (playerLife<=0)
-                {
-                     DrawString(200, 200, "Game Over", GetColor(255, 0, 0));
-                    gameOver = true;
-                }
             }
         }
-       
+        else if (Dead)
+        {
+            playerLife--;
+            Dead = false;
+            break;
+        }
+		else if (playerLife <= 0)
+        {
+            DrawString(200, 200, "Game Over", GetColor(255, 0, 0));
+            gameOver = true;
+        }
         
   
         background.Draw();

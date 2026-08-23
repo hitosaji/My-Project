@@ -1,14 +1,15 @@
 #include "DxLib.h"
 #include "background.h"
 #include"startsetting.h"
+#include"Config.h"
 
 void Background::Init()
 {
-    //ç”»åƒã®èª­ã¿è¾¼ã¿
+    //‰æ‘œ‚Ì“Ç‚İ‚İ
     handle1 = LoadGraph("Picture/perfect_loop1.bmp");
 
-    back1 = 0;
-    back2 = 2172; // ç”»é¢å¹…ã¶ã‚“å³ã«é…ç½®
+    back1 = ConstNumber::BACKGROUND_1;
+    back2 = ConstNumber::BACKGROUND_2; // ‰æ–Ê•‚Ô‚ñ‰E‚É”z’u
 }
 
 void Background::Update()
@@ -17,16 +18,16 @@ void Background::Update()
     startsetting.isPlaying;
     if (startsetting.isPlaying == FALSE)
     {
-        back1 = 0;
-        back2 = 2172;
+        back1 = ConstNumber::BACKGROUND_1;
+        back2 = ConstNumber::BACKGROUND_2;
     }
     else
     {
-        //èƒŒæ™¯ã®é€Ÿåº¦
-        back1 -= 1.25f;
-        back2 -= 1.25f;
+        //”wŒi‚Ì‘¬“x
+        back1 -= ConstNumber::BACKGROUND_SPEED;
+        back2 -= ConstNumber::BACKGROUND_SPEED;
 
-        // ç”»é¢å¤–ã«å‡ºãŸã‚‰ãƒ«ãƒ¼ãƒ—
+        // ‰æ–ÊŠO‚Éo‚½‚çƒ‹[ƒv
         if (back1 <= -2172) back1 = back2 + 2172;
         if (back2 <= -2172) back2 = back1 + 2172;
     }
@@ -34,7 +35,7 @@ void Background::Update()
 
 void Background::Draw()
 {
-    //èƒŒæ™¯ç”»åƒï¼’æšã®ãƒ«ãƒ¼ãƒ—
+    //”wŒi‰æ‘œ‚Q–‡‚Ìƒ‹[ƒv
     DrawGraph((int)back1, 0, handle1, TRUE);
     DrawGraph((int)back2, 0, handle1, TRUE);
 }
