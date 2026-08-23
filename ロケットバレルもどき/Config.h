@@ -1,5 +1,5 @@
 #pragma once
-//定数
+// 定数
 namespace ConstNumber
 {
 
@@ -7,10 +7,10 @@ namespace ConstNumber
 
 
 
-//背景　定数
+// 背景定数
 
-	const int BACKGROUND_1 = 0;     //画像のX座標1
-	const int BACKGROUND_2 = 2172;      //画像のX座標2
-	const int BACKGROUND_SPEED = 1.25f;      //画像が流れる速さ
+    const int BACKGROUND_1 = 0;     // 背景1の初期位置
+    const int BACKGROUND_2 = 2172;      // 背景2の初期位置
+    const float BACKGROUND_SPEED = 1.25f;      // 背景スクロール速度（固定）
 
 }

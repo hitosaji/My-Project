@@ -22,7 +22,7 @@ void GameManager::DetectCollision(Player& player, std::vector<Obstacles>& obstac
     // すでに衝突処理中なら重複処理しない
     if (pausedAfterHit) return;
     if (collisionHandled) return;
-    // invulnerability after restart
+    // 再起動の無敵状態
     if (GetNowCount() < invulUntil) return;
 
     for (int i = 0; i < (int)obstacles.size(); i++)
@@ -47,7 +47,6 @@ void GameManager::DetectCollision(Player& player, std::vector<Obstacles>& obstac
             // プレイ中フラグを落として二重判定を防ぐ
             player.startsetting.isPlaying = false;
 
-            // do not set gameOver here; defer to Update() to decide when to end the game
             break;
         }
     }
@@ -55,7 +54,7 @@ void GameManager::DetectCollision(Player& player, std::vector<Obstacles>& obstac
 
 void GameManager::EnterLifeScreen(Player& player, Background& background, std::vector<Obstacles>& obstacles)
 {
-    // Called when transitioning from pause to life screen; nothing extra needed here for now
+
 }
 
 void GameManager::EnterStartScreen(Player& player, Background& background, std::vector<Obstacles>& obstacles)

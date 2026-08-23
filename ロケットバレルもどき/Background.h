@@ -1,16 +1,19 @@
 #pragma once
-#include"Startsetting.h"
+#include "Startsetting.h"
+
 class Background
 {
 public:
-	Startsetting startsetting;
+	Startsetting startsetting; // メインの Startsetting をコピーして使用します
 
 	void Init();
 	void Draw();
-	void Update();
+	// Update はフレーム番号を受け取り、同フレームで複数回呼ばれても1回だけ実行する
+	void Update(int currentFrame);
 
 	int handle1 = 0;
 	float back1 = 0;
 	float back2 = 0;
+	int lastUpdateFrame = -1; // 同一フレーム重複更新防止用
 
 };
