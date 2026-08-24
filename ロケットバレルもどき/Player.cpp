@@ -43,7 +43,7 @@ void Player::Update(bool isPlaying, float startY)
             if (vy > 0) vy = 0;
         }
 
-        boxcolider.Update(120, (int)y + 10, 40, 45);
+        boxcolider.Update(120, (int)y + 10, 30, 35);
     }
     else
     {

@@ -30,7 +30,7 @@ void Obstacles::Update(bool isPlaying)
 
 	box2.Update(x + 300, y + 280, 345, 100);
 
-	box3.Update(x + 239, y + 320, 450, 95);
+	box3.Update(x + 239, y + 320, 425, 95);
 
 	box4.Update(x + 260, y + 380, 200, 95);
 
@@ -73,25 +73,25 @@ void Obstacles::Draw()
 
 	DrawRotaGraph3(x, y, 0, 0, size, size, 0, playerImg, TRUE, TRUE);
 
-	//ÂΩì„Åü„ÇäÂà§ÂÆö„ÅÆ‰ΩçÁΩÆ
-	DrawBox(box1.x1, box1.y1, box1.x2, box1.y2, GetColor(255, 0, 0), FALSE);   // Ëµ§
-	DrawBox(box2.x1, box2.y1, box2.x2, box2.y2, GetColor(0, 255, 0), FALSE);   // Á∑ë
-	DrawBox(box3.x1, box3.y1, box3.x2, box3.y2, GetColor(0, 0, 255), FALSE);   // Èùí 
-	DrawBox(box4.x1, box4.y1, box4.x2, box4.y2, GetColor(0, 255, 255), FALSE); // „Ç∑„Ç¢„É≥
-	DrawBox(box5.x1, box5.y1, box5.x2, box5.y2, GetColor(255, 0, 255), FALSE); // „Éû„Çº„É≥„Çø
-	DrawBox(box6.x1, box6.y1, box6.x2, box6.y2, GetColor(255, 255, 0), FALSE); // ÈªÑ
-	DrawBox(box7.x1, box7.y1, box7.x2, box7.y2, GetColor(125, 255, 255), FALSE); // ÁôΩ
-	DrawBox(box8.x1, box8.y1, box8.x2, box8.y2, GetColor(255, 255, 255), FALSE); // ÁôΩ
-	DrawBox(box9.x1, box9.y1, box9.x2, box9.y2, GetColor(255, 255, 255), FALSE); // ÁôΩ
-	DrawBox(box10.x1, box10.y1, box10.x2, box10.y2, GetColor(255, 255, 255), FALSE); // ÁôΩ
-	DrawBox(box11.x1, box11.y1, box11.x2, box11.y2, GetColor(255, 255, 255), FALSE); // ÁôΩ
-	DrawBox(box12.x1, box12.y1, box12.x2, box12.y2, GetColor(255, 255, 255), FALSE); // ÁôΩ
-	DrawBox(box13.x1, box13.y1, box13.x2, box13.y2, GetColor(255, 255, 255), FALSE); // ÁôΩ
-	DrawBox(box14.x1, box14.y1, box14.x2, box14.y2, GetColor(255, 255, 255), FALSE); // ÁôΩ
-	DrawBox(box15.x1, box15.y1, box15.x2, box15.y2, GetColor(255, 255, 255), FALSE); // ÁôΩ
-	DrawBox(box16.x1, box16.y1, box16.x2, box16.y2, GetColor(255, 255, 255), FALSE); // ÁôΩ
-	DrawBox(box17.x1, box17.y1, box17.x2, box17.y2, GetColor(255, 255, 255), FALSE); // ÁôΩ
-	DrawBox(box18.x1, box18.y1, box18.x2, box18.y2, GetColor(255, 255, 255), FALSE); // ÁôΩ
+	//ìñÇΩÇËîªíËÇÃà íu
+	DrawBox(box1.x1, box1.y1, box1.x2, box1.y2, GetColor(255, 0, 0), FALSE);   // ê‘
+	DrawBox(box2.x1, box2.y1, box2.x2, box2.y2, GetColor(0, 255, 0), FALSE);   // óŒ
+	DrawBox(box3.x1, box3.y1, box3.x2, box3.y2, GetColor(0, 0, 255), FALSE);   // ê¬ 
+	DrawBox(box4.x1, box4.y1, box4.x2, box4.y2, GetColor(0, 255, 255), FALSE); // ÉVÉAÉì
+	DrawBox(box5.x1, box5.y1, box5.x2, box5.y2, GetColor(255, 0, 255), FALSE); // É}É[ÉìÉ^
+	DrawBox(box6.x1, box6.y1, box6.x2, box6.y2, GetColor(255, 255, 0), FALSE); // â©
+	DrawBox(box7.x1, box7.y1, box7.x2, box7.y2, GetColor(125, 255, 255), FALSE); // îí
+	DrawBox(box8.x1, box8.y1, box8.x2, box8.y2, GetColor(255, 255, 255), FALSE); // îí
+	DrawBox(box9.x1, box9.y1, box9.x2, box9.y2, GetColor(255, 255, 255), FALSE); // îí
+	DrawBox(box10.x1, box10.y1, box10.x2, box10.y2, GetColor(255, 255, 255), FALSE); // îí
+	DrawBox(box11.x1, box11.y1, box11.x2, box11.y2, GetColor(255, 255, 255), FALSE); // îí
+	DrawBox(box12.x1, box12.y1, box12.x2, box12.y2, GetColor(255, 255, 255), FALSE); // îí
+	DrawBox(box13.x1, box13.y1, box13.x2, box13.y2, GetColor(255, 255, 255), FALSE); // îí
+	DrawBox(box14.x1, box14.y1, box14.x2, box14.y2, GetColor(255, 255, 255), FALSE); // îí
+	DrawBox(box15.x1, box15.y1, box15.x2, box15.y2, GetColor(255, 255, 255), FALSE); // îí
+	DrawBox(box16.x1, box16.y1, box16.x2, box16.y2, GetColor(255, 255, 255), FALSE); // îí
+	DrawBox(box17.x1, box17.y1, box17.x2, box17.y2, GetColor(255, 255, 255), FALSE); // îí
+	DrawBox(box18.x1, box18.y1, box18.x2, box18.y2, GetColor(255, 255, 255), FALSE); // îí
 
 
 

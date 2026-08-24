@@ -7,7 +7,7 @@
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
-    ChangeWindowMode(TRUE);
+    ChangeWindowMode(FALSE);
     SetGraphMode(640, 440, 32);
 
     if (DxLib_Init() == -1)
@@ -26,28 +26,40 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
     int explosionSound1 = -1;
 	int explosionSound2 = 0;
     bool waitingExplosion = false; // 爆発音再生中フラグ
-    // explosion.wav をプロジェクトの Sound フォルダに置いてください
+   
     explosionSound1 = LoadSoundMem("Sound/explosion.mp3");
     explosionSound2 = LoadSoundMem("Sound/Music.mp3");
-    // BGM 再生フラグ
+    //BGM再生フラグ
     bool playingBgm = false;
 
     std::vector<Obstacles> allObstacles;
 
+    //上部参考値(X,-1100)
+    //中部参考値(X,-30)
+    //下部参考値(X,50)
+
+    /*allObstacles.push_back(Obstacles(100, -700));*/
     allObstacles.push_back(Obstacles(200, -1100));
     allObstacles.push_back(Obstacles(640, 0));
     allObstacles.push_back(Obstacles(1000, 100));
+    allObstacles.push_back(Obstacles(900, -1100));
+    allObstacles.push_back(Obstacles(940, -1130));
     allObstacles.push_back(Obstacles(980, -1150));
     allObstacles.push_back(Obstacles(1500, -50));
-    allObstacles.push_back(Obstacles(1800, -1070));
+    allObstacles.push_back(Obstacles(1800, -1160));
     allObstacles.push_back(Obstacles(2300, 70));
-    allObstacles.push_back(Obstacles(2600, 50));
-    allObstacles.push_back(Obstacles(2700, 20));
-    allObstacles.push_back(Obstacles(2800, -10));
-    allObstacles.push_back(Obstacles(2900, -40));
-    allObstacles.push_back(Obstacles(3000, -70));
-    allObstacles.push_back(Obstacles(3400, -700));
-   
+    allObstacles.push_back(Obstacles(2600, -100));
+    allObstacles.push_back(Obstacles(2700, -60));
+    allObstacles.push_back(Obstacles(2800, -20));
+    allObstacles.push_back(Obstacles(2900, 20));
+    allObstacles.push_back(Obstacles(3000, -1120));
+    allObstacles.push_back(Obstacles(3050, -1070));
+    allObstacles.push_back(Obstacles(3400, -10)); 
+    allObstacles.push_back(Obstacles(3700, -60));
+    allObstacles.push_back(Obstacles(4050, -900));
+    allObstacles.push_back(Obstacles(4500, -60));
+
+
     
 
     // ゲーム状態
