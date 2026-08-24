@@ -36,7 +36,7 @@ void Player::Update(bool isPlaying, float startY)
 
      
         const float bottomAllowance = 8.0f; // 余裕ピクセル数
-        const float maxY = 440 - 64 + bottomAllowance;
+        const float maxY = 452 - 64 + bottomAllowance;
         if (y > maxY) // 下
         {
             y = maxY;
@@ -62,14 +62,14 @@ void Player::Draw()
 
     DrawExtendGraph(100, (int)y, 100 + size, (int)y + size, playerImg, TRUE);      //プレイヤー画像の描画
 
-    DrawBox(
+    /*DrawBox(
         boxcolider.x1,
         boxcolider.y1,
         boxcolider.x2,
         boxcolider.y2,
         GetColor(255, 255, 0),
         FALSE
-    );
+    );*/
 
     // デバッグ表示: 位置と速度
     char buf[128];

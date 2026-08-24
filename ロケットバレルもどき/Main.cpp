@@ -47,17 +47,43 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
     allObstacles.push_back(Obstacles(980, -1150));
     allObstacles.push_back(Obstacles(1500, -50));
     allObstacles.push_back(Obstacles(1800, -1160));
+    allObstacles.push_back(Obstacles(1950, -1000));
     allObstacles.push_back(Obstacles(2300, 70));
     allObstacles.push_back(Obstacles(2600, -100));
     allObstacles.push_back(Obstacles(2700, -60));
     allObstacles.push_back(Obstacles(2800, -20));
     allObstacles.push_back(Obstacles(2900, 20));
     allObstacles.push_back(Obstacles(3000, -1120));
-    allObstacles.push_back(Obstacles(3050, -1070));
+    allObstacles.push_back(Obstacles(3050, -1090));
     allObstacles.push_back(Obstacles(3400, -10)); 
     allObstacles.push_back(Obstacles(3700, -60));
-    allObstacles.push_back(Obstacles(4050, -900));
+    allObstacles.push_back(Obstacles(4050, -920));
     allObstacles.push_back(Obstacles(4500, -60));
+    allObstacles.push_back(Obstacles(4550, -150));
+    allObstacles.push_back(Obstacles(4870, -1100));
+    allObstacles.push_back(Obstacles(5100, -60));
+    allObstacles.push_back(Obstacles(5400, -1050));
+    allObstacles.push_back(Obstacles(5430, -1000));
+    allObstacles.push_back(Obstacles(5460, -950));
+    allObstacles.push_back(Obstacles(5490, -900));
+    allObstacles.push_back(Obstacles(5800, 90));
+    allObstacles.push_back(Obstacles(5840, 50));
+    allObstacles.push_back(Obstacles(5880, 0));
+    allObstacles.push_back(Obstacles(5920, -40));
+    allObstacles.push_back(Obstacles(5960, -80));
+    allObstacles.push_back(Obstacles(6000, -130));
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     
@@ -135,7 +161,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
                 {
                     allObstacles[i].Update(startsetting.isPlaying);
 
-                    // “–‚½‚è”»’è
+                     //“–‚½‚è”»’è
                     if (player.boxcolider.CheckOverlap(allObstacles[i].box1) ||
                         player.boxcolider.CheckOverlap(allObstacles[i].box2) ||
                         player.boxcolider.CheckOverlap(allObstacles[i].box3) ||
@@ -157,7 +183,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
                     {
                         dead = true;
                         break;
-                    }
+                    }     
                 }
 
                 // ========================================
