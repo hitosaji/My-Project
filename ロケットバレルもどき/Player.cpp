@@ -33,6 +33,15 @@ void Player::Update(bool isPlaying, float startY)
             y = 0.0f;
             vy = 2.0f;
         }
+        if (vy > 2.4f)
+        {
+            vy = 2.4f;
+        }
+
+        if (vy < -2.5f)
+        {
+            vy = -2.5f;
+        }
 
      
         const float bottomAllowance = 8.0f; // 余裕ピクセル数
@@ -43,7 +52,7 @@ void Player::Update(bool isPlaying, float startY)
             if (vy > 0) vy = 0;
         }
 
-        boxcolider.Update(120, (int)y + 10, 30, 35);
+        boxcolider.Update(120, (int)y + 15, 28, 33);
     }
     else
     {
@@ -62,14 +71,14 @@ void Player::Draw()
 
     DrawExtendGraph(100, (int)y, 100 + size, (int)y + size, playerImg, TRUE);      //プレイヤー画像の描画
 
-    /*DrawBox(
+    DrawBox(
         boxcolider.x1,
         boxcolider.y1,
         boxcolider.x2,
         boxcolider.y2,
         GetColor(255, 255, 0),
         FALSE
-    );*/
+    );
 
     // デバッグ表示: 位置と速度
     char buf[128];

@@ -11,7 +11,7 @@ namespace ConstNumber
     const int PLAYER_COORDINATE_X = 100;
     const int PLAYER_LANDSCAPE_UP = 0;
     const int PLAYER_LANDSCAPE_DOWN = 480;
-    const float PLAYER_GRAVITY = 0.1f;
+    const float PLAYER_GRAVITY = 0.08f;
 
 
 
@@ -19,6 +19,6 @@ namespace ConstNumber
 
     const int BACKGROUND_1 = 0;     // 背景1の開始位置
     const int BACKGROUND_2 = 2172;      // 背景2の開始位置
-    const float BACKGROUND_SPEED = 1.25f;      // 背景スクロール速度
+    const float BACKGROUND_SPEED = 1.0f;      // 背景スクロール速度
 
 }

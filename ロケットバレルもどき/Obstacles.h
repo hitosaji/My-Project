@@ -36,7 +36,7 @@ public:
 
 	int y;
 	int x;
-	int vy;
+	float vy;
 	int vx;
 	int playerImg;
 	int player_Life=3;
