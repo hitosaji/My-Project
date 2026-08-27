@@ -6,6 +6,7 @@ public:
 
 
 	void Update();
+	void Reset(); // ゲームリセット用の関数を追加)
 
 	int prev = 0;
 

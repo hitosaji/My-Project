@@ -6,6 +6,15 @@ Startsetting::Startsetting()
 {
 }
 
+void Startsetting::Reset()
+{
+    pressCount = 0;
+	prev = 0;
+	isPlaying = false;
+	y = 220; // 初期待機位置を画面中央に設定 (ウィンドウ高さ 440 の中央)
+    vy = 0;
+}
+
 void Startsetting::Update()
 {
     int now = CheckHitKey(KEY_INPUT_SPACE);
