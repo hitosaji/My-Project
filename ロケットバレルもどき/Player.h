@@ -1,4 +1,4 @@
-#pragma once
+ #pragma once
 #include "BoxColider.h"
 
 class Player

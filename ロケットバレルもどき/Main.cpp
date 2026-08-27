@@ -57,29 +57,41 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
     allObstacles.push_back(Obstacles(3050, -1090));
     allObstacles.push_back(Obstacles(3400, -10)); 
     allObstacles.push_back(Obstacles(3700, -60));
-    allObstacles.push_back(Obstacles(4080, -920));
-    allObstacles.push_back(Obstacles(4500, -60));
-    allObstacles.push_back(Obstacles(4550, -150));
+    allObstacles.push_back(Obstacles(4080, -1000));
+    allObstacles.push_back(Obstacles(4500, -40));
+    allObstacles.push_back(Obstacles(4550, -70));
     allObstacles.push_back(Obstacles(4900, -1100));
-    allObstacles.push_back(Obstacles(5100, -60));
+    allObstacles.push_back(Obstacles(5100, -30));
+
+    //ŠK’i
     allObstacles.push_back(Obstacles(5400, -1050));
     allObstacles.push_back(Obstacles(5430, -1000));
-    allObstacles.push_back(Obstacles(5460, -950));
-    allObstacles.push_back(Obstacles(5490, -900));
+    allObstacles.push_back(Obstacles(5460, -1050));
+    allObstacles.push_back(Obstacles(5490, -1100));
+
+    allObstacles.push_back(Obstacles(5780, -1110));
+
     allObstacles.push_back(Obstacles(5800, 90));
     allObstacles.push_back(Obstacles(5840, 50));
     allObstacles.push_back(Obstacles(5880, 0));
     allObstacles.push_back(Obstacles(5920, -40));
     allObstacles.push_back(Obstacles(5960, -80));
-    allObstacles.push_back(Obstacles(6000, -130));
-    allObstacles.push_back(Obstacles(6300, -1050));
     allObstacles.push_back(Obstacles(6400, -1110));
-    allObstacles.push_back(Obstacles(6500, -15));
+    allObstacles.push_back(Obstacles(6500, 0));
     allObstacles.push_back(Obstacles(6800, -1080));
-    allObstacles.push_back(Obstacles(7000, -60));
-    allObstacles.push_back(Obstacles(7100, -1100));
+    allObstacles.push_back(Obstacles(7000, -30));
+    allObstacles.push_back(Obstacles(7100, -1170));
     allObstacles.push_back(Obstacles(7200, -5));
+    allObstacles.push_back(Obstacles(7320, -1120));
     allObstacles.push_back(Obstacles(7400, -1050));
+    allObstacles.push_back(Obstacles(7700, -80));
+    allObstacles.push_back(Obstacles(7900, -1110));
+    allObstacles.push_back(Obstacles(8100, -1130));
+    allObstacles.push_back(Obstacles(8200, -10));
+    allObstacles.push_back(Obstacles(8300, -1060));
+
+
+
    
 
 
