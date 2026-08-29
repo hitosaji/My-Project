@@ -63,15 +63,27 @@ void PopulateObstacles(std::vector<Obstacles>& allObstacles)
     allObstacles.push_back(Obstacles(8870, -980));
     allObstacles.push_back(Obstacles(8970, -980));
     allObstacles.push_back(Obstacles(9070, -940));
-    allObstacles.push_back(Obstacles(9100, 180));
+    allObstacles.push_back(Obstacles(9180, 180));
     allObstacles.push_back(Obstacles(9170, -960));
-    allObstacles.push_back(Obstacles(9200, 160));
+    allObstacles.push_back(Obstacles(9200, 170));
     allObstacles.push_back(Obstacles(9270, -1010));
     allObstacles.push_back(Obstacles(9300, 150));
-    allObstacles.push_back(Obstacles(9400, 90));
+    allObstacles.push_back(Obstacles(9400, 80));
     allObstacles.push_back(Obstacles(9580, -40));
-    allObstacles.push_back(Obstacles(10100, -10));
-    allObstacles.push_back(Obstacles(10200, -10));
+    allObstacles.push_back(Obstacles(9900, -1000));
+    allObstacles.push_back(Obstacles(9950, 140));
+    allObstacles.push_back(Obstacles(10000, -1030));
+    allObstacles.push_back(Obstacles(10050, 80));
+    allObstacles.push_back(Obstacles(11100, -1060));
+    allObstacles.push_back(Obstacles(10150, 10));
+    allObstacles.push_back(Obstacles(11200, -1090));
+    allObstacles.push_back(Obstacles(10250, -60));
+    allObstacles.push_back(Obstacles(10250, -1120));
+    allObstacles.push_back(Obstacles(10300, -1150));
+
+
+
+
 }
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
@@ -221,7 +233,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
                     allObstacles[i].Update(startsetting.isPlaying);
 
                      //“–‚½‚è”»’è
-                    if (player.boxcolider.CheckOverlap(allObstacles[i].box1) ||
+                    /*if (player.boxcolider.CheckOverlap(allObstacles[i].box1) ||
                         player.boxcolider.CheckOverlap(allObstacles[i].box2) ||
                         player.boxcolider.CheckOverlap(allObstacles[i].box3) ||
                         player.boxcolider.CheckOverlap(allObstacles[i].box4) ||
@@ -242,7 +254,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
                     {
                         dead = true;
                         break;
-                    }     
+                    }     */
                 }
 
 
