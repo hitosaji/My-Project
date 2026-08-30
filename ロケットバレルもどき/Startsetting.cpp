@@ -1,51 +1,77 @@
 #include "DxLib.h"
-#include <iostream>
 #include "Startsetting.h"
 
 Startsetting::Startsetting()
 {
+	titleStage = 0;
+	titleImage = LoadGraph("Picture/Perilous Journey.png"); // Àsƒtƒ@ƒCƒ‹‚©‚ç‚Ì‘Š‘ÎƒpƒX
+	if (titleImage != -1) {
+		GetGraphSize(titleImage, &titleW, &titleH);
+	}
+	else {
+		titleW = titleH = 0;
+	}
+}
+
+Startsetting::~Startsetting()
+{
+	if (titleImage != -1) {
+		DeleteGraph(titleImage);
+	}
 }
 
 void Startsetting::Reset()
 {
-    pressCount = 0;
+	pressCount = 0;
 	prev = 0;
 	isPlaying = false;
-	y = 220; // åˆæœŸå¾…æ©Ÿä½ç½®ã‚’ç”»é¢ä¸­å¤®ã«è¨­å®š (ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦é«˜ã• 440 ã®ä¸­å¤®)
-    vy = 0;
+	y = 220;
+	vy = 0;
+	titleStage = 0;
 }
 
 void Startsetting::Update()
 {
-    int now = CheckHitKey(KEY_INPUT_SPACE);
+	int now = CheckHitKey(KEY_INPUT_SPACE);
 
-    if (now == 1 && prev == 0) // æŠ¼ã—ãŸç¬é–“
-    {
-        if (!isPlaying)
-        {
-            pressCount++;
+	if (now == 1 && prev == 0) {
+		if (!isPlaying) {
+			if (titleStage == 0) titleStage = 1;
+			else if (titleStage == 1) { isPlaying = true; titleStage = 2; }
+		}
+	}
 
-            if (pressCount >= 3)
-            {
-                isPlaying = true; // ã‚²ãƒ¼ãƒ é–‹å§‹
-            }
-        }
-    }
-    if (isPlaying)
-    {
-        // é€šå¸¸ã®å‡¦ç†
-      // y += vy;
-    }
-    else
-    {
-        // å¾…æ©ŸçŠ¶æ…‹ï¼ˆå›ºå®šï¼‰
-        y = 220; // ä¸­å¤®ã«å›ºå®š (ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦é«˜ã• 440 ã®ä¸­å¤®)
-        vy = 0;
-    }
+	// ó‘ÔXV‚Ì‚İi•`‰æ‚Í Draw() ‚ÉˆÚ“®j
+	y = isPlaying ? y : 220;
+	vy = isPlaying ? vy : 0;
 
-    if (!isPlaying)
-    {
-        DrawString(320, 330, "Three Space Presses to Start", GetColor(255, 255, 255));
-    }
-    prev = now;
+	prev = now;
 }
+
+void Startsetting::Draw()
+{
+	if (!isPlaying)
+	{
+		if (titleStage == 0)
+		{
+			if (titleImage != -1 && titleW > 0 && titleH > 0)
+			{
+				int x = (640 - titleW) / 2;
+				int y0 = (440 - titleH) / 2;
+				DrawGraph(640, 440, titleImage, TRUE);
+			}
+			else
+			{
+				DrawString(160, 120, "ƒƒPƒbƒgƒoƒŒƒ‹‚à‚Ç‚«", GetColor(255, 220, 80));
+				DrawString(220, 200, "ƒXƒy[ƒXƒL[‚ÅŸ‚Éi‚Ş", GetColor(255, 255, 255));
+			}
+		}
+		else if (titleStage == 1)
+		{
+			// ”wŒi‚ğ•‚É‚·‚é
+			DrawBox(0, 0, 640, 480, GetColor(0, 0, 0), TRUE);
+			DrawString(100, 330, "‚±‚ÌƒQ[ƒ€‚ÍƒXƒy[ƒXƒL[‚¾‚¯g‚¢‚Ü‚·", GetColor(255, 255, 255));
+		}
+	}
+}
+	

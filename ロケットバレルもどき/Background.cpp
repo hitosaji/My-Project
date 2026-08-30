@@ -5,7 +5,7 @@
 void Background::Init()
 {
     // ‰æ‘œ“Ç‚İ‚İ
-    handle1 = LoadGraph("Picture/perfect_loop1.bmp");
+    handle1 = LoadGraph("Picture/perfect_loop1.png");
 
     back1 = ConstNumber::BACKGROUND_1;
     back2 = ConstNumber::BACKGROUND_2; // —\‚ß2–‡•ª‚ÌˆÊ’u‚ğ—pˆÓ

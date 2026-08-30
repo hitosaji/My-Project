@@ -3,6 +3,7 @@
 #include "background.h"
 #include "obstacles.h"
 #include "Startsetting.h"
+#include"GameState.h"
 #include <vector>
 
 // 障害物初期化関数
@@ -37,49 +38,64 @@ void PopulateObstacles(std::vector<Obstacles>& allObstacles)
     allObstacles.push_back(Obstacles(5430, -1000));
     allObstacles.push_back(Obstacles(5460, -1050));
     allObstacles.push_back(Obstacles(5490, -1100));
-    allObstacles.push_back(Obstacles(5780, -1170));
-    allObstacles.push_back(Obstacles(5800, 90));
-    allObstacles.push_back(Obstacles(5840, 50));
+    allObstacles.push_back(Obstacles(5780, -1130));
+    allObstacles.push_back(Obstacles(5800, 50));
+    allObstacles.push_back(Obstacles(5840, 30));
     allObstacles.push_back(Obstacles(5880, 0));
     allObstacles.push_back(Obstacles(5920, -40));
     allObstacles.push_back(Obstacles(5960, -80));
-    allObstacles.push_back(Obstacles(6400, -1110));
-    allObstacles.push_back(Obstacles(6500, 0));
+    allObstacles.push_back(Obstacles(6400, -1130));
+    allObstacles.push_back(Obstacles(6500, -20));
     allObstacles.push_back(Obstacles(6800, -1080));
-    allObstacles.push_back(Obstacles(7000, -20));
+    allObstacles.push_back(Obstacles(7000, -30));
     allObstacles.push_back(Obstacles(7100, -1170));
     allObstacles.push_back(Obstacles(7200, 10));
     allObstacles.push_back(Obstacles(7320, -1120));
-    allObstacles.push_back(Obstacles(7400, -1080));
+    allObstacles.push_back(Obstacles(7400, -1100));
     allObstacles.push_back(Obstacles(7700, -30));
     allObstacles.push_back(Obstacles(7900, -1130));
     allObstacles.push_back(Obstacles(8100, -1150));
     allObstacles.push_back(Obstacles(8200, -10));
     allObstacles.push_back(Obstacles(8300, -1110));
-    allObstacles.push_back(Obstacles(8450, -1140));
+    allObstacles.push_back(Obstacles(8450, -1130));
     allObstacles.push_back(Obstacles(8500, -20));
     allObstacles.push_back(Obstacles(8650, 100));
-    allObstacles.push_back(Obstacles(8800, -1010));
-    allObstacles.push_back(Obstacles(8870, -980));
-    allObstacles.push_back(Obstacles(8970, -980));
-    allObstacles.push_back(Obstacles(9070, -940));
+    allObstacles.push_back(Obstacles(8800, -1000));
+    allObstacles.push_back(Obstacles(8870, -970));
+    allObstacles.push_back(Obstacles(8970, -970));
+    allObstacles.push_back(Obstacles(9070, -930));
     allObstacles.push_back(Obstacles(9180, 180));
-    allObstacles.push_back(Obstacles(9170, -960));
+    allObstacles.push_back(Obstacles(9170, -950));
     allObstacles.push_back(Obstacles(9200, 170));
-    allObstacles.push_back(Obstacles(9270, -1010));
+    allObstacles.push_back(Obstacles(9270, -1000));
     allObstacles.push_back(Obstacles(9300, 150));
     allObstacles.push_back(Obstacles(9400, 80));
     allObstacles.push_back(Obstacles(9580, -40));
-    allObstacles.push_back(Obstacles(9900, -1000));
+    allObstacles.push_back(Obstacles(9900, -1010));
     allObstacles.push_back(Obstacles(9950, 140));
-    allObstacles.push_back(Obstacles(10000, -1030));
-    allObstacles.push_back(Obstacles(10050, 80));
-    allObstacles.push_back(Obstacles(11100, -1060));
-    allObstacles.push_back(Obstacles(10150, 10));
-    allObstacles.push_back(Obstacles(11200, -1090));
-    allObstacles.push_back(Obstacles(10250, -60));
-    allObstacles.push_back(Obstacles(10250, -1120));
-    allObstacles.push_back(Obstacles(10300, -1150));
+    allObstacles.push_back(Obstacles(9975, -1020));
+
+    allObstacles.push_back(Obstacles(10050, 90));
+    allObstacles.push_back(Obstacles(10050, -1060));
+    allObstacles.push_back(Obstacles(10150, 30));
+    allObstacles.push_back(Obstacles(10125, -1090));
+    allObstacles.push_back(Obstacles(10250, -20));
+    allObstacles.push_back(Obstacles(10200, -1120));
+    allObstacles.push_back(Obstacles(10275, -1150));
+
+    allObstacles.push_back(Obstacles(10400, -20));
+
+    allObstacles.push_back(Obstacles(10550, -20));
+    allObstacles.push_back(Obstacles(10550, -1160));
+    allObstacles.push_back(Obstacles(10650, 30));
+    allObstacles.push_back(Obstacles(10625, -1130));
+    allObstacles.push_back(Obstacles(10750, 90));
+    allObstacles.push_back(Obstacles(10700, -1110));
+    allObstacles.push_back(Obstacles(10775, -1085));
+    allObstacles.push_back(Obstacles(10850, -1055));
+    allObstacles.push_back(Obstacles(10925, -1015));
+
+
 
 
 
@@ -94,11 +110,17 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
     if (DxLib_Init() == -1)
         return -1;
 
+   
     SetDrawScreen(DX_SCREEN_BACK);
+    
+    int titleImg = LoadGraph("Picture/Perilous Journey.png");
+    int rankingImg = LoadGraph("Picture/RANKING BORD.png");
+
 
     // オブジェクト
     Startsetting startsetting;
     Player player;
+
 
     Background background;
     background.Init();
@@ -128,6 +150,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
     int frameCounter = 0;
 	int highScore = 0;
 
+
+
     while (ProcessMessage() == 0)
     {
         ClearDrawScreen();
@@ -136,7 +160,58 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
         // 更新処理
         // ========================================
 
-       
+        if (gameState == GameState::Title)
+        {
+            DrawExtendGraph( 0, 0, 640, 440,titleImg, TRUE );
+            // ランキング画像
+            DrawExtendGraph(300, 10, 450, 140,rankingImg, TRUE );
+
+            if (CheckHitKey(KEY_INPUT_SPACE))
+            {
+                gameState = GameState::Explanation;
+            }
+
+            ScreenFlip();
+            continue;
+        }
+
+        if (gameState == GameState::Explanation)
+        {
+            // 背景を黒にする
+            DrawBox(0, 0,640, 440,GetColor(0, 0, 0),TRUE);
+
+            DrawString(
+                220, 100,
+                "操作説明",
+                GetColor(255, 255, 255)
+            );
+
+            DrawString(
+                180, 180,
+                "SPACE : 上昇",
+                GetColor(255, 255, 255)
+            );
+
+            DrawString(
+                180, 220,
+                "障害物を避けて進もう！",
+                GetColor(255, 255, 255)
+            );
+
+            DrawString(
+                180, 350,
+                "ENTER : ゲーム開始",
+                GetColor(255, 255, 255)
+            );
+
+            if (CheckHitKey(KEY_INPUT_SPACE))
+            {
+                gameState = GameState::Playing;
+            }
+
+            ScreenFlip();
+            continue;
+        }
 
 
         // スタート処理はMainで1回だけ
@@ -213,13 +288,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
             if (startsetting.isPlaying == TRUE)
             {
                 if (startsetting.isPlaying && !waitingExplosion && !showDeathInfo) {
-                    player.score++;
+                    player.score+=2;
                 }
                 // プレイヤー更新（入力は爆発表示中は無効化）
                 player.Update(startsetting.isPlaying, startsetting.y, !(waitingExplosion || showDeathInfo));
 
                 // 画面下端にめり込み始めたらダメージ扱いにする
-                if (player.y > 440 - 64)
+                if (player.y > 440 - 50)
                 {
                     dead = true;
                 }
@@ -233,7 +308,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
                     allObstacles[i].Update(startsetting.isPlaying);
 
                      //当たり判定
-                    /*if (player.boxcolider.CheckOverlap(allObstacles[i].box1) ||
+                    if (player.boxcolider.CheckOverlap(allObstacles[i].box1) ||
                         player.boxcolider.CheckOverlap(allObstacles[i].box2) ||
                         player.boxcolider.CheckOverlap(allObstacles[i].box3) ||
                         player.boxcolider.CheckOverlap(allObstacles[i].box4) ||
@@ -254,7 +329,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
                     {
                         dead = true;
                         break;
-                    }     */
+                    }     
                 }
 
 
@@ -325,6 +400,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
         }
 
         player.Draw();
+
+        startsetting.Draw();
 
         // 爆発音が終わった後（showDeathInfo）が true の間に High Score と残機を表示
         if (showDeathInfo)

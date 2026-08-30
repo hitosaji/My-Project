@@ -2,6 +2,7 @@
 enum class GameState
 {
     Title,
+    Explanation,
     Playing,
     GameOver
 };

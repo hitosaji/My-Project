@@ -18,7 +18,7 @@ namespace ConstNumber
 // 背景関連の定数
 
     const int BACKGROUND_1 = 0;     // 背景1の開始位置
-    const int BACKGROUND_2 = 2172;      // 背景2の開始位置
+    const int BACKGROUND_2 = 2161;      // 背景2の開始位置
     const float BACKGROUND_SPEED = 1.0f;      // 背景スクロール速度
 
 }
