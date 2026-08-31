@@ -38,9 +38,9 @@ void Player::Update(bool isPlaying, float startY, bool acceptInput)
             y = 0.0f;
             vy = 2.0f;
         }
-        if (vy > 2.4f)
+        if (vy > 2.2f)
         {
-            vy = 2.4f;
+            vy = 2.2f;
         }
 
         if (vy < -2.1f)
