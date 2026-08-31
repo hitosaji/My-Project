@@ -4,16 +4,18 @@
 class Background
 {
 public:
-	Startsetting startsetting; // ãƒ¡ã‚¤ãƒ³ã® Startsetting ã‚’ã‚³ãƒ”ãƒ¼ã—ã¦ä½¿ç”¨ã—ã¾ã™
+	Startsetting startsetting; // ƒƒCƒ“‚Ì Startsetting ‚ğƒRƒs[‚µ‚Äg—p‚µ‚Ü‚·
 
 	void Init();
+	void Load();
 	void Draw();
-	// Update ã¯ãƒ•ãƒ¬ãƒ¼ãƒ ç•ªå·ã‚’å—ã‘å–ã‚Šã€åŒãƒ•ãƒ¬ãƒ¼ãƒ ã§è¤‡æ•°å›å‘¼ã°ã‚Œã¦ã‚‚1å›ã ã‘å®Ÿè¡Œã™ã‚‹
+	// Update ‚ÍƒtƒŒ[ƒ€”Ô†‚ğó‚¯æ‚èA“¯ƒtƒŒ[ƒ€‚Å•¡”‰ñŒÄ‚Î‚ê‚Ä‚à1‰ñ‚¾‚¯Às‚·‚é
 	void Update(int currentFrame);
+	void End();
 
 	int handle1 = 0;
 	float back1 = 0;
 	float back2 = 0;
-	int lastUpdateFrame = -1; // åŒä¸€ãƒ•ãƒ¬ãƒ¼ãƒ é‡è¤‡æ›´æ–°é˜²æ­¢ç”¨
+	int lastUpdateFrame = -1; // “¯ˆêƒtƒŒ[ƒ€d•¡XV–h~—p
 
 };

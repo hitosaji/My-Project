@@ -3,9 +3,14 @@
 #include"startsetting.h"
 #include"BoxColider.h"
 
+int Obstacles::playerImg = -1;
+
 Obstacles::Obstacles(int initialX, int initialY)
 {
-	playerImg = LoadGraph("Picture/obstacles2.png");
+	if (playerImg == -1)
+	{
+		playerImg = LoadGraph("Picture/obstacles2.png");
+	}
 
 	x = initialX;
 	y = initialY;
@@ -14,6 +19,7 @@ Obstacles::Obstacles(int initialX, int initialY)
 	vy = 0.0f;
 
 }
+
 void Obstacles::Init()
 {
 }
@@ -75,23 +81,23 @@ void Obstacles::Draw()
 
 	//当たり判定の位置
 	
-	DrawBox(box1.x1, box1.y1, box1.x2, box1.y2, GetColor(255, 0, 0), FALSE);   // 赤
-	DrawBox(box2.x1, box2.y1, box2.x2, box2.y2, GetColor(0, 255, 0), FALSE);   // 緑
-	DrawBox(box3.x1, box3.y1, box3.x2, box3.y2, GetColor(0, 0, 255), FALSE);   // 青 
-	DrawBox(box4.x1, box4.y1, box4.x2, box4.y2, GetColor(0, 255, 255), FALSE); // シアン
-	DrawBox(box5.x1, box5.y1, box5.x2, box5.y2, GetColor(255, 0, 255), FALSE); // マゼンタ
-	DrawBox(box6.x1, box6.y1, box6.x2, box6.y2, GetColor(255, 255, 0), FALSE); // 黄
-	DrawBox(box7.x1, box7.y1, box7.x2, box7.y2, GetColor(125, 255, 255), FALSE); // 白
-	DrawBox(box8.x1, box8.y1, box8.x2, box8.y2, GetColor(255, 255, 255), FALSE); // 白
-	DrawBox(box9.x1, box9.y1, box9.x2, box9.y2, GetColor(255, 255, 255), FALSE); // 白
-	DrawBox(box10.x1, box10.y1, box10.x2, box10.y2, GetColor(255, 255, 255), FALSE); // 白
-	DrawBox(box11.x1, box11.y1, box11.x2, box11.y2, GetColor(255, 255, 255), FALSE); // 白
-	DrawBox(box12.x1, box12.y1, box12.x2, box12.y2, GetColor(255, 255, 255), FALSE); // 白
-	DrawBox(box13.x1, box13.y1, box13.x2, box13.y2, GetColor(255, 255, 255), FALSE); // 白
-	DrawBox(box14.x1, box14.y1, box14.x2, box14.y2, GetColor(255, 255, 255), FALSE); // 白
-	DrawBox(box15.x1, box15.y1, box15.x2, box15.y2, GetColor(255, 255, 255), FALSE); // 白
-	DrawBox(box16.x1, box16.y1, box16.x2, box16.y2, GetColor(255, 255, 255), FALSE); // 白
-	DrawBox(box17.x1, box17.y1, box17.x2, box17.y2, GetColor(255, 255, 255), FALSE); // 白
-	DrawBox(box18.x1, box18.y1, box18.x2, box18.y2, GetColor(255, 255, 255), FALSE); // 白
+	//DrawBox(box1.x1, box1.y1, box1.x2, box1.y2, GetColor(255, 0, 0), FALSE);   // 赤
+	//DrawBox(box2.x1, box2.y1, box2.x2, box2.y2, GetColor(0, 255, 0), FALSE);   // 緑
+	//DrawBox(box3.x1, box3.y1, box3.x2, box3.y2, GetColor(0, 0, 255), FALSE);   // 青 
+	//DrawBox(box4.x1, box4.y1, box4.x2, box4.y2, GetColor(0, 255, 255), FALSE); // シアン
+	//DrawBox(box5.x1, box5.y1, box5.x2, box5.y2, GetColor(255, 0, 255), FALSE); // マゼンタ
+	//DrawBox(box6.x1, box6.y1, box6.x2, box6.y2, GetColor(255, 255, 0), FALSE); // 黄
+	//DrawBox(box7.x1, box7.y1, box7.x2, box7.y2, GetColor(125, 255, 255), FALSE); // 白
+	//DrawBox(box8.x1, box8.y1, box8.x2, box8.y2, GetColor(255, 255, 255), FALSE); // 白
+	//DrawBox(box9.x1, box9.y1, box9.x2, box9.y2, GetColor(255, 255, 255), FALSE); // 白
+	//DrawBox(box10.x1, box10.y1, box10.x2, box10.y2, GetColor(255, 255, 255), FALSE); // 白
+	//DrawBox(box11.x1, box11.y1, box11.x2, box11.y2, GetColor(255, 255, 255), FALSE); // 白
+	//DrawBox(box12.x1, box12.y1, box12.x2, box12.y2, GetColor(255, 255, 255), FALSE); // 白
+	//DrawBox(box13.x1, box13.y1, box13.x2, box13.y2, GetColor(255, 255, 255), FALSE); // 白
+	//DrawBox(box14.x1, box14.y1, box14.x2, box14.y2, GetColor(255, 255, 255), FALSE); // 白
+	//DrawBox(box15.x1, box15.y1, box15.x2, box15.y2, GetColor(255, 255, 255), FALSE); // 白
+	//DrawBox(box16.x1, box16.y1, box16.x2, box16.y2, GetColor(255, 255, 255), FALSE); // 白
+	//DrawBox(box17.x1, box17.y1, box17.x2, box17.y2, GetColor(255, 255, 255), FALSE); // 白
+	//DrawBox(box18.x1, box18.y1, box18.x2, box18.y2, GetColor(255, 255, 255), FALSE); // 白 
 	
 }

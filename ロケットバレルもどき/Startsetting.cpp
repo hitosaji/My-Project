@@ -1,5 +1,6 @@
 #include "DxLib.h"
 #include "Startsetting.h"
+#include<iostream>
 
 Startsetting::Startsetting()
 {
@@ -11,7 +12,9 @@ void Startsetting::Reset()
 	isPlaying = false;
 	y = 220;
 	vy = 0;
-	
+
+	pressCount = 0;
+	prev = 0;
 }
 
 void Startsetting::Update()
@@ -37,5 +40,14 @@ void Startsetting::Update()
 	prev = now;
 }
 
+void Startsetting::Draw()
+{
+	if (!isPlaying)
+	{
+		char buf[16];
+		sprintf_s(buf, "%d", 3 - pressCount);
 
+		DrawExtendString(225, 35, 25, 25, buf, GetColor(0, 0, 0));
+	}
+}
 	

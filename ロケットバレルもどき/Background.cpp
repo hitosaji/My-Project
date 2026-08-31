@@ -4,11 +4,16 @@
 
 void Background::Init()
 {
+    
+    back1 = ConstNumber::BACKGROUND_1;
+    back2 = ConstNumber::BACKGROUND_2; // —\‚ß2–‡•ª‚ÌˆÊ’u‚ğ—pˆÓ
+}
+
+void Background::Load()
+{
     // ‰æ‘œ“Ç‚İ‚İ
     handle1 = LoadGraph("Picture/perfect_loop1.png");
 
-    back1 = ConstNumber::BACKGROUND_1;
-    back2 = ConstNumber::BACKGROUND_2; // —\‚ß2–‡•ª‚ÌˆÊ’u‚ğ—pˆÓ
 }
 
 void Background::Update(int currentFrame)
@@ -31,4 +36,9 @@ void Background::Draw()
     //”wŒi‰æ‘œ‚Q–‡‚Ìƒ‹[ƒv
     DrawGraph((int)back1, ConstNumber::BACKGROUND_1, handle1, TRUE);
     DrawGraph((int)back2, ConstNumber::BACKGROUND_1, handle1, TRUE);
+}
+
+void Background::End()
+{
+    DeleteGraph(handle1);
 }

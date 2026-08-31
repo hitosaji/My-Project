@@ -7,6 +7,7 @@ public:
 
 	void Update();   // ó‘ÔXV‚Ì‚İ
 	void Reset();
+	void Draw();
 
 
 	int prev = 0;

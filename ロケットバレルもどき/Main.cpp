@@ -10,71 +10,80 @@
 void PopulateObstacles(std::vector<Obstacles>& allObstacles)
 {
     allObstacles.clear();
-    allObstacles.push_back(Obstacles(200, -1100));
-    allObstacles.push_back(Obstacles(640, 0));
-    allObstacles.push_back(Obstacles(900, -1100));
-    allObstacles.push_back(Obstacles(940, -1130));
-    allObstacles.push_back(Obstacles(980, -1150));
-    allObstacles.push_back(Obstacles(1000, 100));
-    allObstacles.push_back(Obstacles(1500, -50));
-    allObstacles.push_back(Obstacles(1800, -1160));
-    allObstacles.push_back(Obstacles(1950, -1000));
-    allObstacles.push_back(Obstacles(2300, 70));
-    allObstacles.push_back(Obstacles(2600, -70));
-    allObstacles.push_back(Obstacles(2700, -50));
-    allObstacles.push_back(Obstacles(2800, -10));
-    allObstacles.push_back(Obstacles(2900, 30));
-    allObstacles.push_back(Obstacles(3000, -1120));
-    allObstacles.push_back(Obstacles(3050, -1090));
-    allObstacles.push_back(Obstacles(3400, -10)); 
-    allObstacles.push_back(Obstacles(3700, -60));
-    allObstacles.push_back(Obstacles(4080, -1000));
-    allObstacles.push_back(Obstacles(4500, -40));
-    allObstacles.push_back(Obstacles(4550, -70));
-    allObstacles.push_back(Obstacles(4900, -1100));
-    allObstacles.push_back(Obstacles(5100, -30));
-    //階段
-    allObstacles.push_back(Obstacles(5400, -1050));
-    allObstacles.push_back(Obstacles(5430, -1000));
-    allObstacles.push_back(Obstacles(5460, -1050));
-    allObstacles.push_back(Obstacles(5490, -1100));
-    allObstacles.push_back(Obstacles(5780, -1130));
-    allObstacles.push_back(Obstacles(5800, 50));
-    allObstacles.push_back(Obstacles(5840, 30));
-    allObstacles.push_back(Obstacles(5880, 0));
-    allObstacles.push_back(Obstacles(5920, -40));
+
+    //地形１
+    allObstacles.push_back(Obstacles(200, -1100));  //+440
+    allObstacles.push_back(Obstacles(640, 0));  //+260
+    allObstacles.push_back(Obstacles(900, -1100));  //+40
+    allObstacles.push_back(Obstacles(940, -1130));  //+40
+    allObstacles.push_back(Obstacles(980, -1150));  //+20
+    allObstacles.push_back(Obstacles(1000, 100));  //+500
+    allObstacles.push_back(Obstacles(1500, -50));  //+300
+    allObstacles.push_back(Obstacles(1800, -1160));  //+150
+    allObstacles.push_back(Obstacles(1950, -1000)); 
+
+    //地形２
+    allObstacles.push_back(Obstacles(2300, 70));  //+300
+    allObstacles.push_back(Obstacles(2600, -70));  //+100
+    allObstacles.push_back(Obstacles(2700, -50));  //+100
+    allObstacles.push_back(Obstacles(2800, -10));  //+100
+    allObstacles.push_back(Obstacles(2900, 30));  //+100
+    allObstacles.push_back(Obstacles(3000, -1120));  //+50
+    allObstacles.push_back(Obstacles(3050, -1090));  //+350
+    allObstacles.push_back(Obstacles(3400, -10));  //+300
+    allObstacles.push_back(Obstacles(3700, -60));  //+380
+    allObstacles.push_back(Obstacles(4080, -1000));  
+
+    //地形３
+    allObstacles.push_back(Obstacles(4500, -40));  //+50
+    allObstacles.push_back(Obstacles(4550, -70));  //+350
+    allObstacles.push_back(Obstacles(4900, -1100));  //+200
+    allObstacles.push_back(Obstacles(5100, -30));  //+300
+    allObstacles.push_back(Obstacles(5430, -1000));  //+30
+    allObstacles.push_back(Obstacles(5460, -1050));  //+30
+    allObstacles.push_back(Obstacles(5490, -1100));  //+290
+    allObstacles.push_back(Obstacles(5780, -1130));  //+20
+    allObstacles.push_back(Obstacles(5800, 50));  //+40
+    allObstacles.push_back(Obstacles(5840, 30));  //+40
+    allObstacles.push_back(Obstacles(5880, 0));  //+40
+    allObstacles.push_back(Obstacles(5920, -40));  //+40
     allObstacles.push_back(Obstacles(5960, -80));
-    allObstacles.push_back(Obstacles(6400, -1130));
-    allObstacles.push_back(Obstacles(6500, -20));
-    allObstacles.push_back(Obstacles(6800, -1080));
-    allObstacles.push_back(Obstacles(7000, -30));
-    allObstacles.push_back(Obstacles(7100, -1170));
-    allObstacles.push_back(Obstacles(7200, 10));
-    allObstacles.push_back(Obstacles(7320, -1120));
-    allObstacles.push_back(Obstacles(7400, -1100));
-    allObstacles.push_back(Obstacles(7700, -30));
-    allObstacles.push_back(Obstacles(7900, -1130));
-    allObstacles.push_back(Obstacles(8100, -1150));
-    allObstacles.push_back(Obstacles(8200, -10));
-    allObstacles.push_back(Obstacles(8300, -1110));
-    allObstacles.push_back(Obstacles(8450, -1130));
-    allObstacles.push_back(Obstacles(8500, -20));
-    allObstacles.push_back(Obstacles(8650, 100));
-    allObstacles.push_back(Obstacles(8800, -1000));
-    allObstacles.push_back(Obstacles(8870, -970));
-    allObstacles.push_back(Obstacles(8970, -970));
-    allObstacles.push_back(Obstacles(9070, -930));
-    allObstacles.push_back(Obstacles(9180, 180));
-    allObstacles.push_back(Obstacles(9170, -950));
-    allObstacles.push_back(Obstacles(9200, 170));
-    allObstacles.push_back(Obstacles(9270, -1000));
+
+    //地形４
+    allObstacles.push_back(Obstacles(6400, -1130));  //+100
+    allObstacles.push_back(Obstacles(6500, -20));  //+300
+    allObstacles.push_back(Obstacles(6800, -1080));  //+200
+    allObstacles.push_back(Obstacles(7000, -30));  //+100
+    allObstacles.push_back(Obstacles(7100, -1170));  //+100
+    allObstacles.push_back(Obstacles(7200, 10));  //+120
+    allObstacles.push_back(Obstacles(7320, -1120));  //+80
+    allObstacles.push_back(Obstacles(7400, -1100));  //+300
+    allObstacles.push_back(Obstacles(7700, -30));  //+200
+    allObstacles.push_back(Obstacles(7900, -1130));  //+200
+    allObstacles.push_back(Obstacles(8100, -1150));  //+100
+    allObstacles.push_back(Obstacles(8200, -10));  //+100
+    allObstacles.push_back(Obstacles(8300, -1110));  //+150
+    allObstacles.push_back(Obstacles(8450, -1130));  //+50
+    allObstacles.push_back(Obstacles(8500, -20));  //+150
+    allObstacles.push_back(Obstacles(8650, 100));  
+
+    //地形５
+    allObstacles.push_back(Obstacles(8800, -1000));  //
+    allObstacles.push_back(Obstacles(8870, -970));  //
+    allObstacles.push_back(Obstacles(8970, -970));  //
+    allObstacles.push_back(Obstacles(9070, -930));  //
+    allObstacles.push_back(Obstacles(9180, 180));  //
+    allObstacles.push_back(Obstacles(9170, -950));  //
+    allObstacles.push_back(Obstacles(9200, 170));  //
+    allObstacles.push_back(Obstacles(9270, -1000));  //
+
+    //地形６
     allObstacles.push_back(Obstacles(9300, 150));
     allObstacles.push_back(Obstacles(9400, 80));
     allObstacles.push_back(Obstacles(9580, -40));
     allObstacles.push_back(Obstacles(9900, -1010));
     allObstacles.push_back(Obstacles(9950, 140));
     allObstacles.push_back(Obstacles(9975, -1020));
-
     allObstacles.push_back(Obstacles(10050, 90));
     allObstacles.push_back(Obstacles(10050, -1060));
     allObstacles.push_back(Obstacles(10150, 30));
@@ -82,9 +91,7 @@ void PopulateObstacles(std::vector<Obstacles>& allObstacles)
     allObstacles.push_back(Obstacles(10250, -20));
     allObstacles.push_back(Obstacles(10200, -1120));
     allObstacles.push_back(Obstacles(10275, -1150));
-
     allObstacles.push_back(Obstacles(10400, -20));
-
     allObstacles.push_back(Obstacles(10550, -20));
     allObstacles.push_back(Obstacles(10550, -1160));
     allObstacles.push_back(Obstacles(10650, 30));
@@ -95,25 +102,51 @@ void PopulateObstacles(std::vector<Obstacles>& allObstacles)
     allObstacles.push_back(Obstacles(10850, -1055));
     allObstacles.push_back(Obstacles(10925, -1015));
 
+    //地形７
+    allObstacles.push_back(Obstacles(11250, -50));
+    allObstacles.push_back(Obstacles(11300, -80));
+    allObstacles.push_back(Obstacles(11350, -110));
+    allObstacles.push_back(Obstacles(11400, -140));
+    allObstacles.push_back(Obstacles(11760, -1110));
+    allObstacles.push_back(Obstacles(11830, -1000));
+    allObstacles.push_back(Obstacles(11900, -920));
+    allObstacles.push_back(Obstacles(12000, -920));
+    allObstacles.push_back(Obstacles(12100, -920));
+    allObstacles.push_back(Obstacles(12200, -920));
+    allObstacles.push_back(Obstacles(12300, -920));
+    allObstacles.push_back(Obstacles(12400, -920));
+    allObstacles.push_back(Obstacles(12500, -920));
+    allObstacles.push_back(Obstacles(12600, -920));
+    allObstacles.push_back(Obstacles(12700, -920));
 
-
-
-
+    //地形２
+    allObstacles.push_back(Obstacles(12800, 70));
+    allObstacles.push_back(Obstacles(13100, -70));
+    allObstacles.push_back(Obstacles(13200, -50));
+    allObstacles.push_back(Obstacles(2800, -10));
+    allObstacles.push_back(Obstacles(2900, 30));
+    allObstacles.push_back(Obstacles(3000, -1120));
+    allObstacles.push_back(Obstacles(3050, -1090));
+    allObstacles.push_back(Obstacles(3400, -10));
+    allObstacles.push_back(Obstacles(3700, -60));
+    allObstacles.push_back(Obstacles(4080, -1000));
 
 }
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
     ChangeWindowMode(FALSE);
+
+    SetFullScreenScalingMode(DX_FSSCALINGMODE_BILINEAR);
+
     SetGraphMode(640, 440, 32);
 
     if (DxLib_Init() == -1)
         return -1;
 
-   
     SetDrawScreen(DX_SCREEN_BACK);
     
-    int titleImg = LoadGraph("Picture/Perilous Journey.png");
+    int titleImg = LoadGraph("Picture/Perilous Journey1.png");
     int rankingImg = LoadGraph("Picture/RANKING BORD.png");
 
 
@@ -123,6 +156,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 
     Background background;
+    background.Load();
     background.Init();
 
     // サウンド準備
@@ -149,8 +183,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
     int playerLife = 3;
     int frameCounter = 0;
 	int highScore = 0;
-
-
+    int rankingNo1 = 0;
+    int rankingNo2 = 0;
+    int rankingNo3 = 0;
 
     while (ProcessMessage() == 0)
     {
@@ -164,7 +199,29 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
         {
             DrawExtendGraph( 0, 0, 640, 440,titleImg, TRUE );
             // ランキング画像
-            DrawExtendGraph(300, 10, 450, 140,rankingImg, TRUE );
+            DrawExtendGraph(0, 220, 250, 475,rankingImg, TRUE );
+
+            DrawExtendString(42, 308, 2, 2, "1.", GetColor(0, 0, 0));
+
+            DrawExtendString(42, 348, 2, 2, "2.", GetColor(0, 0, 0));
+
+            DrawExtendString(42, 389, 2, 2, "3.", GetColor(0, 0, 0));
+
+            DrawExtendString(320, 395, 2, 2, "Enter キーで開始", GetColor(255, 255, 255));
+
+            char No1Buf[64];
+            sprintf_s(No1Buf, "%d", rankingNo1);
+            DrawExtendString(80, 308, 2, 2, No1Buf, GetColor(0, 0, 0));
+
+            char No2Buf[64];
+            sprintf_s(No2Buf, "%d", rankingNo2);
+            DrawExtendString(80, 348, 2, 2, No2Buf, GetColor(0, 0, 0));
+
+            char No3Buf[64];
+            sprintf_s(No3Buf, "%d", rankingNo3);
+            DrawExtendString(80, 388, 2, 2, No3Buf, GetColor(0, 0, 0));
+
+
 
             if (CheckHitKey(KEY_INPUT_RETURN))
             {
@@ -288,7 +345,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
                 if (startsetting.isPlaying == TRUE)
                 {
                     if (startsetting.isPlaying && !waitingExplosion && !showDeathInfo) {
-                        player.score += 4;
+                        player.score += 2;
                     }
                     // プレイヤー更新（入力は爆発表示中は無効化）
                     player.Update(startsetting.isPlaying, startsetting.y, !(waitingExplosion || showDeathInfo));
@@ -401,6 +458,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
              player.Draw();
 
+             startsetting.Draw();
+
+
             // 爆発音が終わった後（showDeathInfo）が true の間に High Score と残機を表示
             if (showDeathInfo)
             {
@@ -450,7 +510,31 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
                 char scoreBuf[64];
                 sprintf_s(scoreBuf, "Score: %d", highScore);
                 DrawExtendString(215, 220, 2, 2, scoreBuf, GetColor(255, 255, 255));
+
+                // SPACEを押したらタイトル画面へ
+                if (CheckHitKey(KEY_INPUT_SPACE))
+                {
+                    gameState = GameState::Title;
+                    gameOver = false;
+
+                    // ゲームを初期状態に戻す
+                    playerLife = 3;
+                    player.score = 0;
+                    highScore = 0;
+
+                    startsetting.Reset();
+
+                    player.y = startsetting.y;
+                    player.vy = 0;
+
+                    background.Init();
+                    frameCounter = 0;
+
+                    PopulateObstacles(allObstacles);
+                }
             }
+
+
 
             // ゲーム画面の枠
             DrawBox(0,0,640,440,GetColor(255, 255, 255),FALSE);
@@ -465,6 +549,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
        
     }
 
+    background.End();
+    
     DxLib_End();
     // サウンド解放
     if (explosionSound1 != -1) {
