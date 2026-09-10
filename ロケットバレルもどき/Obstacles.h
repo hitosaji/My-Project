@@ -26,6 +26,7 @@ public:
 	BoxColider box16;
 	BoxColider box17;
 	BoxColider box18;
+	BoxColider box19;
 
 
 

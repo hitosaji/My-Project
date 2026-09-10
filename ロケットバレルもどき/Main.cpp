@@ -68,38 +68,38 @@ void PopulateObstacles(std::vector<Obstacles>& allObstacles)
     allObstacles.push_back(Obstacles(8650, 100));  
 
     //ínå`ÇT
-    allObstacles.push_back(Obstacles(8800, -1000));  //
-    allObstacles.push_back(Obstacles(8870, -970));  //
-    allObstacles.push_back(Obstacles(8970, -970));  //
-    allObstacles.push_back(Obstacles(9070, -930));  //
-    allObstacles.push_back(Obstacles(9180, 180));  //
-    allObstacles.push_back(Obstacles(9170, -950));  //
-    allObstacles.push_back(Obstacles(9200, 170));  //
-    allObstacles.push_back(Obstacles(9270, -1000));  //
+    allObstacles.push_back(Obstacles(8800, -1000));  //+70
+    allObstacles.push_back(Obstacles(8870, -970));  //+100
+    allObstacles.push_back(Obstacles(8970, -970));  //+100
+    allObstacles.push_back(Obstacles(9070, -930));  //+110
+    allObstacles.push_back(Obstacles(9180, 180));  //-10
+    allObstacles.push_back(Obstacles(9170, -950));  //+30
+    allObstacles.push_back(Obstacles(9200, 170));  //+70
+    allObstacles.push_back(Obstacles(9270, -1000));
 
     //ínå`ÇU
-    allObstacles.push_back(Obstacles(9300, 150));
-    allObstacles.push_back(Obstacles(9400, 80));
-    allObstacles.push_back(Obstacles(9580, -40));
-    allObstacles.push_back(Obstacles(9900, -1010));
-    allObstacles.push_back(Obstacles(9950, 140));
-    allObstacles.push_back(Obstacles(9975, -1020));
-    allObstacles.push_back(Obstacles(10050, 90));
-    allObstacles.push_back(Obstacles(10050, -1060));
-    allObstacles.push_back(Obstacles(10150, 30));
-    allObstacles.push_back(Obstacles(10125, -1090));
-    allObstacles.push_back(Obstacles(10250, -20));
-    allObstacles.push_back(Obstacles(10200, -1120));
-    allObstacles.push_back(Obstacles(10275, -1150));
-    allObstacles.push_back(Obstacles(10400, -20));
-    allObstacles.push_back(Obstacles(10550, -20));
-    allObstacles.push_back(Obstacles(10550, -1160));
-    allObstacles.push_back(Obstacles(10650, 30));
-    allObstacles.push_back(Obstacles(10625, -1130));
-    allObstacles.push_back(Obstacles(10750, 90));
-    allObstacles.push_back(Obstacles(10700, -1110));
-    allObstacles.push_back(Obstacles(10775, -1085));
-    allObstacles.push_back(Obstacles(10850, -1055));
+    allObstacles.push_back(Obstacles(9300, 150));  //+100
+    allObstacles.push_back(Obstacles(9400, 80));  //+180
+    allObstacles.push_back(Obstacles(9580, -40));  //+320
+    allObstacles.push_back(Obstacles(9900, -1010));  //+50
+    allObstacles.push_back(Obstacles(9950, 140));  //+25
+    allObstacles.push_back(Obstacles(9975, -1020));  //+75
+    allObstacles.push_back(Obstacles(10050, 90));  //+-0
+    allObstacles.push_back(Obstacles(10050, -1060));  //+100
+    allObstacles.push_back(Obstacles(10150, 30));  //-25
+    allObstacles.push_back(Obstacles(10125, -1090));  //+125
+    allObstacles.push_back(Obstacles(10250, -20));  //-50
+    allObstacles.push_back(Obstacles(10200, -1120));  //+75
+    allObstacles.push_back(Obstacles(10275, -1150));  //+125
+    allObstacles.push_back(Obstacles(10400, -20));  //+150
+    allObstacles.push_back(Obstacles(10550, -20));  //+-0
+    allObstacles.push_back(Obstacles(10550, -1160));  //+100
+    allObstacles.push_back(Obstacles(10650, 30));  //-25
+    allObstacles.push_back(Obstacles(10625, -1130));  //+125
+    allObstacles.push_back(Obstacles(10750, 90));  //-50
+    allObstacles.push_back(Obstacles(10700, -1110));  //+75
+    allObstacles.push_back(Obstacles(10775, -1085));  //+75
+    allObstacles.push_back(Obstacles(10850, -1055));  //+75
     allObstacles.push_back(Obstacles(10925, -1015));
 
     //ínå`ÇV
@@ -119,17 +119,96 @@ void PopulateObstacles(std::vector<Obstacles>& allObstacles)
     allObstacles.push_back(Obstacles(12600, -920));
     allObstacles.push_back(Obstacles(12700, -920));
 
-    //ínå`ÇQ
-    allObstacles.push_back(Obstacles(12800, 70));
-    allObstacles.push_back(Obstacles(13100, -70));
-    allObstacles.push_back(Obstacles(13200, -50));
-    allObstacles.push_back(Obstacles(2800, -10));
-    allObstacles.push_back(Obstacles(2900, 30));
-    allObstacles.push_back(Obstacles(3000, -1120));
-    allObstacles.push_back(Obstacles(3050, -1090));
-    allObstacles.push_back(Obstacles(3400, -10));
-    allObstacles.push_back(Obstacles(3700, -60));
-    allObstacles.push_back(Obstacles(4080, -1000));
+    //ínå`ÇQÅ[ÇP
+    allObstacles.push_back(Obstacles(13000, 60));
+    allObstacles.push_back(Obstacles(13300, -100));
+    allObstacles.push_back(Obstacles(13400, -60));
+    allObstacles.push_back(Obstacles(13500, -20));
+    allObstacles.push_back(Obstacles(13600, 20));
+    allObstacles.push_back(Obstacles(13700, -1090));
+    allObstacles.push_back(Obstacles(13750, -1060));
+    allObstacles.push_back(Obstacles(14100, -40));
+    allObstacles.push_back(Obstacles(14400, -90));
+    allObstacles.push_back(Obstacles(14780, -950));
+
+    //ínå`ÇSÅ[ÇP
+    allObstacles.push_back(Obstacles(15200, -1100));  //+100
+    allObstacles.push_back(Obstacles(15300, -20));  //+300
+    allObstacles.push_back(Obstacles(15600, -1050));  //+200
+    allObstacles.push_back(Obstacles(15800, -30));  //+100
+    allObstacles.push_back(Obstacles(15900, -1090));  //+100
+    allObstacles.push_back(Obstacles(16000, 10));  //+120
+    allObstacles.push_back(Obstacles(16120, -1070));  //+80
+    allObstacles.push_back(Obstacles(16200, -1050));  //+300
+    allObstacles.push_back(Obstacles(16500, -30));  //+200
+    allObstacles.push_back(Obstacles(16700, -1070));  //+200
+    allObstacles.push_back(Obstacles(16900, -1100));  //+100
+    allObstacles.push_back(Obstacles(17000, -10));  //+100
+    allObstacles.push_back(Obstacles(17100, -1080));  //+150
+    allObstacles.push_back(Obstacles(17250, -1100));  //+50
+    allObstacles.push_back(Obstacles(17300, -20));  //+150
+    allObstacles.push_back(Obstacles(17450, 100));
+
+    //ínå`ÇPÅ[ÇP
+    allObstacles.push_back(Obstacles(17700, -880));  //+440
+    allObstacles.push_back(Obstacles(18140, -40));  //+260
+    allObstacles.push_back(Obstacles(18400, -1010));  //+40
+    allObstacles.push_back(Obstacles(18440, -1030));  //+40
+    allObstacles.push_back(Obstacles(18480, -1050));  //+20
+    allObstacles.push_back(Obstacles(18500, 60));  //+500
+    allObstacles.push_back(Obstacles(19000, -90));  //+300
+    allObstacles.push_back(Obstacles(19300, -1060));  //+150
+    allObstacles.push_back(Obstacles(19450, -900));
+
+    //ínå`ÇUÅ[ÇP
+    allObstacles.push_back(Obstacles(19600, 150));  //+100
+    allObstacles.push_back(Obstacles(19700, 80));  //+180
+    allObstacles.push_back(Obstacles(20080, -40));  //+320
+    allObstacles.push_back(Obstacles(20400, -990));  //+50
+    allObstacles.push_back(Obstacles(20450, 140));  //+25
+    allObstacles.push_back(Obstacles(20475, -1000));  //+75
+    allObstacles.push_back(Obstacles(20550, 90));  //+-0
+    allObstacles.push_back(Obstacles(20550, -1030));  //+100
+    allObstacles.push_back(Obstacles(20650, 30));  //-25
+    allObstacles.push_back(Obstacles(20625, -1060));  //+125
+    allObstacles.push_back(Obstacles(20750, -20));  //-50
+    allObstacles.push_back(Obstacles(20700, -1090));  //+75
+    allObstacles.push_back(Obstacles(20775, -1120));  //+125
+    allObstacles.push_back(Obstacles(20900, -20));  //+150
+    allObstacles.push_back(Obstacles(21050, -20));  //+-0
+    allObstacles.push_back(Obstacles(21050, -1090));  //+100
+    allObstacles.push_back(Obstacles(21150, 30));  //-25
+    allObstacles.push_back(Obstacles(21125, -1060));  //+125
+    allObstacles.push_back(Obstacles(21250, 90));  //-50
+    allObstacles.push_back(Obstacles(21200, -1040));  //+75
+    allObstacles.push_back(Obstacles(21275, -1015));  //+75
+    allObstacles.push_back(Obstacles(21350, -980));  //+75
+    allObstacles.push_back(Obstacles(21425, -940));
+
+    //ínå`ÇRÅ[ÇP
+    allObstacles.push_back(Obstacles(21800, -40));  //+50
+    allObstacles.push_back(Obstacles(21850, -70));  //+350
+    allObstacles.push_back(Obstacles(22200, -1100));  //+200
+    allObstacles.push_back(Obstacles(22400, -30));  //+300
+    allObstacles.push_back(Obstacles(22700, -1000));  //+30
+    allObstacles.push_back(Obstacles(22730, -1050));  //+30
+    allObstacles.push_back(Obstacles(22760, -1100));  //+290
+    allObstacles.push_back(Obstacles(23050, -1065));  //+20
+    allObstacles.push_back(Obstacles(23070, 50));  //+40
+    allObstacles.push_back(Obstacles(23110, 30));  //+40
+    allObstacles.push_back(Obstacles(23150, 0));  //+40
+    allObstacles.push_back(Obstacles(23190, -40));  //+40
+    allObstacles.push_back(Obstacles(23230, -80));
+
+    //ínå`ÇT
+    allObstacles.push_back(Obstacles(23500, -1000));  //+70
+    allObstacles.push_back(Obstacles(23570, -970));  //+100
+    allObstacles.push_back(Obstacles(23670, -970));  //+100
+    allObstacles.push_back(Obstacles(23780, -930));  //+110
+    allObstacles.push_back(Obstacles(23890, 180));  //-10
+    allObstacles.push_back(Obstacles(23880, -950));  //+30
+    allObstacles.push_back(Obstacles(23910, 170));  //+70
+    allObstacles.push_back(Obstacles(23980, -1000));
 
 }
 
@@ -382,7 +461,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
                             player.boxcolider.CheckOverlap(allObstacles[i].box15) ||
                             player.boxcolider.CheckOverlap(allObstacles[i].box16) ||
                             player.boxcolider.CheckOverlap(allObstacles[i].box17) ||
-                            player.boxcolider.CheckOverlap(allObstacles[i].box18))
+                            player.boxcolider.CheckOverlap(allObstacles[i].box18) ||
+                            player.boxcolider.CheckOverlap(allObstacles[i].box19))
                         {
                             dead = true;
                             break;
