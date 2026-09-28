@@ -18,13 +18,27 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
     SetDrawScreen(DX_SCREEN_BACK);
 
     float cameraX = 600.0f;
-    float cameraY = 500.0f;
+    float cameraY = 1500.0f;
     float cameraZ = -800.0f;
+
+    // 壁の範囲
+    float wallMinX = cameraX - 7000.0f;
+    float wallMaxX = cameraX + 100.0f;
+
+    float wallMinY = cameraY - 70.0f;
+    float wallMaxY = cameraY + 100.0f;
+
+    float wallMinZ = cameraZ - 100.0f;
+    float wallMaxZ = cameraZ + 100.0f;
+
+    float cameraBobTime = 0.0f;
 
     float cameraYaw = 0.0f;   // 左右の向き
     float cameraPitch = 0.0f; // 上下の向き
 
     int stageModel = MV1LoadModel(_T("Stage2.mv1"));
+
+    MV1SetScale(stageModel, VGet(6.0f, 6.0f, 6.0f));
 
     int meshNum = MV1GetMeshNum(stageModel);
 
@@ -35,7 +49,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
     }
 
     // カメラの描画範囲
-    SetCameraNearFar(132.0f, 33000.0f);
+    SetCameraNearFar(132.0f, 50000.0f);
 
     while (ProcessMessage() == 0)
     {
@@ -47,31 +61,68 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
         //    VGet(750.0f, 0.0f, -200.0f),
         //    VGet(750.0f, 1200.0f, 10.0f)
         //);
+        bool isMoving = false;
 
-         // カメラの位置を移動
+        // カメラの位置を移動
         if (CheckHitKey(KEY_INPUT_A))
         {
-            cameraX -= cos(cameraYaw) * 5.0f;
-            cameraZ += sin(cameraYaw) * 5.0f;
+            float nextX = cameraX + sin(cameraYaw) * 5.0f;
+            float nextZ = cameraZ + cos(cameraYaw) * 5.0f;
+
+            // 次の位置が壁の中ではなければ移動
+            if (!(nextX >= wallMinX && nextX <= wallMaxX &&
+                nextZ >= wallMinZ && nextZ <= wallMaxZ))
+            {
+                cameraX = nextX;
+                cameraZ = nextZ;
+            }
+            isMoving = true;
         }
 
         if (CheckHitKey(KEY_INPUT_D))
         {
-            cameraX += cos(cameraYaw) * 5.0f;
-            cameraZ -= sin(cameraYaw) * 5.0f;
+            float nextX = cameraX + sin(cameraYaw) * 5.0f;
+            float nextZ = cameraZ + cos(cameraYaw) * 5.0f;
+
+            // 次の位置が壁の中ではなければ移動
+            if (!(nextX >= wallMinX && nextX <= wallMaxX &&
+                nextZ >= wallMinZ && nextZ <= wallMaxZ))
+            {
+                cameraX = nextX;
+                cameraZ = nextZ;
+            }
+            isMoving = true;
         }
-        
+
 
         if (CheckHitKey(KEY_INPUT_W))
         {
-            cameraX += sin(cameraYaw) * 5.0f;
-            cameraZ += cos(cameraYaw) * 5.0f;
+            float nextX = cameraX + sin(cameraYaw) * 5.0f;
+            float nextZ = cameraZ + cos(cameraYaw) * 5.0f;
+
+            // 次の位置が壁の中ではなければ移動
+            if (!(nextX >= wallMinX && nextX <= wallMaxX &&
+                nextZ >= wallMinZ && nextZ <= wallMaxZ))
+            {
+                cameraX = nextX;
+                cameraZ = nextZ;
+            }
+            isMoving = true;
         }
 
         if (CheckHitKey(KEY_INPUT_S))
         {
-            cameraX -= sin(cameraYaw) * 5.0f;
-            cameraZ -= cos(cameraYaw) * 5.0f;
+            float nextX = cameraX + sin(cameraYaw) * 5.0f;
+            float nextZ = cameraZ + cos(cameraYaw) * 5.0f;
+
+            // 次の位置が壁の中ではなければ移動
+            if (!(nextX >= wallMinX && nextX <= wallMaxX &&
+                nextZ >= wallMinZ && nextZ <= wallMaxZ))
+            {
+                cameraX = nextX;
+                cameraZ = nextZ;
+            }
+            isMoving = true;
         }
 
         // カメラの向き
@@ -88,12 +139,25 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
         if (CheckHitKey(KEY_INPUT_UP))
         {
             cameraPitch += 0.02f;
+
+            if (cameraPitch > 0.785f)
+                cameraPitch = 0.785f;
         }
 
         if (CheckHitKey(KEY_INPUT_DOWN))
         {
             cameraPitch -= 0.02f;
+
+            if (cameraPitch < -0.785f)
+                cameraPitch = -0.785f;
         }
+
+        if (isMoving)
+        {
+            cameraBobTime += 0.1f;
+        }
+
+        float bobOffset = sin(cameraBobTime) * 6.0f;
 
         // 視線の先を計算
         float targetX =
@@ -106,10 +170,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
             cameraZ + cos(cameraPitch) * cos(cameraYaw) * 1000.0f;
 
         // カメラ設定
-        SetCameraPositionAndTarget_UpVecY(
-            VGet(cameraX, cameraY, cameraZ),
-            VGet(targetX, targetY, targetZ)
-        );
+        SetCameraPositionAndTarget_UpVecY(VGet(cameraX, cameraY + bobOffset, cameraZ), VGet(targetX, targetY + bobOffset, targetZ));
 
         int matNum = MV1GetMaterialNum(stageModel);
         for (int i = 0; i < matNum; i++) {
@@ -117,7 +178,33 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
             MV1SetMaterialDifColor(stageModel, i, GetColorF(0.75f, 0.75f, 0.75f, 1.0f));
         }
 
+        SetUseLighting(FALSE);
+
         MV1DrawModel(stageModel);
+        DrawLine3D(
+            VGet(wallMinX, wallMinY, wallMinZ),
+            VGet(wallMaxX, wallMinY, wallMinZ),
+            GetColor(255, 0, 0)
+        );
+
+        DrawLine3D(
+            VGet(wallMaxX, wallMinY, wallMinZ),
+            VGet(wallMaxX, wallMinY, wallMaxZ),
+            GetColor(255, 0, 0)
+        );
+
+        DrawLine3D(
+            VGet(wallMaxX, wallMinY, wallMaxZ),
+            VGet(wallMinX, wallMinY, wallMaxZ),
+            GetColor(255, 0, 0)
+        );
+
+        DrawLine3D(
+            VGet(wallMinX, wallMinY, wallMaxZ),
+            VGet(wallMinX, wallMinY, wallMinZ),
+            GetColor(255, 0, 0)
+        );
+        
 
         ScreenFlip();
     }
@@ -133,4 +220,3 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
     return 0;
 }
-
