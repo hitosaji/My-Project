@@ -22,14 +22,14 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
     float cameraZ = -800.0f;
 
     // 壁の範囲
-    float wallMinX = cameraX - 7000.0f;
-    float wallMaxX = cameraX + 100.0f;
+    float wallMinX = 7000.0f;
+    float wallMaxX = 1500.0f;
 
-    float wallMinY = cameraY - 70.0f;
-    float wallMaxY = cameraY + 100.0f;
+    float wallMinY =  1000.0f;
+    float wallMaxY =  1000.0f;
 
-    float wallMinZ = cameraZ - 100.0f;
-    float wallMaxZ = cameraZ + 100.0f;
+    float wallMinZ =  1000.0f;
+    float wallMaxZ =  1500.0f;
 
     float cameraBobTime = 0.0f;
 
@@ -66,12 +66,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
         // カメラの位置を移動
         if (CheckHitKey(KEY_INPUT_A))
         {
-            float nextX = cameraX + sin(cameraYaw) * 5.0f;
-            float nextZ = cameraZ + cos(cameraYaw) * 5.0f;
+            float nextX = cameraX - cos(cameraYaw) * 5.0f;
+            float nextZ = cameraZ + sin(cameraYaw) * 5.0f;
 
             // 次の位置が壁の中ではなければ移動
-            if (!(nextX >= wallMinX && nextX <= wallMaxX &&
-                nextZ >= wallMinZ && nextZ <= wallMaxZ))
+            if (!(cameraX <= wallMinX && cameraX >= wallMaxX &&
+                cameraZ >= wallMinZ && cameraZ <= wallMaxZ))
             {
                 cameraX = nextX;
                 cameraZ = nextZ;
@@ -81,12 +81,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
         if (CheckHitKey(KEY_INPUT_D))
         {
-            float nextX = cameraX + sin(cameraYaw) * 5.0f;
-            float nextZ = cameraZ + cos(cameraYaw) * 5.0f;
+            float nextX = cameraX + cos(cameraYaw) * 5.0f;
+            float nextZ = cameraZ - sin(cameraYaw) * 5.0f;
 
             // 次の位置が壁の中ではなければ移動
-            if (!(nextX >= wallMinX && nextX <= wallMaxX &&
-                nextZ >= wallMinZ && nextZ <= wallMaxZ))
+            if (!(cameraX <= wallMinX && cameraX >= wallMaxX &&
+                cameraZ >= wallMinZ && cameraZ <= wallMaxZ))
             {
                 cameraX = nextX;
                 cameraZ = nextZ;
@@ -94,15 +94,15 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
             isMoving = true;
         }
 
-
+        
         if (CheckHitKey(KEY_INPUT_W))
         {
             float nextX = cameraX + sin(cameraYaw) * 5.0f;
             float nextZ = cameraZ + cos(cameraYaw) * 5.0f;
 
             // 次の位置が壁の中ではなければ移動
-            if (!(nextX >= wallMinX && nextX <= wallMaxX &&
-                nextZ >= wallMinZ && nextZ <= wallMaxZ))
+            if (!(cameraX <= wallMinX && cameraX >= wallMaxX &&
+                cameraZ >= wallMinZ && cameraZ <= wallMaxZ))
             {
                 cameraX = nextX;
                 cameraZ = nextZ;
@@ -112,12 +112,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
         if (CheckHitKey(KEY_INPUT_S))
         {
-            float nextX = cameraX + sin(cameraYaw) * 5.0f;
-            float nextZ = cameraZ + cos(cameraYaw) * 5.0f;
+            float nextX = cameraX - sin(cameraYaw) * 5.0f;
+            float nextZ = cameraZ - cos(cameraYaw) * 5.0f;
 
             // 次の位置が壁の中ではなければ移動
-            if (!(nextX >= wallMinX && nextX <= wallMaxX &&
-                nextZ >= wallMinZ && nextZ <= wallMaxZ))
+            if (!(cameraX <= wallMinX && cameraX >= wallMaxX &&
+                cameraZ >= wallMinZ && cameraZ <= wallMaxZ))
             {
                 cameraX = nextX;
                 cameraZ = nextZ;
