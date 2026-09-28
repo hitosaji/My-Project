@@ -1,4 +1,5 @@
 #include "DxLib.h"
+#include"Camera.h"
 #include <math.h>
 #include <tchar.h>
 
@@ -13,7 +14,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
     if (DxLib_Init() == -1)
         return -1;
-
+    
     // 3Dï`âÊê›íË
     SetDrawScreen(DX_SCREEN_BACK);
 
