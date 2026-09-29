@@ -193,22 +193,44 @@ void PopulateObstacles(std::vector<Obstacles>& allObstacles)
     allObstacles.push_back(Obstacles(22700, -1000));  //+30
     allObstacles.push_back(Obstacles(22730, -1050));  //+30
     allObstacles.push_back(Obstacles(22760, -1100));  //+290
-    allObstacles.push_back(Obstacles(23050, -1065));  //+20
+    allObstacles.push_back(Obstacles(23050, -1070));  //+20
     allObstacles.push_back(Obstacles(23070, 50));  //+40
     allObstacles.push_back(Obstacles(23110, 30));  //+40
     allObstacles.push_back(Obstacles(23150, 0));  //+40
     allObstacles.push_back(Obstacles(23190, -40));  //+40
     allObstacles.push_back(Obstacles(23230, -80));
 
-    //地形５
+    //地形５ー１
     allObstacles.push_back(Obstacles(23500, -1000));  //+70
-    allObstacles.push_back(Obstacles(23570, -970));  //+100
-    allObstacles.push_back(Obstacles(23670, -970));  //+100
-    allObstacles.push_back(Obstacles(23780, -930));  //+110
-    allObstacles.push_back(Obstacles(23890, 180));  //-10
-    allObstacles.push_back(Obstacles(23880, -950));  //+30
-    allObstacles.push_back(Obstacles(23910, 170));  //+70
-    allObstacles.push_back(Obstacles(23980, -1000));
+    allObstacles.push_back(Obstacles(23570, -910));  //+100
+    allObstacles.push_back(Obstacles(23670, -890));  //+100
+    allObstacles.push_back(Obstacles(23780, -860));  //+110
+    allObstacles.push_back(Obstacles(23890, 190));  //-10
+    allObstacles.push_back(Obstacles(23880, -860));  //+30
+    allObstacles.push_back(Obstacles(23910, 175));  //+70
+    allObstacles.push_back(Obstacles(23980, -890));
+
+    //地形７ー１
+    allObstacles.push_back(Obstacles(24350, -50)); //+50
+    allObstacles.push_back(Obstacles(24400, -80)); //+50
+    allObstacles.push_back(Obstacles(24450, -110)); //+50
+    allObstacles.push_back(Obstacles(24500, -140)); //+360
+    allObstacles.push_back(Obstacles(24860, -1110)); //+70
+    allObstacles.push_back(Obstacles(24930, -1000)); //+70
+    allObstacles.push_back(Obstacles(25000, -920)); //+100
+    allObstacles.push_back(Obstacles(25100, -900)); //+100
+    allObstacles.push_back(Obstacles(25200, -880)); //+100
+    allObstacles.push_back(Obstacles(25300, -850)); //+100
+    allObstacles.push_back(Obstacles(25400, -850)); //+100
+    allObstacles.push_back(Obstacles(25500, -850)); //+100
+    allObstacles.push_back(Obstacles(25600, -850)); //+100
+    allObstacles.push_back(Obstacles(25700, -850)); //+100
+    allObstacles.push_back(Obstacles(25800, -850));
+    allObstacles.push_back(Obstacles(25900, -850));
+    allObstacles.push_back(Obstacles(26000, -850));
+    allObstacles.push_back(Obstacles(26100, -850));
+
+
 
 }
 
@@ -218,7 +240,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
     SetFullScreenScalingMode(DX_FSSCALINGMODE_BILINEAR);
 
-    SetGraphMode(640, 440, 32);
+    SetGraphMode(660, 440, 32);
 
     if (DxLib_Init() == -1)
         return -1;
@@ -266,6 +288,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
     int rankingNo2 = 0;
     int rankingNo3 = 0;
 
+    static bool spaceLock = false;
+
     while (ProcessMessage() == 0)
     {
          ClearDrawScreen();
@@ -286,7 +310,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
             DrawExtendString(42, 389, 2, 2, "3.", GetColor(0, 0, 0));
 
-            DrawExtendString(320, 395, 2, 2, "Enter キーで開始", GetColor(255, 255, 255));
+            DrawExtendString(320, 395, 2, 2, "SPACE キーで開始", GetColor(255, 255, 255));
 
             char No1Buf[64];
             sprintf_s(No1Buf, "%d", rankingNo1);
@@ -302,9 +326,18 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 
 
-            if (CheckHitKey(KEY_INPUT_RETURN))
+            if (CheckHitKey(KEY_INPUT_SPACE))
             {
-                gameState = GameState::Explanation;
+                if (!spaceLock)
+                {
+                    gameState = GameState::Explanation;
+
+                    spaceLock = true;
+                }
+            }
+            else
+            {
+                spaceLock = false;
             }
 
             ScreenFlip();
@@ -316,18 +349,28 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
             // 背景を黒にする
             DrawBox(0, 0,640, 440,GetColor(0, 0, 0),TRUE);
 
-             DrawString(220, 100,"操作説明",GetColor(255, 255, 255));
+             DrawExtendString(150, 50,5,5,"操作説明",GetColor(255, 255, 255));
 
-            DrawString(180, 180,"SPACE : 上昇",GetColor(255, 255, 255));
+            DrawExtendString(200, 150,2,2,"SPACE : 上昇",GetColor(255, 255, 255));
+
+            DrawExtendString(0, 200, 2, 2, "このゲームはスペースキーしか使いません!", GetColor(255, 255, 255));
 
             DrawString(180, 220,"障害物を避けて進もう！",GetColor(255, 255, 255));
 
             DrawString(180, 350,"SPACE : ゲーム開始",GetColor(255, 255, 255));
 
-            if (CheckHitKey(KEY_INPUT_UP))
+            if (CheckHitKey(KEY_INPUT_SPACE))
             {
-                gameState = GameState::Playing;
-                
+                if (!spaceLock)
+                {
+                    gameState = GameState::Playing;
+
+                    spaceLock = true;
+                }
+            }
+            else
+            {
+                spaceLock = false;
             }
 
             ScreenFlip();
@@ -584,12 +627,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
                 DrawBox(0, 0, 640, 480, GetColor(0, 0, 0), TRUE);
 
                 // GAME OVER
-                DrawExtendString(150, 130, 4, 4, "GAME OVER", GetColor(255, 255, 255));
+                DrawExtendString(160, 130, 4, 4, "GAME OVER", GetColor(255, 255, 255));
 
                 // スコア
                 char scoreBuf[64];
                 sprintf_s(scoreBuf, "Score: %d", highScore);
-                DrawExtendString(215, 220, 2, 2, scoreBuf, GetColor(255, 255, 255));
+                DrawExtendString(225, 220, 2, 2, scoreBuf, GetColor(255, 255, 255));
 
                 // SPACEを押したらタイトル画面へ
                 if (CheckHitKey(KEY_INPUT_SPACE))
@@ -617,7 +660,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 
             // ゲーム画面の枠
-            DrawBox(0,0,640,440,GetColor(255, 255, 255),FALSE);
+            DrawBox(0,0,660,440,GetColor(255, 255, 255),FALSE);
 
             ScreenFlip();
             frameCounter++;
