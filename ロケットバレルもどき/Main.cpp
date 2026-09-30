@@ -347,7 +347,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
         if (gameState == GameState::Explanation)
         {
             // 背景を黒にする
-            DrawBox(0, 0,640, 440,GetColor(0, 0, 0),TRUE);
+            DrawBox(0, 0,660, 440,GetColor(0, 0, 0),TRUE);
 
              DrawExtendString(150, 50,5,5,"操作説明",GetColor(255, 255, 255));
 
@@ -355,9 +355,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
             DrawExtendString(0, 200, 2, 2, "このゲームはスペースキーしか使いません!", GetColor(255, 255, 255));
 
-            DrawString(180, 220,"障害物を避けて進もう！",GetColor(255, 255, 255));
+            DrawExtendString(145, 260,2,2,"障害物を避けて進もう！",GetColor(255, 255, 255));
 
-            DrawString(180, 350,"SPACE : ゲーム開始",GetColor(255, 255, 255));
+            DrawExtendString(132, 350,2,2," - START to SPACE - ",GetColor(255, 255, 255));
 
             if (CheckHitKey(KEY_INPUT_SPACE))
             {
@@ -588,7 +588,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
             if (showDeathInfo)
             {
                 // 背景を黒にする
-                DrawBox(0, 0, 640, 480, GetColor(0, 0, 0), TRUE);
+                DrawBox(0, 0, 660, 480, GetColor(0, 0, 0), TRUE);
 
                 char hsBuf[64];
                 sprintf_s(hsBuf, "High Score: %d", highScore);
@@ -624,7 +624,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
             if (gameOver)
             {
                 // 背景を黒にする
-                DrawBox(0, 0, 640, 480, GetColor(0, 0, 0), TRUE);
+                DrawBox(0, 0, 660, 480, GetColor(0, 0, 0), TRUE);
 
                 // GAME OVER
                 DrawExtendString(160, 130, 4, 4, "GAME OVER", GetColor(255, 255, 255));
