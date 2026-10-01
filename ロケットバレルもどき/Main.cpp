@@ -288,15 +288,20 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
     int rankingNo2 = 0;
     int rankingNo3 = 0;
 
+    int blinkTimer = 0;
+
+
     static bool spaceLock = false;
 
     while (ProcessMessage() == 0)
     {
          ClearDrawScreen();
 
+            blinkTimer++;
         // ========================================
         // 更新処理
         // ========================================
+
 
         if (gameState == GameState::Title)
         {
@@ -347,17 +352,29 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
         if (gameState == GameState::Explanation)
         {
             // 背景を黒にする
-            DrawBox(0, 0,660, 440,GetColor(0, 0, 0),TRUE);
+            DrawBox(0, 0, 660, 440, GetColor(0, 0, 0), TRUE);
 
-             DrawExtendString(150, 50,5,5,"操作説明",GetColor(255, 255, 255));
+            DrawFormatString(10, 10, GetColor(255, 255, 255),
+                "Timer: %d", blinkTimer);
 
-            DrawExtendString(200, 150,2,2,"SPACE : 上昇",GetColor(255, 255, 255));
+            DrawExtendString(150, 50, 5, 5, "操作説明", GetColor(255, 255, 255));
+
+            DrawExtendString(200, 150, 2, 2, "SPACE : 上昇", GetColor(255, 255, 255));
 
             DrawExtendString(0, 200, 2, 2, "このゲームはスペースキーしか使いません!", GetColor(255, 255, 255));
 
-            DrawExtendString(145, 260,2,2,"障害物を避けて進もう！",GetColor(255, 255, 255));
+            DrawExtendString(145, 260, 2, 2, "障害物を避けて進もう！", GetColor(255, 255, 255));
 
-            DrawExtendString(132, 350,2,2," - START to SPACE - ",GetColor(255, 255, 255));
+            if (blinkTimer < 40)
+            {
+                DrawExtendString(132, 350, 2, 2, " - START to SPACE - ", GetColor(255, 255, 255));
+            }
+            else if (blinkTimer > 80)
+            {
+                DrawExtendString(132, 350, 2, 2, " - START to SPACE - ", GetColor(0, 0, 0));
+                blinkTimer = 0;
+            }
+     
 
             if (CheckHitKey(KEY_INPUT_SPACE))
             {
@@ -572,6 +589,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
             // 描画処理
             // ========================================
 
+
+
             background.Draw();
 
             for (int i = 0; i < allObstacles.size(); i++)
@@ -668,6 +687,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
         
         }
+
 
        
     }

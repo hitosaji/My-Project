@@ -112,4 +112,22 @@ void Player::Draw()
     char buf4[64];
     sprintf_s(buf4, "Score:%d", score);
     DrawExtendString(10, 10, 2, 2,buf4, GetColor(255, 255, 255));
+
+    static int frameCount = 0;
+    static int fps = 0;
+    static int lastTime = GetNowCount();
+
+    frameCount++;
+
+    int nowTime = GetNowCount();
+
+    if (nowTime - lastTime >= 1000)
+    {
+        fps = frameCount;
+        frameCount = 0;
+        lastTime = nowTime;
+    }
+
+    DrawFormatString(10, 10, GetColor(255, 255, 255),
+        "FPS: %d", fps);
 }
