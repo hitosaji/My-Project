@@ -16,7 +16,7 @@ void Background::Load()
 
 }
 
-void Background::Update(int currentFrame)
+void Background::Update(int currentFrame, float deltaTime)
 {
     // “¯ˆêƒtƒŒ[ƒ€‚Å•¡”‰ñŒÄ‚Î‚ê‚½ê‡‚ÍÅ‰‚Ìˆê‰ñ‚¾‚¯ˆ—‚·‚é
     if (lastUpdateFrame == currentFrame) return;

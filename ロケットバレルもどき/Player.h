@@ -8,7 +8,7 @@ public:
     BoxColider boxcolider;
 
     // 外部の再生フラグと開始Yを受け取る
-    void Update(bool isPlaying, float startY, bool acceptInput);
+    void Update(bool isPlaying, float startY, bool acceptInput, float deltaTime);
     void Draw();
 
     int px = 0;

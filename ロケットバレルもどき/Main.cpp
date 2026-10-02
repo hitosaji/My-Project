@@ -204,7 +204,7 @@ void PopulateObstacles(std::vector<Obstacles>& allObstacles)
     allObstacles.push_back(Obstacles(23500, -1000));  //+70
     allObstacles.push_back(Obstacles(23570, -910));  //+100
     allObstacles.push_back(Obstacles(23670, -890));  //+100
-    allObstacles.push_back(Obstacles(23780, -860));  //+110
+    allObstacles.push_back(Obstacles(23780, -870));  //+110
     allObstacles.push_back(Obstacles(23890, 190));  //-10
     allObstacles.push_back(Obstacles(23880, -860));  //+30
     allObstacles.push_back(Obstacles(23910, 175));  //+70
@@ -220,15 +220,15 @@ void PopulateObstacles(std::vector<Obstacles>& allObstacles)
     allObstacles.push_back(Obstacles(25000, -920)); //+100
     allObstacles.push_back(Obstacles(25100, -900)); //+100
     allObstacles.push_back(Obstacles(25200, -880)); //+100
-    allObstacles.push_back(Obstacles(25300, -850)); //+100
-    allObstacles.push_back(Obstacles(25400, -850)); //+100
-    allObstacles.push_back(Obstacles(25500, -850)); //+100
-    allObstacles.push_back(Obstacles(25600, -850)); //+100
-    allObstacles.push_back(Obstacles(25700, -850)); //+100
-    allObstacles.push_back(Obstacles(25800, -850));
-    allObstacles.push_back(Obstacles(25900, -850));
-    allObstacles.push_back(Obstacles(26000, -850));
-    allObstacles.push_back(Obstacles(26100, -850));
+    allObstacles.push_back(Obstacles(25300, -860)); //+100
+    allObstacles.push_back(Obstacles(25400, -860)); //+100
+    allObstacles.push_back(Obstacles(25500, -860)); //+100
+    allObstacles.push_back(Obstacles(25600, -860)); //+100
+    allObstacles.push_back(Obstacles(25700, -860)); //+100
+    allObstacles.push_back(Obstacles(25800, -860));
+    allObstacles.push_back(Obstacles(25900, -860));
+    allObstacles.push_back(Obstacles(26000, -860));
+    allObstacles.push_back(Obstacles(26100, -860));
 
 
 
@@ -290,169 +290,196 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
     int blinkTimer = 0;
 
-
     static bool spaceLock = false;
+
+    int oldTime = GetNowCount();
 
     while (ProcessMessage() == 0)
     {
-         ClearDrawScreen();
+        while (ProcessMessage() == 0)
+        {
+            int nowTime = GetNowCount();
+
+            float deltaTime = (nowTime - oldTime) / 1000.0f;
+
+            oldTime = nowTime;
+
+            ClearDrawScreen();
 
             blinkTimer++;
-        // ========================================
-        // 更新処理
-        // ========================================
 
+            // ========================================
+            // 更新処理
+            // ========================================
 
-        if (gameState == GameState::Title)
-        {
-            DrawExtendGraph( 0, 0, 640, 440,titleImg, TRUE );
-            // ランキング画像
-            DrawExtendGraph(0, 220, 250, 475,rankingImg, TRUE );
-
-            DrawExtendString(42, 308, 2, 2, "1.", GetColor(0, 0, 0));
-
-            DrawExtendString(42, 348, 2, 2, "2.", GetColor(0, 0, 0));
-
-            DrawExtendString(42, 389, 2, 2, "3.", GetColor(0, 0, 0));
-
-            DrawExtendString(320, 395, 2, 2, "SPACE キーで開始", GetColor(255, 255, 255));
-
-            char No1Buf[64];
-            sprintf_s(No1Buf, "%d", rankingNo1);
-            DrawExtendString(80, 308, 2, 2, No1Buf, GetColor(0, 0, 0));
-
-            char No2Buf[64];
-            sprintf_s(No2Buf, "%d", rankingNo2);
-            DrawExtendString(80, 348, 2, 2, No2Buf, GetColor(0, 0, 0));
-
-            char No3Buf[64];
-            sprintf_s(No3Buf, "%d", rankingNo3);
-            DrawExtendString(80, 388, 2, 2, No3Buf, GetColor(0, 0, 0));
-
-
-
-            if (CheckHitKey(KEY_INPUT_SPACE))
+            if (gameState == GameState::Title)
             {
-                if (!spaceLock)
-                {
-                    gameState = GameState::Explanation;
+                DrawExtendGraph(0, 0, 640, 440, titleImg, TRUE);
+                // ランキング画像
+                DrawExtendGraph(0, 220, 250, 475, rankingImg, TRUE);
 
-                    spaceLock = true;
+                DrawExtendString(42, 308, 2, 2, "1.", GetColor(0, 0, 0));
+
+                DrawExtendString(42, 348, 2, 2, "2.", GetColor(0, 0, 0));
+
+                DrawExtendString(42, 389, 2, 2, "3.", GetColor(0, 0, 0));
+
+                DrawExtendString(320, 395, 2, 2, "SPACE キーで開始", GetColor(255, 255, 255));
+
+                char No1Buf[64];
+                sprintf_s(No1Buf, "%d", rankingNo1);
+                DrawExtendString(80, 308, 2, 2, No1Buf, GetColor(0, 0, 0));
+
+                char No2Buf[64];
+                sprintf_s(No2Buf, "%d", rankingNo2);
+                DrawExtendString(80, 348, 2, 2, No2Buf, GetColor(0, 0, 0));
+
+                char No3Buf[64];
+                sprintf_s(No3Buf, "%d", rankingNo3);
+                DrawExtendString(80, 388, 2, 2, No3Buf, GetColor(0, 0, 0));
+
+
+
+                if (CheckHitKey(KEY_INPUT_SPACE))
+                {
+                    if (!spaceLock)
+                    {
+                        gameState = GameState::Explanation;
+
+                        spaceLock = true;
+                    }
                 }
-            }
-            else
-            {
-                spaceLock = false;
-            }
-
-            ScreenFlip();
-            continue;
-        }
-
-        if (gameState == GameState::Explanation)
-        {
-            // 背景を黒にする
-            DrawBox(0, 0, 660, 440, GetColor(0, 0, 0), TRUE);
-
-            DrawFormatString(10, 10, GetColor(255, 255, 255),
-                "Timer: %d", blinkTimer);
-
-            DrawExtendString(150, 50, 5, 5, "操作説明", GetColor(255, 255, 255));
-
-            DrawExtendString(200, 150, 2, 2, "SPACE : 上昇", GetColor(255, 255, 255));
-
-            DrawExtendString(0, 200, 2, 2, "このゲームはスペースキーしか使いません!", GetColor(255, 255, 255));
-
-            DrawExtendString(145, 260, 2, 2, "障害物を避けて進もう！", GetColor(255, 255, 255));
-
-            if (blinkTimer < 40)
-            {
-                DrawExtendString(132, 350, 2, 2, " - START to SPACE - ", GetColor(255, 255, 255));
-            }
-            else if (blinkTimer > 80)
-            {
-                DrawExtendString(132, 350, 2, 2, " - START to SPACE - ", GetColor(0, 0, 0));
-                blinkTimer = 0;
-            }
-     
-
-            if (CheckHitKey(KEY_INPUT_SPACE))
-            {
-                if (!spaceLock)
+                else
                 {
-                    gameState = GameState::Playing;
-
-                    spaceLock = true;
+                    spaceLock = false;
                 }
-            }
-            else
-            {
-                spaceLock = false;
-            }
 
-            ScreenFlip();
-            continue;
-        }
-
-
-        if (gameState == GameState::Playing)
-        {
-            DrawString(
-                10, 10,
-                "PLAYING",
-                GetColor(255, 255, 255)
-            );
-
-            DrawFormatString(
-                10, 30,
-                GetColor(255, 255, 255),
-                "isPlaying = %d",
-                startsetting.isPlaying
-            );
-
-            // 以下そのまま
-            
-            if (!waitingExplosion && !showDeathInfo)
-            {
-                startsetting.Update();
+                ScreenFlip();
+                continue;
             }
 
-            // BGM 再生管理: ゲーム中のみループ再生、ゲームオーバー/爆発再生中は停止
-            if (!gameOver && !waitingExplosion && startsetting.isPlaying == TRUE)
+            if (gameState == GameState::Explanation)
             {
-                if (!playingBgm && explosionSound2 != -1)
+                // 背景を黒にする
+                DrawBox(0, 0, 660, 440, GetColor(0, 0, 0), TRUE);
+
+                DrawFormatString(10, 10, GetColor(255, 255, 255),
+                    "Timer: %d", blinkTimer);
+
+                DrawExtendString(150, 50, 5, 5, "操作説明", GetColor(255, 255, 255));
+
+                DrawExtendString(200, 150, 2, 2, "SPACE : 上昇", GetColor(255, 255, 255));
+
+                DrawExtendString(0, 200, 2, 2, "このゲームはスペースキーしか使いません!", GetColor(255, 255, 255));
+
+                DrawExtendString(145, 260, 2, 2, "障害物を避けて進もう！", GetColor(255, 255, 255));
+
+                if (blinkTimer < 40)
                 {
-                    PlaySoundMem(explosionSound2, DX_PLAYTYPE_LOOP);
-                    playingBgm = true;
+                    DrawExtendString(132, 350, 2, 2, " - START to SPACE - ", GetColor(255, 255, 255));
                 }
-            }
-            else
-            {
-                if (playingBgm && explosionSound2 != -1)
+                else if (blinkTimer > 80)
                 {
-                    StopSoundMem(explosionSound2);
-                    playingBgm = false;
+                    DrawExtendString(132, 350, 2, 2, " - START to SPACE - ", GetColor(0, 0, 0));
+                    blinkTimer = 0;
                 }
-            }
-            // 爆発音再生中はゲーム進行を一時停止し、音の終了で処理を分岐する
-            if (waitingExplosion)
-            {
-                if (explosionSound1 != -1)
+
+
+                if (CheckHitKey(KEY_INPUT_SPACE))
                 {
-                    // CheckSoundMem: 0 = 停止, 1 = 再生中
-                    if (CheckSoundMem(explosionSound1) == 0)
+                    if (!spaceLock)
+                    {
+                        gameState = GameState::Playing;
+
+                        spaceLock = true;
+                    }
+                }
+                else
+                {
+                    spaceLock = false;
+                }
+
+                ScreenFlip();
+                continue;
+            }
+
+
+            if (gameState == GameState::Playing)
+            {
+                DrawString(
+                    10, 10,
+                    "PLAYING",
+                    GetColor(255, 255, 255)
+                );
+
+                DrawFormatString(
+                    10, 30,
+                    GetColor(255, 255, 255),
+                    "isPlaying = %d",
+                    startsetting.isPlaying
+                );
+
+                // 以下そのまま
+
+                if (!waitingExplosion && !showDeathInfo)
+                {
+                    startsetting.Update();
+                }
+
+                // BGM 再生管理: ゲーム中のみループ再生、ゲームオーバー/爆発再生中は停止
+                if (!gameOver && !waitingExplosion && startsetting.isPlaying == TRUE)
+                {
+                    if (!playingBgm && explosionSound2 != -1)
+                    {
+                        PlaySoundMem(explosionSound2, DX_PLAYTYPE_LOOP);
+                        playingBgm = true;
+                    }
+                }
+                else
+                {
+                    if (playingBgm && explosionSound2 != -1)
+                    {
+                        StopSoundMem(explosionSound2);
+                        playingBgm = false;
+                    }
+                }
+                // 爆発音再生中はゲーム進行を一時停止し、音の終了で処理を分岐する
+                if (waitingExplosion)
+                {
+                    if (explosionSound1 != -1)
+                    {
+                        // CheckSoundMem: 0 = 停止, 1 = 再生中
+                        if (CheckSoundMem(explosionSound1) == 0)
+                        {
+                            if (pendingGameOver)
+                            {
+                                // ライフ尽きている -> ゲームオーバー
+                                gameOver = true;
+                            }
+                            else
+                            {
+                                // ライフ残あり -> 爆発音終了後に High Score と残機を表示する
+                                showDeathInfo = true;
+                                deathInfoStartTime = GetNowCount();
+                                // 表示中はゲーム進行を止めるためスタート待機状態に戻す
+                                startsetting.Reset();
+                                player.vy = 0;
+                            }
+
+                            waitingExplosion = false;
+                            pendingGameOver = false;
+                        }
+                    }
+                    else
                     {
                         if (pendingGameOver)
                         {
-                            // ライフ尽きている -> ゲームオーバー
                             gameOver = true;
                         }
                         else
                         {
-                            // ライフ残あり -> 爆発音終了後に High Score と残機を表示する
                             showDeathInfo = true;
                             deathInfoStartTime = GetNowCount();
-                            // 表示中はゲーム進行を止めるためスタート待機状態に戻す
                             startsetting.Reset();
                             player.vy = 0;
                         }
@@ -461,248 +488,233 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
                         pendingGameOver = false;
                     }
                 }
-                else
+                else if (!gameOver)
                 {
-                    if (pendingGameOver)
+                    if (startsetting.isPlaying == TRUE)
                     {
-                        gameOver = true;
-                    }
-                    else
-                    {
-                        showDeathInfo = true;
-                        deathInfoStartTime = GetNowCount();
-                        startsetting.Reset();
-                        player.vy = 0;
-                    }
+                        if (startsetting.isPlaying && !waitingExplosion && !showDeathInfo) {
+                            player.score += 2;
+                        }
+                        // プレイヤー更新（入力は爆発表示中は無効化）
+                        player.Update(startsetting.isPlaying, startsetting.y, !(waitingExplosion || showDeathInfo), deltaTime);
 
-                    waitingExplosion = false;
-                    pendingGameOver = false;
-                }
-            }
-            else if (!gameOver)
-            {
-                if (startsetting.isPlaying == TRUE)
-                {
-                    if (startsetting.isPlaying && !waitingExplosion && !showDeathInfo) {
-                        player.score += 2;
-                    }
-                    // プレイヤー更新（入力は爆発表示中は無効化）
-                    player.Update(startsetting.isPlaying, startsetting.y, !(waitingExplosion || showDeathInfo));
-
-                    // 画面下端にめり込み始めたらダメージ扱いにする
-                    if (player.y > 440 - 50)
-                    {
-                        dead = true;
-                    }
-
-                    // 背景更新
-                    background.Update(frameCounter);
-
-                    // 障害物更新
-                    for (int i = 0; i < allObstacles.size(); i++)
-                    {
-                        allObstacles[i].Update(startsetting.isPlaying);
-
-                        //当たり判定
-                        if (player.boxcolider.CheckOverlap(allObstacles[i].box1) ||
-                            player.boxcolider.CheckOverlap(allObstacles[i].box2) ||
-                            player.boxcolider.CheckOverlap(allObstacles[i].box3) ||
-                            player.boxcolider.CheckOverlap(allObstacles[i].box4) ||
-                            player.boxcolider.CheckOverlap(allObstacles[i].box5) ||
-                            player.boxcolider.CheckOverlap(allObstacles[i].box6) ||
-                            player.boxcolider.CheckOverlap(allObstacles[i].box7) ||
-                            player.boxcolider.CheckOverlap(allObstacles[i].box8) ||
-                            player.boxcolider.CheckOverlap(allObstacles[i].box9) ||
-                            player.boxcolider.CheckOverlap(allObstacles[i].box10) ||
-                            player.boxcolider.CheckOverlap(allObstacles[i].box11) ||
-                            player.boxcolider.CheckOverlap(allObstacles[i].box12) ||
-                            player.boxcolider.CheckOverlap(allObstacles[i].box13) ||
-                            player.boxcolider.CheckOverlap(allObstacles[i].box14) ||
-                            player.boxcolider.CheckOverlap(allObstacles[i].box15) ||
-                            player.boxcolider.CheckOverlap(allObstacles[i].box16) ||
-                            player.boxcolider.CheckOverlap(allObstacles[i].box17) ||
-                            player.boxcolider.CheckOverlap(allObstacles[i].box18) ||
-                            player.boxcolider.CheckOverlap(allObstacles[i].box19))
+                        // 画面下端にめり込み始めたらダメージ扱いにする
+                        if (player.y > 440 - 50)
                         {
                             dead = true;
-                            break;
-                        }
-                    }
-
-
-                    if (player.score > highScore)
-                    {
-                        highScore = player.score;
-                    }
-
-
-                    // ========================================
-                    // プレイヤーが死亡した場合
-                    // ========================================
-
-                    if (dead)
-                    {
-                        playerLife--;
-                        dead = false;
-
-                        // BGM を止めて爆発音再生
-                        if (playingBgm && explosionSound2 != -1)
-                        {
-                            StopSoundMem(explosionSound2);
-                            playingBgm = false;
-
                         }
 
-                        if (explosionSound1 != -1)
-                        {
-                            PlaySoundMem(explosionSound1, DX_PLAYTYPE_BACK);
-                            waitingExplosion = true;
-                            pendingGameOver = (playerLife <= 0);
-                        }
-                        else
-                        {
+                        // 背景更新
+                        background.Update(frameCounter, deltaTime);
 
-                            if (playerLife <= 0)
+                        // 障害物更新
+                        for (int i = 0; i < allObstacles.size(); i++)
+                        {
+                            allObstacles[i].Update(startsetting.isPlaying);
+
+                            //当たり判定
+                            if (player.boxcolider.CheckOverlap(allObstacles[i].box1) ||
+                                player.boxcolider.CheckOverlap(allObstacles[i].box2) ||
+                                player.boxcolider.CheckOverlap(allObstacles[i].box3) ||
+                                player.boxcolider.CheckOverlap(allObstacles[i].box4) ||
+                                player.boxcolider.CheckOverlap(allObstacles[i].box5) ||
+                                player.boxcolider.CheckOverlap(allObstacles[i].box6) ||
+                                player.boxcolider.CheckOverlap(allObstacles[i].box7) ||
+                                player.boxcolider.CheckOverlap(allObstacles[i].box8) ||
+                                player.boxcolider.CheckOverlap(allObstacles[i].box9) ||
+                                player.boxcolider.CheckOverlap(allObstacles[i].box10) ||
+                                player.boxcolider.CheckOverlap(allObstacles[i].box11) ||
+                                player.boxcolider.CheckOverlap(allObstacles[i].box12) ||
+                                player.boxcolider.CheckOverlap(allObstacles[i].box13) ||
+                                player.boxcolider.CheckOverlap(allObstacles[i].box14) ||
+                                player.boxcolider.CheckOverlap(allObstacles[i].box15) ||
+                                player.boxcolider.CheckOverlap(allObstacles[i].box16) ||
+                                player.boxcolider.CheckOverlap(allObstacles[i].box17) ||
+                                player.boxcolider.CheckOverlap(allObstacles[i].box18) ||
+                                player.boxcolider.CheckOverlap(allObstacles[i].box19))
                             {
-                                gameOver = true;
+                                dead = true;
+                                break;
+                            }
+                        }
+
+
+                        if (player.score > highScore)
+                        {
+                            highScore = player.score;
+                        }
+
+
+                        // ========================================
+                        // プレイヤーが死亡した場合
+                        // ========================================
+
+                        if (dead)
+                        {
+                            playerLife--;
+                            dead = false;
+
+                            // BGM を止めて爆発音再生
+                            if (playingBgm && explosionSound2 != -1)
+                            {
+                                StopSoundMem(explosionSound2);
+                                playingBgm = false;
+
+                            }
+
+                            if (explosionSound1 != -1)
+                            {
+                                PlaySoundMem(explosionSound1, DX_PLAYTYPE_BACK);
+                                waitingExplosion = true;
+                                pendingGameOver = (playerLife <= 0);
                             }
                             else
                             {
 
-                                // 即時リスポーン（音なし）
-                                startsetting.Reset();
-                                player.y = startsetting.y;
-                                player.vy = 0;
-                                background.Init();
-                                frameCounter = 0;
+                                if (playerLife <= 0)
+                                {
+                                    gameOver = true;
+                                }
+                                else
+                                {
 
-                                PopulateObstacles(allObstacles);
+                                    // 即時リスポーン
+                                    startsetting.Reset();
+                                    player.y = startsetting.y;
+                                    player.vy = 0;
+                                    background.Init();
+                                    frameCounter = 0;
 
+                                    PopulateObstacles(allObstacles);
+
+                                }
                             }
-                        }
 
+                        }
                     }
                 }
-            }
 
-            // ========================================
-            // 描画処理
-            // ========================================
-
+                // ========================================
+                // 描画処理
+                // ========================================
 
 
-            background.Draw();
 
-            for (int i = 0; i < allObstacles.size(); i++)
-            {
-                  allObstacles[i].Draw();
-            }
+                background.Draw();
 
-             player.Draw();
-
-             startsetting.Draw();
-
-
-            // 爆発音が終わった後（showDeathInfo）が true の間に High Score と残機を表示
-            if (showDeathInfo)
-            {
-                // 背景を黒にする
-                DrawBox(0, 0, 660, 480, GetColor(0, 0, 0), TRUE);
-
-                char hsBuf[64];
-                sprintf_s(hsBuf, "High Score: %d", highScore);
-                DrawExtendString(200, 180, 2, 2, hsBuf, GetColor(255, 255, 255));
-
-                char lifeBuf[64];
-                sprintf_s(lifeBuf, "残機: %d", playerLife);
-                DrawExtendString(200, 220, 2, 2, lifeBuf, GetColor(255, 255, 255));
-            }
-
-            // 爆発終了後に一定時間（2000ms）経過したらリスポーン処理を行う
-            if (showDeathInfo)
-            {
-                int elapsed = GetNowCount() - deathInfoStartTime;
-                if (elapsed >= 2000)
+                for (int i = 0; i < allObstacles.size(); i++)
                 {
-                    // リスポーン実行
-                    startsetting.Reset();
-                    player.y = startsetting.y;
-                    player.vy = 0;
-                    background.Init();
-                    frameCounter = 0;
-                    PopulateObstacles(allObstacles);
-
-                    // スコアを暗転終了後にリセット
-                    player.score = 0;
-
-                    showDeathInfo = false;
+                    allObstacles[i].Draw();
                 }
-            }
 
-            // ゲームオーバー表示
-            if (gameOver)
-            {
-                // 背景を黒にする
-                DrawBox(0, 0, 660, 480, GetColor(0, 0, 0), TRUE);
+                player.Draw();
 
-                // GAME OVER
-                DrawExtendString(160, 130, 4, 4, "GAME OVER", GetColor(255, 255, 255));
+                startsetting.Draw();
 
-                // スコア
-                char scoreBuf[64];
-                sprintf_s(scoreBuf, "Score: %d", highScore);
-                DrawExtendString(225, 220, 2, 2, scoreBuf, GetColor(255, 255, 255));
 
-                // SPACEを押したらタイトル画面へ
-                if (CheckHitKey(KEY_INPUT_SPACE))
+                // 爆発音が終わった後がtrueの間にHigh Scoreと残機を表示
+                if (showDeathInfo)
                 {
-                    gameState = GameState::Title;
-                    gameOver = false;
+                    // 背景を黒にする
+                    DrawBox(0, 0, 660, 480, GetColor(0, 0, 0), TRUE);
 
-                    // ゲームを初期状態に戻す
-                    playerLife = 3;
-                    player.score = 0;
-                    highScore = 0;
+                    char hsBuf[64];
+                    sprintf_s(hsBuf, "High Score: %d", highScore);
+                    DrawExtendString(200, 180, 2, 2, hsBuf, GetColor(255, 255, 255));
 
-                    startsetting.Reset();
-
-                    player.y = startsetting.y;
-                    player.vy = 0;
-
-                    background.Init();
-                    frameCounter = 0;
-
-                    PopulateObstacles(allObstacles);
+                    char lifeBuf[64];
+                    sprintf_s(lifeBuf, "残機: %d", playerLife);
+                    DrawExtendString(200, 220, 2, 2, lifeBuf, GetColor(255, 255, 255));
                 }
+
+                // 爆発終了後に一定時間経過したらリスポーン処理を行う
+                if (showDeathInfo)
+                {
+                    int elapsed = GetNowCount() - deathInfoStartTime;
+                    if (elapsed >= 2000)
+                    {
+                        // リスポーン実行
+                        startsetting.Reset();
+                        player.y = startsetting.y;
+                        player.vy = 0;
+                        background.Init();
+                        frameCounter = 0;
+                        PopulateObstacles(allObstacles);
+
+                        // スコアを暗転終了後にリセット
+                        player.score = 0;
+
+                        showDeathInfo = false;
+                    }
+                }
+
+                // ゲームオーバー表示
+                if (gameOver)
+                {
+                    // 背景を黒にする
+                    DrawBox(0, 0, 660, 480, GetColor(0, 0, 0), TRUE);
+
+                    // GAME OVER
+                    DrawExtendString(160, 130, 4, 4, "GAME OVER", GetColor(255, 255, 255));
+
+                    // スコア
+                    char scoreBuf[64];
+                    sprintf_s(scoreBuf, "Score: %d", highScore);
+                    DrawExtendString(225, 220, 2, 2, scoreBuf, GetColor(255, 255, 255));
+
+                    // SPACEを押したらタイトル画面へ
+                    if (CheckHitKey(KEY_INPUT_SPACE))
+                    {
+                        gameState = GameState::Title;
+                        gameOver = false;
+
+                        // ゲームを初期状態に戻す
+                        playerLife = 3;
+                        player.score = 0;
+                        highScore = 0;
+
+                        startsetting.Reset();
+
+                        player.y = startsetting.y;
+                        player.vy = 0;
+
+                        background.Init();
+                        frameCounter = 0;
+
+                        PopulateObstacles(allObstacles);
+                    }
+                }
+                /*DrawFormatString(
+                    10, 10,
+                    GetColor(255, 255, 255),
+                    "DeltaTime: %f",
+                    deltaTime
+                );*/
+
+
+                // ゲーム画面の枠
+                DrawBox(0, 0, 660, 440, GetColor(255, 255, 255), FALSE);
+
+                ScreenFlip();
+                frameCounter++;
+                continue;
+
             }
 
-
-
-            // ゲーム画面の枠
-            DrawBox(0,0,660,440,GetColor(255, 255, 255),FALSE);
-
-            ScreenFlip();
-            frameCounter++;
-            continue;
-
-        
         }
 
+        background.End();
 
-       
-    }
-
-    background.End();
-    
-    DxLib_End();
-    // サウンド解放
-    if (explosionSound1 != -1) {
-        StopSoundMem(explosionSound1);
-        DeleteSoundMem(explosionSound1);
-    }
-    if (explosionSound2 != -1) {
-        StopSoundMem(explosionSound2);
-        DeleteSoundMem(explosionSound2);
+        DxLib_End();
+        // サウンド解放
+        if (explosionSound1 != -1) {
+            StopSoundMem(explosionSound1);
+            DeleteSoundMem(explosionSound1);
+        }
+        if (explosionSound2 != -1) {
+            StopSoundMem(explosionSound2);
+            DeleteSoundMem(explosionSound2);
+        }
     }
 
     return 0;

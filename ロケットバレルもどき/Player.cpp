@@ -9,7 +9,7 @@ Player::Player()
     // 初期位置を画面中央に設定（ウィンドウ高さ 440 の中央）
     y = 220.0f;
 }
-void Player::Update(bool isPlaying, float startY, bool acceptInput)
+void Player::Update(bool isPlaying, float startY, bool acceptInput, float deltaTime)
 {
     // Update が呼ばれたことを示すフラグを立てる（Draw で表示する）
     updated = true;
@@ -24,13 +24,18 @@ void Player::Update(bool isPlaying, float startY, bool acceptInput)
             key = CheckHitKey(KEY_INPUT_SPACE);
         }
         lastKey = key;
+
+        const float BASE_FPS = 144.0f;
+        float frameScale = deltaTime * BASE_FPS;
+
+
         if (key)    // スペース押下
         {
-            vy -= ConstNumber::PLAYER_V;    // 上方向の速度を与える
+            vy -= ConstNumber::PLAYER_V * frameScale;    // 上方向の速度を与える
         }
-        vy += ConstNumber::PLAYER_GRAVITY;     // 重力
+        vy += ConstNumber::PLAYER_GRAVITY * frameScale;     // 重力
 
-        y += vy;      // 位置更新
+        y += vy * frameScale;    // 位置更新
 
         // 天井処理
         if (y < ConstNumber::PLAYER_LANDSCAPE_UP)
@@ -128,6 +133,6 @@ void Player::Draw()
         lastTime = nowTime;
     }
 
-    DrawFormatString(10, 10, GetColor(255, 255, 255),
-        "FPS: %d", fps);
+    //DrawFormatString(10, 10, GetColor(255, 255, 255),
+    //    "FPS: %d", fps);
 }
