@@ -204,7 +204,7 @@ void PopulateObstacles(std::vector<Obstacles>& allObstacles)
     allObstacles.push_back(Obstacles(23500, -1000));  //+70
     allObstacles.push_back(Obstacles(23570, -910));  //+100
     allObstacles.push_back(Obstacles(23670, -890));  //+100
-    allObstacles.push_back(Obstacles(23780, -870));  //+110
+    allObstacles.push_back(Obstacles(23780, -850));  //+110
     allObstacles.push_back(Obstacles(23890, 190));  //-10
     allObstacles.push_back(Obstacles(23880, -860));  //+30
     allObstacles.push_back(Obstacles(23910, 175));  //+70
@@ -220,17 +220,26 @@ void PopulateObstacles(std::vector<Obstacles>& allObstacles)
     allObstacles.push_back(Obstacles(25000, -920)); //+100
     allObstacles.push_back(Obstacles(25100, -900)); //+100
     allObstacles.push_back(Obstacles(25200, -880)); //+100
-    allObstacles.push_back(Obstacles(25300, -860)); //+100
-    allObstacles.push_back(Obstacles(25400, -860)); //+100
-    allObstacles.push_back(Obstacles(25500, -860)); //+100
-    allObstacles.push_back(Obstacles(25600, -860)); //+100
-    allObstacles.push_back(Obstacles(25700, -860)); //+100
-    allObstacles.push_back(Obstacles(25800, -860));
-    allObstacles.push_back(Obstacles(25900, -860));
-    allObstacles.push_back(Obstacles(26000, -860));
-    allObstacles.push_back(Obstacles(26100, -860));
+    allObstacles.push_back(Obstacles(25300, -850)); //+100
+    allObstacles.push_back(Obstacles(25400, -850)); //+100
+    allObstacles.push_back(Obstacles(25500, -850)); //+100
+    allObstacles.push_back(Obstacles(25600, -850)); //+100
+    allObstacles.push_back(Obstacles(25700, -850)); //+100
+    allObstacles.push_back(Obstacles(25800, -850));
+    allObstacles.push_back(Obstacles(25900, -850));
+    allObstacles.push_back(Obstacles(26000, -850));
+    allObstacles.push_back(Obstacles(26100, -830));
 
-
+    allObstacles.push_back(Obstacles(26400, 80));  //+60
+    allObstacles.push_back(Obstacles(26460, -935));  //+310
+    allObstacles.push_back(Obstacles(26770, -1040));  //+130
+    allObstacles.push_back(Obstacles(26900, -40));  //+200
+    allObstacles.push_back(Obstacles(27100, -130));  //+0
+    allObstacles.push_back(Obstacles(27100, -1150));  //+200
+    allObstacles.push_back(Obstacles(27300, -1100));  //+0
+    allObstacles.push_back(Obstacles(27300, -90));  //+200
+    allObstacles.push_back(Obstacles(27500, -130));  //+0
+    allObstacles.push_back(Obstacles(27500, -1150));
 
 }
 
@@ -512,6 +521,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
                         {
                             allObstacles[i].Update(startsetting.isPlaying);
 
+
                             //“–‚½‚è”»’è
                             if (player.boxcolider.CheckOverlap(allObstacles[i].box1) ||
                                 player.boxcolider.CheckOverlap(allObstacles[i].box2) ||
@@ -537,7 +547,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
                                 break;
                             }
                         }
-
+                        
 
                         if (player.score > highScore)
                         {

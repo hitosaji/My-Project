@@ -88,14 +88,7 @@ void Player::Draw()
 
     DrawExtendGraph(100, (int)y, 100 + size, (int)y + size, playerImg, TRUE);      //プレイヤー画像の描画
 
-    /*DrawBox(
-        boxcolider.x1,
-        boxcolider.y1,
-        boxcolider.x2,
-        boxcolider.y2,
-        GetColor(255, 255, 0),
-        FALSE
-    );*/
+    DrawBox(boxcolider.x1,boxcolider.y1,boxcolider.x2,boxcolider.y2,GetColor(255, 255, 0),FALSE);
 
     // デバッグ表示: 位置と速度
     //char buf[128];
