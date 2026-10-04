@@ -85,17 +85,20 @@ void Player::Update(bool isPlaying, float startY, bool acceptInput, float deltaT
 void Player::Draw()
 {
     int size = 64;      //プレイヤー画像の大きさ
+    
+
 
     DrawExtendGraph(100, (int)y, 100 + size, (int)y + size, playerImg, TRUE);      //プレイヤー画像の描画
 
-    DrawBox(boxcolider.x1,boxcolider.y1,boxcolider.x2,boxcolider.y2,GetColor(255, 255, 0),FALSE);
+
+    //DrawBox(boxcolider.x1,boxcolider.y1,boxcolider.x2,boxcolider.y2,GetColor(255, 255, 0),FALSE);
 
     // デバッグ表示: 位置と速度
     //char buf[128];
     //sprintf_s(buf, "y=%.2f vy=%.2f", y, vy);
     //DrawString(10, 10, buf, GetColor(255, 255, 255));
 
-    //// Update 呼ばれたか表示
+    ////Update呼ばれたか表示
     //char buf2[64];
     //sprintf_s(buf2, "updated=%d", updated ? 1 : 0);
     //DrawString(10, 30, buf2, GetColor(255, 255, 255));
@@ -109,7 +112,7 @@ void Player::Draw()
 
     char buf4[64];
     sprintf_s(buf4, "Score:%d", score);
-    DrawExtendString(10, 10, 2, 2,buf4, GetColor(255, 255, 255));
+    DrawExtendString(10, 10, 2.0f, 2.0f,buf4, GetColor(255, 255, 255));
 
     static int frameCount = 0;
     static int fps = 0;

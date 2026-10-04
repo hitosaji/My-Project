@@ -47,7 +47,7 @@ void Startsetting::Draw()
 		char buf[16];
 		sprintf_s(buf, "%d", 3 - pressCount);
 
-		DrawExtendString(240, 35, 25, 25, buf, GetColor(0, 0, 0));
+		DrawExtendString(240, 35, 25.0f, 25.0f, buf, GetColor(0, 0, 0));
 	}
 }
 	
