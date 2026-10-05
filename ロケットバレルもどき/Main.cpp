@@ -6,6 +6,26 @@
 #include"GameState.h"
 #include <vector>
 
+//ランキング関数
+void UpdateRanking(int highScore, int& rankingNo1, int& rankingNo2, int& rankingNo3)
+{
+    if (highScore > rankingNo1)
+    {
+        rankingNo3 = rankingNo2;
+        rankingNo2 = rankingNo1;
+        rankingNo1 = highScore;
+    }
+    else if (highScore > rankingNo2)
+    {
+        rankingNo3 = rankingNo2;
+        rankingNo2 = highScore;
+    }
+    else if (highScore > rankingNo3)
+    {
+        rankingNo3 = highScore;
+    }
+}
+
 // 障害物初期化関数
 void PopulateObstacles(std::vector<Obstacles>& allObstacles)
 {
@@ -294,6 +314,7 @@ void PopulateObstacles(std::vector<Obstacles>& allObstacles)
 
 }
 
+
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
     ChangeWindowMode(FALSE);
@@ -352,6 +373,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
     int rankingNo2 = 0;
     int rankingNo3 = 0;
 
+
+
     int blinkTimer = 0;
 
     static bool spaceLock = false;
@@ -397,11 +420,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
                 char No2Buf[64];
                 sprintf_s(No2Buf, "%d", rankingNo2);
-                DrawExtendString(80, 348, 2, 2, No2Buf, GetColor(0, 0, 0));
+                DrawExtendString(80, 349, 2, 2, No2Buf, GetColor(0, 0, 0));
 
                 char No3Buf[64];
                 sprintf_s(No3Buf, "%d", rankingNo3);
-                DrawExtendString(80, 388, 2, 2, No3Buf, GetColor(0, 0, 0));
+                DrawExtendString(80, 390, 2, 2, No3Buf, GetColor(0, 0, 0));
 
 
 
@@ -603,7 +626,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 
                             //当たり判定
-                            /*if (player.boxcolider.CheckOverlap(allObstacles[i].box1) ||
+                            if (player.boxcolider.CheckOverlap(allObstacles[i].box1) ||
                                 player.boxcolider.CheckOverlap(allObstacles[i].box2) ||
                                 player.boxcolider.CheckOverlap(allObstacles[i].box3) ||
                                 player.boxcolider.CheckOverlap(allObstacles[i].box4) ||
@@ -625,7 +648,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
                             {
                                 dead = true;
                                 break;
-                            }*/
+                            }
                         }
                         
 
@@ -759,7 +782,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			{
                 if (clearFlag)
                 {
-                    // クリア時はスペース入力を待つ（ここでは何もしない）
+                    // クリア時はスペース入力を待つ
                     // SPACE 判定は下で行う
                 }
                 else
@@ -788,6 +811,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
                 if (!spaceLock)
                 {
                     if (clearSound != -1) StopSoundMem(clearSound);
+
+                    UpdateRanking(highScore, rankingNo1, rankingNo2, rankingNo3);
+
+
                     gameState = GameState::Title;
 
                     playerLife = 3;
@@ -830,6 +857,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
                     // SPACEを押したらタイトル画面へ
                     if (CheckHitKey(KEY_INPUT_SPACE))
                     {
+
+                        UpdateRanking(highScore,rankingNo1, rankingNo2, rankingNo3);
+
                         gameState = GameState::Title;
                         gameOver = false;
 
