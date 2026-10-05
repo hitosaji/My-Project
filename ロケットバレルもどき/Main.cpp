@@ -332,6 +332,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
     int rankingImg = LoadGraph("Picture/RANKING BORD.png");
     int spaneImg = LoadGraph("Picture/SPACE.png");
 	int PLAYERImg = LoadGraph("Picture/Player.png");
+    int BarImg = LoadGraph("Picture/yellowBar.png");
 
     // オブジェクト
     Startsetting startsetting;
@@ -376,6 +377,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 
     int blinkTimer = 0;
+    int blinkTimer2 = 0;
 
     static bool spaceLock = false;
 
@@ -395,7 +397,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
             ClearDrawScreen();
 
             blinkTimer++;
-
+           
             // ========================================
             // 更新処理
             // ========================================
@@ -451,24 +453,23 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
                 // 背景を黒にする
                 DrawBox(0, 0, 660, 440, GetColor(0, 0, 0), TRUE);
 
-                DrawFormatString(10, 10, GetColor(255, 255, 255),
-                    "Timer: %d", blinkTimer);
+                //DrawFormatString(10, 10, GetColor(255, 255, 255),"Timer: %d", blinkTimer);
 
-                DrawExtendString(150, 50, 5, 5, "操作説明", GetColor(255, 255, 255));
+                DrawExtendString(170, 50, 5, 5, "操作説明", GetColor(255, 255, 255));
 
-                DrawExtendString(200, 150, 2, 2, "SPACE : 上昇", GetColor(255, 255, 255));
+                DrawExtendString(220, 150, 2, 2, "SPACE : 上昇", GetColor(255, 255, 255));
 
                 DrawExtendString(0, 200, 2, 2, "このゲームはスペースキーしか使いません!", GetColor(255, 255, 255));
 
                 DrawExtendString(145, 260, 2, 2, "障害物を避けて進もう！", GetColor(255, 255, 255));
 
-                if (blinkTimer < 40)
+                if (blinkTimer < 80)
                 {
-                    DrawExtendString(132, 350, 2, 2, " - START to SPACE - ", GetColor(255, 255, 255));
+                    DrawExtendString(150, 350, 2, 2, " - START to SPACE - ", GetColor(255, 255, 255));
                 }
-                else if (blinkTimer > 80)
+                else if (blinkTimer > 160)
                 {
-                    DrawExtendString(132, 350, 2, 2, " - START to SPACE - ", GetColor(0, 0, 0));
+                    DrawExtendString(150, 350, 2, 2, " - START to SPACE - ", GetColor(0, 0, 0));
                     blinkTimer = 0;
                 }
 
@@ -550,6 +551,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
                                 // スコアが 30000 を超えている場合はクリアサウンドを鳴らす
                                 if (player.score > 30000)
                                 {
+                                    highScore = 30000;
                                     if (playingBgm && explosionSound2 != -1)
                                     {
                                         StopSoundMem(explosionSound2);
@@ -626,7 +628,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 
                             //当たり判定
-                            if (player.boxcolider.CheckOverlap(allObstacles[i].box1) ||
+                            /*if (player.boxcolider.CheckOverlap(allObstacles[i].box1) ||
                                 player.boxcolider.CheckOverlap(allObstacles[i].box2) ||
                                 player.boxcolider.CheckOverlap(allObstacles[i].box3) ||
                                 player.boxcolider.CheckOverlap(allObstacles[i].box4) ||
@@ -648,7 +650,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
                             {
                                 dead = true;
                                 break;
-                            }
+                            }*/
                         }
                         
 
@@ -731,6 +733,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
                 startsetting.Draw();
 
+                DrawExtendGraph(180, 30,490,40, BarImg, TRUE);
+
 				DrawExtendGraph(540, 5, 600, 55, PLAYERImg, TRUE);
 
                 SetDrawBlendMode(DX_BLENDMODE_ALPHA, 100);
@@ -753,7 +757,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
                 // 爆発音が終わった後がtrueの間にHigh Scoreと残機を表示
                 if (showDeathInfo)
                 {
-                    
+                    /*blinkTimer++;*/
                     // 背景を黒にする
                     DrawBox(0, 0, 660, 480, GetColor(0, 0, 0), TRUE);
 
@@ -767,12 +771,28 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
                     sprintf_s(lifeBuf, "    : %d", playerLife);
                     DrawExtendString(255, 220, 2, 2, lifeBuf, GetColor(255, 255, 255));
                     // クリア時は GAME CLEAR を表示
+                   
                     if (clearFlag)
                     {
                         DrawExtendString(160, 100, 4.0f, 4.0f, "GAME CLEAR", GetColor(255, 255, 255));
-                        DrawExtendString(100, 340, 2.0f, 2.0f, "      SPACE to TITLE", GetColor(255, 255, 255));
+
+                        DrawBox(0, 160, 655, 300, GetColor(0, 0, 0), TRUE);
+
+                        DrawExtendString(30, 200, 2, 2, "まさかクリアするものが現れるとは...", GetColor(255, 255, 255));
+
+                        DrawExtendString(160, 260, 2, 2, "キミは 英雄 になれる", GetColor(255, 255, 255));
+                        
+                        if (blinkTimer < 80)
+                        {
+                            DrawExtendString(150, 350, 2, 2, " - SPACE to TITLE - ", GetColor(255, 255, 255));
+                        }
+                        else if (blinkTimer > 160)
+                        {
+                            DrawExtendString(150, 350, 2, 2, " - SPACE to TITLE - ", GetColor(0, 0, 0));
+                            blinkTimer = 0;
+                        }
                     }
-		}
+		} 
 
 		// 爆発音が終わった後がtrueの間にHigh Scoreと残機を表示
 		if (showDeathInfo)
@@ -847,12 +867,20 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
                     DrawBox(0, 0, 660, 480, GetColor(0, 0, 0), TRUE);
 
                     // GAME OVER
-                    DrawExtendString(160, 130, 4, 4, "GAME OVER", GetColor(255, 255, 255));
+                    DrawExtendString(170, 130, 4, 4, "GAME OVER", GetColor(255, 255, 255));
 
-                    // スコア
+                    if (blinkTimer < 80)
+                    {
+                        DrawExtendString(150, 350, 2, 2, " - SPACE to TITLE - ", GetColor(255, 255, 255));
+                    }
+                    else if (blinkTimer > 160)
+                    {
+                        DrawExtendString(150, 350, 2, 2, " - SPACE to TITLE - ", GetColor(0, 0, 0));
+                        blinkTimer = 0;
+                    }                    // スコア
                     char scoreBuf[64];
-                    sprintf_s(scoreBuf, "Score: %d", highScore);
-                    DrawExtendString(225, 220, 2, 2, scoreBuf, GetColor(255, 255, 255));
+                    sprintf_s(scoreBuf, "High Score: %d", highScore);
+                    DrawExtendString(178, 220, 2, 2, scoreBuf, GetColor(255, 255, 255));
 
                     // SPACEを押したらタイトル画面へ
                     if (CheckHitKey(KEY_INPUT_SPACE))

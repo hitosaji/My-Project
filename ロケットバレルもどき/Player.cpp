@@ -6,6 +6,7 @@
 Player::Player()
 {
     playerImg = LoadGraph("Picture/Player.png");//プレイヤー画像の読み込み
+
     // 初期位置を画面中央に設定（ウィンドウ高さ 440 の中央）
     y = 220.0f;
 }
