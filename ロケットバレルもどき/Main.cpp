@@ -5,6 +5,7 @@
 #include "Startsetting.h"
 #include"GameState.h"
 #include <vector>
+#include <cmath>
 
 //ランキング関数
 void UpdateRanking(int highScore, int& rankingNo1, int& rankingNo2, int& rankingNo3)
@@ -327,7 +328,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
     SetDrawScreen(DX_SCREEN_BACK);
     
-    int titleImg = LoadGraph("Picture/Perilous Journey1.png");
+    int titleImg = LoadGraph("Picture/PerilousJourney2.png");
+	int titleplayerImg = LoadGraph("Picture/Player2.png");
     int rankingImg = LoadGraph("Picture/RANKING BORD.png");
     int spaneImg = LoadGraph("Picture/SPACE.png");
 	int PLAYERImg = LoadGraph("Picture/Player.png");
@@ -382,6 +384,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
     int blinkTimer = 0;
     int blinkTimer2 = 0;
 
+    float elapsedTime = 0.0f;
+    float titlePlayerTimer = 0.0f; // タイトル画面のプレイヤー画像用タイマー
+
     static bool spaceLock = false;
 
     int oldTime = GetNowCount();
@@ -429,6 +434,18 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
                 char No3Buf[64];
                 sprintf_s(No3Buf, "%d", rankingNo3);
                 DrawExtendString(80, 390, 2, 2, No3Buf, GetColor(0, 0, 0));
+
+                // タイトル画面でプレイヤー画像を上下に揺らす
+                titlePlayerTimer += deltaTime;
+                {
+                    const float bobFreq = 2.0f; //周波数(rad/s)
+                    const float bobAmp = 8.0f;  //振幅(px)
+                    float bob = sinf(titlePlayerTimer * bobFreq) * bobAmp;
+                    int px = 300;
+                    int py = 110 + (int)bob;
+                    int size = 300;
+                    DrawExtendGraph(px, py, 350 + size, py + size, titleplayerImg, TRUE);
+                }
 
                 if (CheckHitKey(KEY_INPUT_SPACE))
                 {
@@ -726,6 +743,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
                 player.Draw();
 
+
+
                 // 死亡時に爆発音が鳴っている間爆発画像を表示する
                 if (waitingExplosion && explosionImg != -1)
                 {
@@ -740,7 +759,37 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
                 startsetting.Draw();
 
-                DrawExtendGraph(180, 30,490,40, BarImg, TRUE);
+                DrawExtendGraph(213, 30,535,40, BarImg, TRUE);
+
+                float arrowX = 0.0f;
+                float arrowY = 35.0f;
+
+                // 死亡時矢印の位置を初期化
+                if (showDeathInfo)
+                {
+                    elapsedTime = 0.0f;
+                }
+                else
+                {
+                    // 爆発再生中は矢印は進まない
+                    if (!waitingExplosion && startsetting.isPlaying && std::fabs(player.vy) > 0.01f)
+                    {
+                        elapsedTime += deltaTime;
+                    }
+                }
+
+                float progress = elapsedTime / 104.0f;
+                if (progress > 1.0f) progress = 1.0f; // 進行度を上限で固定
+
+                arrowX = 214.0f + 320.0f * progress;
+
+                DrawTriangle(
+                    arrowX, arrowY,
+                    arrowX - 10, arrowY - 15,
+                    arrowX + 10, arrowY - 15,
+                    GetColor(100, 200, 255),
+                    TRUE
+                );
 
 				DrawExtendGraph(540, 5, 600, 55, PLAYERImg, TRUE);
 
@@ -765,6 +814,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
                 if (showDeathInfo)
                 {
                     /*blinkTimer++;*/
+
                     // 背景を黒にする
                     DrawBox(0, 0, 660, 480, GetColor(0, 0, 0), TRUE);
 
