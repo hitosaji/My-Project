@@ -314,7 +314,6 @@ void PopulateObstacles(std::vector<Obstacles>& allObstacles)
 
 }
 
-
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
     ChangeWindowMode(FALSE);
@@ -333,11 +332,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
     int spaneImg = LoadGraph("Picture/SPACE.png");
 	int PLAYERImg = LoadGraph("Picture/Player.png");
     int BarImg = LoadGraph("Picture/yellowBar.png");
+	int explosionImg = LoadGraph("Picture/Explosion2.png");
 
     // オブジェクト
     Startsetting startsetting;
     Player player;
-
 
     Background background;
     background.Load();
@@ -346,18 +345,24 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
     // サウンド準備
     int explosionSound1 = -1;
 	int explosionSound2 = 0;
+    int clickSound = -1;
+    int clearSound = -1;
+    int deathInfoStartTime = 0; // 表示開始時刻
     bool waitingExplosion = false; // 爆発音再生中フラグ
     bool pendingGameOver = false; // 爆発終了後にゲームオーバーにするか
-    bool showDeathInfo = false; // 爆発終了後にスコア／残機を表示するフラグ
-    bool clearFlag = false; // ゲームクリア（スコア閾値到達でのクリア）フラグ
-    int deathInfoStartTime = 0; // 表示開始時刻（ms）
-   
+    bool showDeathInfo = false; // 爆発終了後にスコア/残機を表示するフラグ
+    bool clearFlag = false; // ゲームクリアフラグ
+    
+   int GameoverSound= LoadSoundMem("Sound/gameover.mp3");
     explosionSound1 = LoadSoundMem("Sound/explosion.mp3");
-    explosionSound2 = LoadSoundMem("Sound/Music.mp3");
-    int clearSound = -1;
+    explosionSound2 = LoadSoundMem("Sound/Music.mp3"); 
     clearSound = LoadSoundMem("Sound/lvup2.mp3");
+    clickSound = LoadSoundMem("Sound/click.mp3");
+    
     //BGM再生フラグ
     bool playingBgm = false;
+    // ゲームオーバー時に一度だけ再生するフラグ
+    bool gameOverSoundPlayed = false;
 
     std::vector<Obstacles> allObstacles;
 
@@ -374,8 +379,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
     int rankingNo2 = 0;
     int rankingNo3 = 0;
 
-
-
     int blinkTimer = 0;
     int blinkTimer2 = 0;
 
@@ -383,7 +386,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
     int oldTime = GetNowCount();
     
-
     while (ProcessMessage() == 0)
     {
         while (ProcessMessage() == 0)
@@ -428,12 +430,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
                 sprintf_s(No3Buf, "%d", rankingNo3);
                 DrawExtendString(80, 390, 2, 2, No3Buf, GetColor(0, 0, 0));
 
-
-
                 if (CheckHitKey(KEY_INPUT_SPACE))
                 {
                     if (!spaceLock)
                     {
+                        if (clickSound != -1) PlaySoundMem(clickSound, DX_PLAYTYPE_BACK);
                         gameState = GameState::Explanation;
 
                         spaceLock = true;
@@ -473,11 +474,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
                     blinkTimer = 0;
                 }
 
-
                 if (CheckHitKey(KEY_INPUT_SPACE))
                 {
                     if (!spaceLock)
                     {
+                        if (clickSound != -1) PlaySoundMem(clickSound, DX_PLAYTYPE_BACK);
                         gameState = GameState::Playing;
 
                         spaceLock = true;
@@ -491,7 +492,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
                 ScreenFlip();
                 continue;
             }
-
 
             if (gameState == GameState::Playing)
             {
@@ -538,7 +538,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
                             }
                             else
                             {
-                                //爆発音終了後に High Score と残機を表示する
+                                //爆発音終了後にHigh Scoreと残機を表示する
                                 showDeathInfo = true;
                                 deathInfoStartTime = GetNowCount();
                                 // 表示中はゲーム進行を止めるためスタート待機状態に戻す
@@ -618,17 +618,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
                         // 背景更新
                         background.Update(frameCounter, deltaTime);
 
-                       
-
-
                         // 障害物更新
                         for (int i = 0; i < allObstacles.size(); i++)
                         {
                             allObstacles[i].Update(startsetting.isPlaying);
 
-
                             //当たり判定
-                            /*if (player.boxcolider.CheckOverlap(allObstacles[i].box1) ||
+                            if (player.boxcolider.CheckOverlap(allObstacles[i].box1) ||
                                 player.boxcolider.CheckOverlap(allObstacles[i].box2) ||
                                 player.boxcolider.CheckOverlap(allObstacles[i].box3) ||
                                 player.boxcolider.CheckOverlap(allObstacles[i].box4) ||
@@ -650,7 +646,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
                             {
                                 dead = true;
                                 break;
-                            }*/
+                            }
                         }
                         
 
@@ -658,7 +654,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
                         {
                             highScore = player.score;
                         }
-
 
                         // ========================================
                         // プレイヤーが死亡した場合
@@ -730,6 +725,18 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
                 }
 
                 player.Draw();
+
+                // 死亡時に爆発音が鳴っている間爆発画像を表示する
+                if (waitingExplosion && explosionImg != -1)
+                {
+                    int explSizeW = 64;
+                    int explSizeH = 64;
+                    int playerCenterX = 100 + 64 / 2;
+                    int playerCenterY = (int)player.y + 64 / 2;
+                    int drawX1 = playerCenterX - explSizeW / 2;
+                    int drawY1 = playerCenterY - explSizeH / 2;
+                    DrawExtendGraph(drawX1, drawY1, drawX1 + explSizeW, drawY1 + explSizeH, explosionImg, TRUE);
+                }
 
                 startsetting.Draw();
 
@@ -863,11 +870,28 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
                 // ゲームオーバー表示
                 if (gameOver)
                 {
+                    // GameOver に入ったとき一度だけサウンドを鳴らす
+                    if (!gameOverSoundPlayed)
+                    {
+                        if (GameoverSound != -1)
+                        {
+                            PlaySoundMem(GameoverSound, DX_PLAYTYPE_BACK);
+                        }
+                        gameOverSoundPlayed = true;
+                    }
                     // 背景を黒にする
                     DrawBox(0, 0, 660, 480, GetColor(0, 0, 0), TRUE);
 
                     // GAME OVER
                     DrawExtendString(170, 130, 4, 4, "GAME OVER", GetColor(255, 255, 255));
+
+                    //クレジット
+                    DrawExtendString(5, 380, 1, 1, "BGM：MusMus", GetColor(255, 255, 255));
+
+                    DrawExtendString(5, 400, 1, 1, "効果音：OtoLogic", GetColor(255, 255, 255));
+
+                    DrawExtendString(5, 420, 1, 1, "効果音：ポケットサウンド", GetColor(255, 255, 255));
+
 
                     if (blinkTimer < 80)
                     {
@@ -905,6 +929,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
                         frameCounter = 0;
 
                         PopulateObstacles(allObstacles);
+                        // クリック音再生（タイトルへ戻る操作音）
+                        if (clickSound != -1) PlaySoundMem(clickSound, DX_PLAYTYPE_BACK);
+
+                        // ゲームオーバー音の状態をリセット（再生中なら停止）
+                        if (GameoverSound != -1) {
+                            StopSoundMem(GameoverSound);
+                        }
+                        gameOverSoundPlayed = false;
                     }
                 }
                 
@@ -930,6 +962,15 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
         if (explosionSound2 != -1) {
             StopSoundMem(explosionSound2);
             DeleteSoundMem(explosionSound2);
+        }
+        if (GameoverSound != -1) {
+            StopSoundMem(GameoverSound);
+            DeleteSoundMem(GameoverSound);
+        }
+        // Click sound 解放
+        if (clickSound != -1) {
+            StopSoundMem(clickSound);
+            DeleteSoundMem(clickSound);
         }
     }
 
