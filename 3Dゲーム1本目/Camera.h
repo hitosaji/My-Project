@@ -1,18 +1,26 @@
 #pragma once
 #include "DxLib.h"
+#include"Config.h"
+#include"Colider.h"
+#include<Vector>
 
-class Camera
+class Camera:protected Colider
 {
-protected:
-    float cameraX = 600.0f;
-    float cameraY = 1500.0f;
-    float cameraZ = -800.0f;
+private:
+    VECTOR cameraPosition = 
+        VGet(Config::INITIAL_CAMERA_POSITION_X, 
+             Config::INITIAL_CAMERA_POSITION_Y, 
+             Config::INITIAL_CAMERA_POSITION_Z);
+
+
+    float cameraYaw = 0.0f;   // ¶‰E‚ÌŒü‚«
+    float cameraPitch = 0.0f; // ã‰º‚ÌŒü‚«
 
     bool isMoving = false;
 
 
-
 private:
+    VECTOR CameraMove();
     //ƒJƒƒ‰‚ÌˆÚ“®
     void CameraMovement();
 
@@ -26,7 +34,7 @@ private:
     void CameraSensitivity();
 
     // ƒJƒƒ‰İ’è
-    SetCameraPositionAndTarget_UpVecY(VGet(cameraX, cameraY + bobOffset, cameraZ), VGet(targetX, targetY + bobOffset, targetZ));
+    //SetCameraPositionAndTarget_UpVecY(VGet(cameraX, cameraY + bobOffset, cameraZ), VGet(targetX, targetY + bobOffset, targetZ));
 
     
 };

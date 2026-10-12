@@ -4,66 +4,120 @@
 #include <math.h>
 #include <tchar.h>
 
+Colider colider;
+
+VECTOR Camera::CameraMove()
+{
+    VECTOR nextPosition = cameraPosition;
+
+    nextPosition.x -= cos(cameraYaw) * 15.0f;
+    nextPosition.z += sin(cameraYaw) * 15.0f;
+
+    return nextPosition;
+}
+
 void Camera::CameraMovement()
 {
+
     if (CheckHitKey(KEY_INPUT_A))
     {
-        float nextX = cameraX - cos(cameraYaw) * 15.0f;
-        float nextZ = cameraZ + sin(cameraYaw) * 15.0f;
+        VECTOR nextPosition = CameraMove();
 
         // 次の位置が壁の中ではなければ移動
-        if (!(cameraX <= wallMinX && cameraX >= wallMaxX &&
-            cameraZ >= wallMinZ && cameraZ <= wallMaxZ))
-        {
-            cameraX = nextX;
-            cameraZ = nextZ;
-        }
+        colider.WallColider(nextPosition.x, nextPosition.z);
         isMoving = true;
     }
 
     if (CheckHitKey(KEY_INPUT_D))
     {
-        float nextX = cameraX + cos(cameraYaw) * 15.0f;
-        float nextZ = cameraZ - sin(cameraYaw) * 15.0f;
+        float nextX = cameraPosition.x + cos(cameraYaw) * 15.0f;
+        float nextZ = cameraPosition.z - sin(cameraYaw) * 15.0f;
 
         // 次の位置が壁の中ではなければ移動
-        if (!(cameraX <= wallMinX && cameraX >= wallMaxX &&
-            cameraZ >= wallMinZ && cameraZ <= wallMaxZ))
-        {
-            cameraX = nextX;
-            cameraZ = nextZ;
-        }
+        colider.WallColider(cameraPosition.x, cameraPosition.z, nextX, nextZ);
         isMoving = true;
     }
 
-
     if (CheckHitKey(KEY_INPUT_W))
     {
-        float nextX = cameraX + sin(cameraYaw) * 15.0f;
-        float nextZ = cameraZ + cos(cameraYaw) * 15.0f;
+        float nextX = cameraPosition.x + sin(cameraYaw) * 15.0f;
+        float nextZ = cameraPosition.z + cos(cameraYaw) * 15.0f;
 
         // 次の位置が壁の中ではなければ移動
-        if (!(cameraX <= wallMinX && cameraX >= wallMaxX &&
-            cameraZ >= wallMinZ && cameraZ <= wallMaxZ))
-        {
-            cameraX = nextX;
-            cameraZ = nextZ;
-        }
+        // 次の位置が壁の中ではなければ移動
+        colider.WallColider(cameraPosition.x, cameraPosition.z, nextX, nextZ);
         isMoving = true;
     }
 
     if (CheckHitKey(KEY_INPUT_S))
     {
-        float nextX = cameraX - sin(cameraYaw) * 15.0f;
-        float nextZ = cameraZ - cos(cameraYaw) * 15.0f;
+        float nextX = cameraPosition.x - sin(cameraYaw) * 15.0f;
+        float nextZ = cameraPosition.z - cos(cameraYaw) * 15.0f;
 
         // 次の位置が壁の中ではなければ移動
-        if (!(cameraX <= wallMinX && cameraX >= wallMaxX &&
-            cameraZ >= wallMinZ && cameraZ <= wallMaxZ))
-        {
-            cameraX = nextX;
-            cameraZ = nextZ;
-        }
+        colider.WallColider(cameraPosition.x, cameraPosition.z, nextX, nextZ);
         isMoving = true;
     }
+
+    //SetCameraPositionAndTarget_UpVecY(VGet(cameraX, cameraY + bobOffset, cameraZ), VGet(targetX, targetY + bobOffset, targetZ));
+
 }
+
+//カメラの向き
+void Camera::CameraOrientation()
+{
+    if (CheckHitKey(KEY_INPUT_LEFT))
+    {
+        cameraYaw -= 0.02f;
+    }
+
+    if (CheckHitKey(KEY_INPUT_RIGHT))
+    {
+        cameraYaw += 0.02f;
+    }
+
+    if (CheckHitKey(KEY_INPUT_UP))
+    {
+        cameraPitch += 0.02f;
+
+        if (cameraPitch > 0.785f)
+        {
+            cameraPitch = 0.785f;
+        }
+    }
+
+    if (CheckHitKey(KEY_INPUT_DOWN))
+    {
+        cameraPitch -= 0.02f;
+
+        if (cameraPitch < -0.785f)
+        {
+            cameraPitch = -0.785f;
+        }
+    }
+};
+
+//カメラの歩く際の振動
+void Camera::CameraVibration()
+{
+    float cameraBobTime = 0.0f;
+
+ if (isMoving)
+ {
+    cameraBobTime += 0.1f;
+ }
+  //歩く時の振動
+  float bobOffset = sin(cameraBobTime) * 10.0f;
+};
+
+//カメラの視線の移動量
+void Camera::CameraSensitivity()
+{
+    VECTOR targetPosition = VGet(
+        cameraPosition.x + cos(cameraPitch) * sin(cameraYaw) * 1000.0f,
+        cameraPosition.y + sin(cameraPitch) * 1000.0f,
+        cameraPosition.z + cos(cameraPitch) * cos(cameraYaw) * 1000.0f
+        );
+
+
+};
