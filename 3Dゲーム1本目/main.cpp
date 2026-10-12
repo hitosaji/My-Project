@@ -67,8 +67,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
         // カメラの位置を移動
         if (CheckHitKey(KEY_INPUT_A))
         {
-            float nextX = cameraX - cos(cameraYaw) * 5.0f;
-            float nextZ = cameraZ + sin(cameraYaw) * 5.0f;
+            float nextX = cameraX - cos(cameraYaw) * 15.0f;
+            float nextZ = cameraZ + sin(cameraYaw) * 15.0f;
 
             // 次の位置が壁の中ではなければ移動
             if (!(cameraX <= wallMinX && cameraX >= wallMaxX &&
@@ -82,8 +82,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
         if (CheckHitKey(KEY_INPUT_D))
         {
-            float nextX = cameraX + cos(cameraYaw) * 5.0f;
-            float nextZ = cameraZ - sin(cameraYaw) * 5.0f;
+            float nextX = cameraX + cos(cameraYaw) * 15.0f;
+            float nextZ = cameraZ - sin(cameraYaw) * 15.0f;
 
             // 次の位置が壁の中ではなければ移動
             if (!(cameraX <= wallMinX && cameraX >= wallMaxX &&
@@ -98,8 +98,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
         
         if (CheckHitKey(KEY_INPUT_W))
         {
-            float nextX = cameraX + sin(cameraYaw) * 5.0f;
-            float nextZ = cameraZ + cos(cameraYaw) * 5.0f;
+            float nextX = cameraX + sin(cameraYaw) * 15.0f;
+            float nextZ = cameraZ + cos(cameraYaw) * 15.0f;
 
             // 次の位置が壁の中ではなければ移動
             if (!(cameraX <= wallMinX && cameraX >= wallMaxX &&
@@ -113,8 +113,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
         if (CheckHitKey(KEY_INPUT_S))
         {
-            float nextX = cameraX - sin(cameraYaw) * 5.0f;
-            float nextZ = cameraZ - cos(cameraYaw) * 5.0f;
+            float nextX = cameraX - sin(cameraYaw) * 15.0f;
+            float nextZ = cameraZ - cos(cameraYaw) * 15.0f;
 
             // 次の位置が壁の中ではなければ移動
             if (!(cameraX <= wallMinX && cameraX >= wallMaxX &&
@@ -142,7 +142,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
             cameraPitch += 0.02f;
 
             if (cameraPitch > 0.785f)
+            {
                 cameraPitch = 0.785f;
+            }
         }
 
         if (CheckHitKey(KEY_INPUT_DOWN))
@@ -150,7 +152,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
             cameraPitch -= 0.02f;
 
             if (cameraPitch < -0.785f)
+            {
                 cameraPitch = -0.785f;
+            }
         }
 
         if (isMoving)
@@ -158,11 +162,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
             cameraBobTime += 0.1f;
         }
 
-        float bobOffset = sin(cameraBobTime) * 6.0f;
+        //歩く時の振動
+        float bobOffset = sin(cameraBobTime) * 10.0f;
 
         // 視線の先を計算
         float targetX =
-            cameraX + cos(cameraPitch) * sin(cameraYaw) * 1000.0f;
+            cameraX + cos(cameraPitch) * sin(cameraYaw) * 500.0f;
 
         float targetY =
             cameraY + sin(cameraPitch) * 1000.0f;
@@ -174,7 +179,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
         SetCameraPositionAndTarget_UpVecY(VGet(cameraX, cameraY + bobOffset, cameraZ), VGet(targetX, targetY + bobOffset, targetZ));
 
         int matNum = MV1GetMaterialNum(stageModel);
-        for (int i = 0; i < matNum; i++) {
+        for (int i = 0; i < matNum; i++) 
+        {
             // ディフューズ色を灰色に強制設定
             MV1SetMaterialDifColor(stageModel, i, GetColorF(0.75f, 0.75f, 0.75f, 1.0f));
         }
