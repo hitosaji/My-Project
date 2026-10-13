@@ -8,7 +8,7 @@ class Camera:protected Colider
 {
 private:
     VECTOR cameraPosition = 
-        VGet(Config::INITIAL_CAMERA_POSITION_X, 
+        VGet(Config::INITIAL_CAMERA_POSITION_X,
              Config::INITIAL_CAMERA_POSITION_Y, 
              Config::INITIAL_CAMERA_POSITION_Z);
 
