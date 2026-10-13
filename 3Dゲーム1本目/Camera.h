@@ -15,6 +15,7 @@ private:
 
     float cameraYaw = 0.0f;   // 左右の向き
     float cameraPitch = 0.0f; // 上下の向き
+    float cameraBobTime = 0.0f;
 
     bool isMoving = false;
 
@@ -28,13 +29,11 @@ private:
     void CameraOrientation();
 
     //カメラの歩く際の振動
-    void CameraVibration();
+    float CameraVibration();
 
     //カメラの視線の移動量
-    void CameraSensitivity();
+    VECTOR CameraSensitivity();
 
-    // カメラ設定
-    //SetCameraPositionAndTarget_UpVecY(VGet(cameraX, cameraY + bobOffset, cameraZ), VGet(targetX, targetY + bobOffset, targetZ));
-
-    
+    //上記2つのカメラ関数をまとめる
+    void CameraSetting();
 };

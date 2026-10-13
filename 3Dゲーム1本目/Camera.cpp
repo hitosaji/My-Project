@@ -4,120 +4,145 @@
 #include <math.h>
 #include <tchar.h>
 
-Colider colider;
 
 VECTOR Camera::CameraMove()
 {
     VECTOR nextPosition = cameraPosition;
 
-    nextPosition.x -= cos(cameraYaw) * 15.0f;
-    nextPosition.z += sin(cameraYaw) * 15.0f;
+    nextPosition.x -= cos(cameraYaw) * Config::CAMERA_MOVE_SPEED;
+    nextPosition.z += sin(cameraYaw) * Config::CAMERA_MOVE_SPEED;
 
     return nextPosition;
 }
 
+
 void Camera::CameraMovement()
 {
-
     if (CheckHitKey(KEY_INPUT_A))
     {
         VECTOR nextPosition = CameraMove();
 
         // 次の位置が壁の中ではなければ移動
-        colider.WallColider(nextPosition.x, nextPosition.z);
+        if (WallColider(nextPosition.x, nextPosition.z))
+        {
+            cameraPosition = nextPosition;
+        }
+
         isMoving = true;
     }
 
     if (CheckHitKey(KEY_INPUT_D))
     {
-        float nextX = cameraPosition.x + cos(cameraYaw) * 15.0f;
-        float nextZ = cameraPosition.z - sin(cameraYaw) * 15.0f;
+        VECTOR nextPosition = CameraMove();
 
         // 次の位置が壁の中ではなければ移動
-        colider.WallColider(cameraPosition.x, cameraPosition.z, nextX, nextZ);
+        if (WallColider(nextPosition.x, nextPosition.z))
+        {
+            cameraPosition = nextPosition;
+        }
+
         isMoving = true;
     }
 
     if (CheckHitKey(KEY_INPUT_W))
     {
-        float nextX = cameraPosition.x + sin(cameraYaw) * 15.0f;
-        float nextZ = cameraPosition.z + cos(cameraYaw) * 15.0f;
+        VECTOR nextPosition = CameraMove();
 
         // 次の位置が壁の中ではなければ移動
-        // 次の位置が壁の中ではなければ移動
-        colider.WallColider(cameraPosition.x, cameraPosition.z, nextX, nextZ);
+        if (WallColider(nextPosition.x, nextPosition.z))
+        {
+            cameraPosition = nextPosition;
+        }
+
         isMoving = true;
     }
 
     if (CheckHitKey(KEY_INPUT_S))
     {
-        float nextX = cameraPosition.x - sin(cameraYaw) * 15.0f;
-        float nextZ = cameraPosition.z - cos(cameraYaw) * 15.0f;
+        VECTOR nextPosition = CameraMove();
 
         // 次の位置が壁の中ではなければ移動
-        colider.WallColider(cameraPosition.x, cameraPosition.z, nextX, nextZ);
+        if (WallColider(nextPosition.x, nextPosition.z))
+        {
+            cameraPosition = nextPosition;
+        }
+
         isMoving = true;
     }
-
-    //SetCameraPositionAndTarget_UpVecY(VGet(cameraX, cameraY + bobOffset, cameraZ), VGet(targetX, targetY + bobOffset, targetZ));
-
 }
+
 
 //カメラの向き
 void Camera::CameraOrientation()
 {
     if (CheckHitKey(KEY_INPUT_LEFT))
     {
-        cameraYaw -= 0.02f;
+        cameraYaw -= Config::CAMERA_ROTATION_SPEED;
     }
 
     if (CheckHitKey(KEY_INPUT_RIGHT))
     {
-        cameraYaw += 0.02f;
+        cameraYaw += Config::CAMERA_ROTATION_SPEED;
     }
 
     if (CheckHitKey(KEY_INPUT_UP))
     {
-        cameraPitch += 0.02f;
+        cameraPitch += Config::CAMERA_ROTATION_SPEED;
 
-        if (cameraPitch > 0.785f)
+        if (cameraPitch > Config::MAXIMUM_UP_CAMERA_ANGLE)
         {
-            cameraPitch = 0.785f;
+            cameraPitch = Config::MAXIMUM_UP_CAMERA_ANGLE;
         }
     }
 
     if (CheckHitKey(KEY_INPUT_DOWN))
     {
-        cameraPitch -= 0.02f;
+        cameraPitch -= Config::CAMERA_ROTATION_SPEED;
 
-        if (cameraPitch < -0.785f)
+        if (cameraPitch < Config::MAXIMUM_DOWN_CAMERA_ANGLE)
         {
-            cameraPitch = -0.785f;
+            cameraPitch = Config::MAXIMUM_DOWN_CAMERA_ANGLE;
         }
     }
 };
 
-//カメラの歩く際の振動
-void Camera::CameraVibration()
-{
-    float cameraBobTime = 0.0f;
 
+//カメラの歩く際の振動
+float Camera::CameraVibration()
+{
  if (isMoving)
  {
-    cameraBobTime += 0.1f;
+    cameraBobTime += Config::CAMERA_VIBRATION_TIMER;
  }
   //歩く時の振動
-  float bobOffset = sin(cameraBobTime) * 10.0f;
+ return sin(cameraBobTime) * Config::CAMERA_VIBRATION_TIME;
 };
 
 //カメラの視線の移動量
-void Camera::CameraSensitivity()
+VECTOR Camera::CameraSensitivity()
 {
     VECTOR targetPosition = VGet(
-        cameraPosition.x + cos(cameraPitch) * sin(cameraYaw) * 1000.0f,
-        cameraPosition.y + sin(cameraPitch) * 1000.0f,
-        cameraPosition.z + cos(cameraPitch) * cos(cameraYaw) * 1000.0f
+        cameraPosition.x + cos(cameraPitch) * sin(cameraYaw) * Config::CAMERA_TARGET_DISTANCE,
+        cameraPosition.y + sin(cameraPitch) * Config::CAMERA_TARGET_DISTANCE,
+        cameraPosition.z + cos(cameraPitch) * cos(cameraYaw) * Config::CAMERA_TARGET_DISTANCE
         );
 
-
+    return targetPosition;
 };
+
+
+void Camera::CameraSetting()
+{
+    float bobOffset = CameraVibration();
+    VECTOR targetPosition = CameraSensitivity();
+
+    SetCameraPositionAndTarget_UpVecY(
+        VGet(cameraPosition.x,
+             cameraPosition.y + bobOffset,
+             cameraPosition.z),
+            
+        VGet(targetPosition.x,
+             targetPosition.y + bobOffset,
+             targetPosition.z)
+    );
+}

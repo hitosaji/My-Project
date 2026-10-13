@@ -1,6 +1,6 @@
 #include "DxLib.h"
 #include"Camera.h"
-#include""
+#include"Colider.h"
 #include <math.h>
 #include <tchar.h>
 
@@ -159,9 +159,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
                cameraPosition.z + cos(cameraPitch) * cos(cameraYaw) * 1000.0f
         );
 
-        // ÉJÉÅÉâê›íË
-        SetCameraPositionAndTarget_UpVecY(VGet(cameraPosition.x, cameraPosition.y + bobOffset, cameraPosition.z), 
-                                          VGet(targetPosition.x, targetPosition.y + bobOffset, targetPosition.z));
+        //// ÉJÉÅÉâê›íË
+        //SetCameraPositionAndTarget_UpVecY(VGet(cameraPosition.x, cameraPosition.y + bobOffset, cameraPosition.z), 
+        //                                  VGet(targetPosition.x, targetPosition.y + bobOffset, targetPosition.z));
 
         int matNum = MV1GetMaterialNum(stageModel);
         for (int i = 0; i < matNum; i++) 

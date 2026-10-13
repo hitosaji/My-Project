@@ -26,8 +26,8 @@ namespace Config
 
     //ステージモデルのそれぞれのサイズ
     const float STAGE_SIZE_X = 6.0f;
-    const float STAGE_SIZE_X = 6.0f;
-    const float STAGE_SIZE_X = 6.0f;
+    const float STAGE_SIZE_Y = 6.0f;
+    const float STAGE_SIZE_Z = 6.0f;
 
     //カメラの描画範囲
     const float CAMERA_RENDERING_NEAR = 132.0f;
@@ -39,10 +39,16 @@ namespace Config
     // カメラの回転速度
     const float CAMERA_ROTATION_SPEED = 0.02f;
 
-    //カメラの上下角度の上限・上
+    //カメラの上下角度の上限
     const float MAXIMUM_UP_CAMERA_ANGLE = 0.785f;
-
     const float MAXIMUM_DOWN_CAMERA_ANGLE = -0.785f;
+
+    //カメラの振動タイマー
+    const float CAMERA_VIBRATION_TIMER = 0.1f;
+
+    //カメラの振動までの時間
+    const float CAMERA_VIBRATION_TIME = 10.0f;
+
     // 視線の先までの距離
     const float CAMERA_TARGET_DISTANCE = 1000.0f;
 }
