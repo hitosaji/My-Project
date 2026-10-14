@@ -19,9 +19,7 @@ private:
 
     bool isMoving = false;
 
-
-private:
-    VECTOR CameraMove();
+    
     //カメラの移動
     void CameraMovement();
 
@@ -36,4 +34,8 @@ private:
 
     //上記2つのカメラ関数をまとめる
     void CameraSetting();
+
+public:
+    //上記の関数をまとめて更新させる
+	void Update();
 };

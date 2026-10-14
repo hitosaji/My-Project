@@ -5,27 +5,24 @@
 #include <tchar.h>
 
 
-VECTOR Camera::CameraMove()
-{
-    VECTOR nextPosition = cameraPosition;
 
-    nextPosition.x -= cos(cameraYaw) * Config::CAMERA_MOVE_SPEED;
-    nextPosition.z += sin(cameraYaw) * Config::CAMERA_MOVE_SPEED;
-
-    return nextPosition;
-}
-
-
+//カメラの移動
 void Camera::CameraMovement()
 {
+    isMoving = false;
+
+    float nextX, nextZ;
+
     if (CheckHitKey(KEY_INPUT_A))
     {
-        VECTOR nextPosition = CameraMove();
+        nextX = cameraPosition.x - cos(cameraYaw) * Config::CAMERA_MOVE_SPEED;
+        nextZ = cameraPosition.z + sin(cameraYaw) * Config::CAMERA_MOVE_SPEED;
 
         // 次の位置が壁の中ではなければ移動
-        if (WallColider(nextPosition.x, nextPosition.z))
+        if (WallColider(nextX, nextZ))
         {
-            cameraPosition = nextPosition;
+            cameraPosition.x = nextX;
+            cameraPosition.z = nextZ;
         }
 
         isMoving = true;
@@ -33,12 +30,14 @@ void Camera::CameraMovement()
 
     if (CheckHitKey(KEY_INPUT_D))
     {
-        VECTOR nextPosition = CameraMove();
+        nextX = cameraPosition.x + cos(cameraYaw) * Config::CAMERA_MOVE_SPEED;
+        nextZ = cameraPosition.z - sin(cameraYaw) * Config::CAMERA_MOVE_SPEED;
 
         // 次の位置が壁の中ではなければ移動
-        if (WallColider(nextPosition.x, nextPosition.z))
+        if (WallColider(nextX, nextZ))
         {
-            cameraPosition = nextPosition;
+            cameraPosition.x = nextX;
+            cameraPosition.z = nextZ;
         }
 
         isMoving = true;
@@ -46,12 +45,14 @@ void Camera::CameraMovement()
 
     if (CheckHitKey(KEY_INPUT_W))
     {
-        VECTOR nextPosition = CameraMove();
+        nextX = cameraPosition.x + sin(cameraYaw) * Config::CAMERA_MOVE_SPEED;
+        nextZ = cameraPosition.z + cos(cameraYaw) * Config::CAMERA_MOVE_SPEED;
 
         // 次の位置が壁の中ではなければ移動
-        if (WallColider(nextPosition.x, nextPosition.z))
+        if (WallColider(nextX, nextZ))
         {
-            cameraPosition = nextPosition;
+            cameraPosition.x = nextX;
+            cameraPosition.z = nextZ;
         }
 
         isMoving = true;
@@ -59,12 +60,14 @@ void Camera::CameraMovement()
 
     if (CheckHitKey(KEY_INPUT_S))
     {
-        VECTOR nextPosition = CameraMove();
+        nextX = cameraPosition.x - sin(cameraYaw) * Config::CAMERA_MOVE_SPEED;
+        nextZ = cameraPosition.z - cos(cameraYaw) * Config::CAMERA_MOVE_SPEED;
 
         // 次の位置が壁の中ではなければ移動
-        if (WallColider(nextPosition.x, nextPosition.z))
+        if (WallColider(nextX, nextZ))
         {
-            cameraPosition = nextPosition;
+            cameraPosition.x = nextX;
+            cameraPosition.z = nextZ;
         }
 
         isMoving = true;
@@ -145,4 +148,13 @@ void Camera::CameraSetting()
              targetPosition.y + bobOffset,
              targetPosition.z)
     );
+}
+
+
+//上記の関数をまとめて更新させる
+void Camera::Update()
+{
+    CameraMovement();
+    CameraOrientation();
+    CameraSetting();
 }
