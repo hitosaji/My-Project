@@ -25,7 +25,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
     VECTOR wallMin = VGet(7000.0f, 1000.0f, 1000.0f);
     VECTOR wallMax = VGet(1500.0f, 1000.0f, 1500.0f);
 
-    int stageModel = MV1LoadModel(_T("Stage3.mv1"));
+    int stageModel = MV1LoadModel("Stage3.mv1");
 
     MV1SetScale(stageModel, VGet(6.0f, 6.0f, 6.0f));
 

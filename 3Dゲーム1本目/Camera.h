@@ -35,6 +35,9 @@ private:
     //上記2つのカメラ関数をまとめる
     void CameraSetting();
 
+    //カメラに対する当たり判定の押し出し
+    float CameraCollisionPush();
+
 public:
     //上記の関数をまとめて更新させる
 	void Update();

@@ -4,15 +4,13 @@
 #include <math.h>
 #include <tchar.h>
 
-
-
 //カメラの移動
 void Camera::CameraMovement()
 {
     isMoving = false;
 
     float nextX, nextZ;
-
+    
     if (CheckHitKey(KEY_INPUT_A))
     {
         nextX = cameraPosition.x - cos(cameraYaw) * Config::CAMERA_MOVE_SPEED;
@@ -150,6 +148,11 @@ void Camera::CameraSetting()
     );
 }
 
+float Camera::CameraCollisionPush()
+{
+
+
+};
 
 //上記の関数をまとめて更新させる
 void Camera::Update()
