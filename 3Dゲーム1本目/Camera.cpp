@@ -148,11 +148,11 @@ void Camera::CameraSetting()
     );
 }
 
-float Camera::CameraCollisionPush()
-{
-
-
-};
+//float Camera::CameraCollisionPush()
+//{
+//
+//
+//};
 
 //ã‹L‚ÌŠÖ”‚ğ‚Ü‚Æ‚ß‚ÄXV‚³‚¹‚é
 void Camera::Update()
