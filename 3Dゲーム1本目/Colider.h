@@ -16,6 +16,10 @@ protected:
     //四方の壁の当たり判定
     bool WallColider(float nextX,float nextZ);
 
-    
+    ////壁にぶつかった際の垂直な方向ベクトルを求める
+    //VECTOR PushbackAngle();
+
+    ////押し戻し処理
+    //void PushBack();
 
 };

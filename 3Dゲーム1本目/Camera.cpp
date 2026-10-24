@@ -17,9 +17,13 @@ void Camera::CameraMovement()
         nextZ = cameraPosition.z + sin(cameraYaw) * Config::CAMERA_MOVE_SPEED;
 
         // 次の位置が壁の中ではなければ移動
-        if (WallColider(nextX, nextZ))
+        if (WallColider(nextX, cameraPosition.z))
         {
             cameraPosition.x = nextX;
+        }
+
+        if (WallColider(cameraPosition.x, nextZ))
+        {
             cameraPosition.z = nextZ;
         }
 
@@ -32,9 +36,13 @@ void Camera::CameraMovement()
         nextZ = cameraPosition.z - sin(cameraYaw) * Config::CAMERA_MOVE_SPEED;
 
         // 次の位置が壁の中ではなければ移動
-        if (WallColider(nextX, nextZ))
+        if (WallColider(nextX, cameraPosition.z))
         {
             cameraPosition.x = nextX;
+        }
+
+        if (WallColider(cameraPosition.x, nextZ))
+        {
             cameraPosition.z = nextZ;
         }
 
@@ -47,9 +55,13 @@ void Camera::CameraMovement()
         nextZ = cameraPosition.z + cos(cameraYaw) * Config::CAMERA_MOVE_SPEED;
 
         // 次の位置が壁の中ではなければ移動
-        if (WallColider(nextX, nextZ))
+        if (WallColider(nextX, cameraPosition.z))
         {
             cameraPosition.x = nextX;
+        }
+
+        if (WallColider(cameraPosition.x, nextZ))
+        {
             cameraPosition.z = nextZ;
         }
 
@@ -62,9 +74,13 @@ void Camera::CameraMovement()
         nextZ = cameraPosition.z - cos(cameraYaw) * Config::CAMERA_MOVE_SPEED;
 
         // 次の位置が壁の中ではなければ移動
-        if (WallColider(nextX, nextZ))
+        if (WallColider(nextX, cameraPosition.z))
         {
             cameraPosition.x = nextX;
+        }
+
+        if (WallColider(cameraPosition.x, nextZ))
+        {
             cameraPosition.z = nextZ;
         }
 
