@@ -148,10 +148,12 @@
     <ClCompile Include="AIClient.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Config.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="memory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
+    <None Include="D:\AI\Shinosawa_Hiro_Persona_v0.3.1-beta.1_public\Persona.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="ソース ファイル\Characters">
+      <UniqueIdentifier>{d10df314-7b09-43b3-addb-cc6670844d1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Characters\Hiro">
+      <UniqueIdentifier>{808b9008-dab5-467a-960a-2c945b8fe4dd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIClient.h">
@@ -41,10 +47,16 @@
     <ClCompile Include="Config.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore">
       <Filter>ソース ファイル</Filter>
+    </None>
+    <None Include="D:\AI\Shinosawa_Hiro_Persona_v0.3.1-beta.1_public\Persona.md">
+      <Filter>ソース ファイル\Characters\Hiro</Filter>
     </None>
   </ItemGroup>
 </Project>
