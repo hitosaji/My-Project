@@ -1,0 +1,27 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Build files
+Debug/
+Release/
+x64/
+x86/
+
+# Compiled files
+*.obj
+*.pdb
+*.ilk
+*.exe
+*.dll
+*.lib
+
+# API secrets
+.env
+.env.*
+!.env.example
+
+# Temporary files
+*.log
+*.tmp
