@@ -3,6 +3,15 @@
 class Colider
 {
 protected:
+
+    struct Wall
+    {
+        float minX;
+        float maxX;
+        float minZ;
+        float maxZ;
+    };
+
     // 壁の範囲
     float wallMinX = Config::WALL_EXTENT_X_1;
     float wallMaxX = Config::WALL_EXTENT_X_2;
@@ -14,12 +23,6 @@ protected:
     float wallMaxZ = Config::WALL_EXTENT_Z_2;
 
     //四方の壁の当たり判定
-    bool WallColider(float nextX,float nextZ);
-
-    ////壁にぶつかった際の垂直な方向ベクトルを求める
-    //VECTOR PushbackAngle();
-
-    ////押し戻し処理
-    //void PushBack();
+    bool WallColider(float nextX, float nextZ, float wallMinX, float wallMaxX, float wallMinZ, float wallMaxZ);
 
 };

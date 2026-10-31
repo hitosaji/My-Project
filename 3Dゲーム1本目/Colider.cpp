@@ -1,7 +1,7 @@
 #include"Colider.h"
 #include"Camera.h"
 
-bool Colider::WallColider(float nextX, float nextZ)
+bool Colider::WallColider(float nextX, float nextZ,float wallMinX, float wallMaxX,float wallMinZ,float wallMaxZ)
 {
     // ŽŸ‚ÌˆÊ’u‚ª•Ç‚Ì’†‚Å‚Í‚È‚¯‚ê‚ÎˆÚ“®
     if (nextX <= wallMinX && nextX >= wallMaxX &&

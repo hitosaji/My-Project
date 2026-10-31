@@ -7,11 +7,6 @@
 class Camera:protected Colider
 {
 private:
-    VECTOR cameraPosition = 
-        VGet(Config::INITIAL_CAMERA_POSITION_X,
-             Config::INITIAL_CAMERA_POSITION_Y, 
-             Config::INITIAL_CAMERA_POSITION_Z);
-
 
     float cameraYaw = 0.0f;   // 左右の向き
     float cameraPitch = 0.0f; // 上下の向き
@@ -38,6 +33,11 @@ private:
     //カメラに対する当たり判定の押し出し
     float CameraCollisionPush();
 
+protected:
+    VECTOR cameraPos =
+        VGet(Config::INITIAL_CAMERA_POSITION_X,
+            Config::INITIAL_CAMERA_POSITION_Y,
+            Config::INITIAL_CAMERA_POSITION_Z);
 public:
     //上記の関数をまとめて更新させる
 	void Update();

@@ -7,8 +7,20 @@ namespace Config
     const int INITIAL_CAMERA_POSITION_Z = -800.0f;
 
     //四方の壁の当たり判定・正面
+    const float WALL_NORTH_X_1 = 10000.0f;
+    const float WALL_NORTH_Y_1 = 10000.0f;
+    const float WALL_NORTH_Z_1 = 10000.0f;
+
+    const float WALL_NORTH_X_2 = 5000.0f;
+    const float WALL_NORTH_Y_2 = 5000.0f;
+    const float WALL_NORTH_Z_2 = 5000.0f;
 
     //四方の壁の当たり判定・左
+    const float WALL_WEST_X_1 = -10000.0f;
+    const float WALL_WEST_Y_1 = -10000.0f;
+    const float WALL_WEST_Z_1 = -10000.0f;
+
+    const float WALL_WEST_X_2 = -5000.0f;
 
     //四方の壁の当たり判定・右
 

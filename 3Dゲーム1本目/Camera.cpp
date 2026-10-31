@@ -13,18 +13,18 @@ void Camera::CameraMovement()
     
     if (CheckHitKey(KEY_INPUT_A))
     {
-        nextX = cameraPosition.x - cos(cameraYaw) * Config::CAMERA_MOVE_SPEED;
-        nextZ = cameraPosition.z + sin(cameraYaw) * Config::CAMERA_MOVE_SPEED;
+        nextX = cameraPos.x - cos(cameraYaw) * Config::CAMERA_MOVE_SPEED;
+        nextZ = cameraPos.z + sin(cameraYaw) * Config::CAMERA_MOVE_SPEED;
 
         // 次の位置が壁の中ではなければ移動
-        if (WallColider(nextX, cameraPosition.z))
+        if (WallColider(nextX, cameraPos.z))
         {
-            cameraPosition.x = nextX;
+            cameraPos.x = nextX;
         }
 
-        if (WallColider(cameraPosition.x, nextZ))
+        if (WallColider(cameraPos.x, nextZ))
         {
-            cameraPosition.z = nextZ;
+            cameraPos.z = nextZ;
         }
 
         isMoving = true;
@@ -32,18 +32,18 @@ void Camera::CameraMovement()
 
     if (CheckHitKey(KEY_INPUT_D))
     {
-        nextX = cameraPosition.x + cos(cameraYaw) * Config::CAMERA_MOVE_SPEED;
-        nextZ = cameraPosition.z - sin(cameraYaw) * Config::CAMERA_MOVE_SPEED;
+        nextX = cameraPos.x + cos(cameraYaw) * Config::CAMERA_MOVE_SPEED;
+        nextZ = cameraPos.z - sin(cameraYaw) * Config::CAMERA_MOVE_SPEED;
 
         // 次の位置が壁の中ではなければ移動
-        if (WallColider(nextX, cameraPosition.z))
+        if (WallColider(nextX, cameraPos.z))
         {
-            cameraPosition.x = nextX;
+            cameraPos.x = nextX;
         }
 
-        if (WallColider(cameraPosition.x, nextZ))
+        if (WallColider(cameraPos.x, nextZ))
         {
-            cameraPosition.z = nextZ;
+            cameraPos.z = nextZ;
         }
 
         isMoving = true;
@@ -51,18 +51,18 @@ void Camera::CameraMovement()
 
     if (CheckHitKey(KEY_INPUT_W))
     {
-        nextX = cameraPosition.x + sin(cameraYaw) * Config::CAMERA_MOVE_SPEED;
-        nextZ = cameraPosition.z + cos(cameraYaw) * Config::CAMERA_MOVE_SPEED;
+        nextX = cameraPos.x + sin(cameraYaw) * Config::CAMERA_MOVE_SPEED;
+        nextZ = cameraPos.z + cos(cameraYaw) * Config::CAMERA_MOVE_SPEED;
 
         // 次の位置が壁の中ではなければ移動
-        if (WallColider(nextX, cameraPosition.z))
+        if (WallColider(nextX, cameraPos.z))
         {
-            cameraPosition.x = nextX;
+            cameraPos.x = nextX;
         }
 
-        if (WallColider(cameraPosition.x, nextZ))
+        if (WallColider(cameraPos.x, nextZ))
         {
-            cameraPosition.z = nextZ;
+            cameraPos.z = nextZ;
         }
 
         isMoving = true;
@@ -70,18 +70,18 @@ void Camera::CameraMovement()
 
     if (CheckHitKey(KEY_INPUT_S))
     {
-        nextX = cameraPosition.x - sin(cameraYaw) * Config::CAMERA_MOVE_SPEED;
-        nextZ = cameraPosition.z - cos(cameraYaw) * Config::CAMERA_MOVE_SPEED;
+        nextX = cameraPos.x - sin(cameraYaw) * Config::CAMERA_MOVE_SPEED;
+        nextZ = cameraPos.z - cos(cameraYaw) * Config::CAMERA_MOVE_SPEED;
 
         // 次の位置が壁の中ではなければ移動
-        if (WallColider(nextX, cameraPosition.z))
+        if (WallColider(nextX, cameraPos.z))
         {
-            cameraPosition.x = nextX;
+            cameraPos.x = nextX;
         }
 
-        if (WallColider(cameraPosition.x, nextZ))
+        if (WallColider(cameraPos.x, nextZ))
         {
-            cameraPosition.z = nextZ;
+            cameraPos.z = nextZ;
         }
 
         isMoving = true;
@@ -139,9 +139,9 @@ float Camera::CameraVibration()
 VECTOR Camera::CameraSensitivity()
 {
     VECTOR targetPosition = VGet(
-        cameraPosition.x + cos(cameraPitch) * sin(cameraYaw) * Config::CAMERA_TARGET_DISTANCE,
-        cameraPosition.y + sin(cameraPitch) * Config::CAMERA_TARGET_DISTANCE,
-        cameraPosition.z + cos(cameraPitch) * cos(cameraYaw) * Config::CAMERA_TARGET_DISTANCE
+        cameraPos.x + cos(cameraPitch) * sin(cameraYaw) * Config::CAMERA_TARGET_DISTANCE,
+        cameraPos.y + sin(cameraPitch) * Config::CAMERA_TARGET_DISTANCE,
+        cameraPos.z + cos(cameraPitch) * cos(cameraYaw) * Config::CAMERA_TARGET_DISTANCE
         );
 
     return targetPosition;
@@ -154,9 +154,9 @@ void Camera::CameraSetting()
     VECTOR targetPosition = CameraSensitivity();
 
     SetCameraPositionAndTarget_UpVecY(
-        VGet(cameraPosition.x,
-             cameraPosition.y + bobOffset,
-             cameraPosition.z),
+        VGet(cameraPos.x,
+             cameraPos.y + bobOffset,
+             cameraPos.z),
             
         VGet(targetPosition.x,
              targetPosition.y + bobOffset,
