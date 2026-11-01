@@ -4,7 +4,8 @@
 #include <fstream>
 #include <sstream>
 
-bool Character::LoadPersona(const std::string& filePath)
+bool Character::LoadPersona(const std::string& characterID, 
+const std::string& displayName,const std::string& filePath)
 {
     // ファイルを開く
     std::ifstream file(filePath);
@@ -16,6 +17,7 @@ bool Character::LoadPersona(const std::string& filePath)
 
     // ファイルの内容を読み込む
     std::ostringstream buffer;
+    std::string 
     buffer << file.rdbuf();
 
     m_persona = buffer.str();

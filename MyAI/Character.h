@@ -1,15 +1,19 @@
 #pragma once
 #include <string>
-using namespace std;
 
 class Character
 {
 private:
-    string m_persona;
+   
+    std::string m_characterID;
+    std::string m_displayName;
+    std::string m_persona;
 
 public:
     // lŠi‘—¿‚ğ“Ç‚İ‚Ş
-    bool LoadPersona(const std::string& filePath);
+    bool LoadPersona(const std::string& characterID, 
+                     const std::string& displayName,
+                     const std::string& filePath);
 
     // lŠi‘—¿‚ğæ“¾‚·‚é
     const std::string& GetPersona() const;
