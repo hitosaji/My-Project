@@ -17,13 +17,21 @@ const std::string& displayName,const std::string& filePath)
 
     // ファイルの内容を読み込む
     std::ostringstream buffer;
-    std::string 
     buffer << file.rdbuf();
 
-    m_persona = buffer.str();
+    std::string persona = buffer.str();
 
-    // 読み込んだ内容が空でないか確認
-    return !m_persona.empty();
+    if (persona.empty())
+    {
+        return false;
+    }
+
+    // 人格情報を保存する
+    m_characterID = characterID;
+    m_displayName = displayName;
+    m_persona = persona;
+
+    return true;
 }
 
 const std::string& Character::GetPersona() const
