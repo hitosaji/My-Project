@@ -681,7 +681,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
                             dead = false;
 
                             //残機が0の状態での死亡していたらゲームオーバー
-                            if (playerLife == 0)
+                            if (playerLife == 1)
                             {
                                
                                 if (playingBgm && explosionSound2 != -1)
@@ -783,13 +783,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
                 arrowX = 214.0f + 320.0f * progress;
 
-                DrawTriangle(
-                    arrowX, arrowY,
-                    arrowX - 10, arrowY - 15,
-                    arrowX + 10, arrowY - 15,
-                    GetColor(100, 200, 255),
-                    TRUE
-                );
+                DrawTriangle(arrowX, arrowY,arrowX - 10, arrowY - 15,arrowX + 10, arrowY - 15,GetColor(100, 200, 255),TRUE);
 
 				DrawExtendGraph(540, 5, 600, 55, PLAYERImg, TRUE);
 
@@ -906,6 +900,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
                     frameCounter = 0;
                     PopulateObstacles(allObstacles);
 
+
                     showDeathInfo = false;
                     clearFlag = false;
                     spaceLock = true;
@@ -977,6 +972,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
                         background.Init();
                         frameCounter = 0;
+                        elapsedTime = 0;
 
                         PopulateObstacles(allObstacles);
                         // クリック音再生（タイトルへ戻る操作音）
