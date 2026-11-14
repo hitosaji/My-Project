@@ -41,7 +41,25 @@ def init_db():
 
         connection.commit()
 
-# 新しい会話を作成する
+ # 新しい会話を作成する
+def create_conversation(persona_id: str, title: str = "新しい会話") -> int:
+
+    # データベースに接続
+    with sqlite3.connect(DB_PATH) as connection:
+
+        # 会話を登録
+        cursor = connection.execute("""
+            INSERT INTO conversations (persona_id, title)
+            VALUES (?, ?)
+        """, (persona_id, title))
+
+        # 登録を確定
+        connection.commit()
+
+        # 作成された会話のIDを返す
+        return cursor.lastrowid
+
+# メッセージを保存する
 def save_message(conversation_id: int, role: str, content: str) -> int:
 
     # データベースに接続
@@ -61,3 +79,53 @@ def save_message(conversation_id: int, role: str, content: str) -> int:
 
         # 保存されたメッセージのIDを返す
         return cursor.lastrowid
+
+    # 会話IDから人格IDを取得する
+def get_conversation_persona(conversation_id: int) -> str | None:
+
+    # データベースに接続
+    with sqlite3.connect(DB_PATH) as connection:
+
+        # 指定された会話IDの人格IDを取得
+        cursor = connection.execute("""
+            SELECT persona_id
+            FROM conversations
+            WHERE id = ?
+        """, (conversation_id,))
+
+        # 検索結果を取得
+        row = cursor.fetchone()
+
+        # 会話が存在しなければ None を返す
+        if row is None:
+            return None
+
+        # 人格IDを返す
+        return row[0]
+
+# 会話履歴を取得する
+def get_messages(conversation_id: int) -> list[dict]:
+
+    # データベースに接続
+    with sqlite3.connect(DB_PATH) as connection:
+
+        # 指定された会話IDのメッセージを取得
+        cursor = connection.execute("""
+            SELECT role, content, created_at
+            FROM messages
+            WHERE conversation_id = ?
+            ORDER BY id ASC
+        """, (conversation_id,))
+
+        # 検索結果をすべて取得
+        rows = cursor.fetchall()
+
+        # 取得したデータを辞書形式にして返す
+        return [
+            {
+                "role": row[0],
+                "content": row[1],
+                "created_at": row[2]
+            }
+            for row in rows
+        ]
