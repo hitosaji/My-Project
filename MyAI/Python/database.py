@@ -80,7 +80,7 @@ def save_message(conversation_id: int, role: str, content: str) -> int:
         # 保存されたメッセージのIDを返す
         return cursor.lastrowid
 
-    # 会話IDから人格IDを取得する
+# 会話IDから人格IDを取得する
 def get_conversation_persona(conversation_id: int) -> str | None:
 
     # データベースに接続
@@ -129,3 +129,23 @@ def get_messages(conversation_id: int) -> list[dict]:
             }
             for row in rows
         ]
+
+        # 保存されている会話一覧を取得する
+        def get_conversations() -> list[dict]:
+            with sqlite3.connect(DB_PATH) as connection:
+                cursor = connection.execute("""
+                    SELECT id, persona_id, title, created_at
+                    FROM conversations
+                    ORDER BY id DESC
+                """)
+                rows = cursor.fetchall()
+
+                return [
+                    {
+                        "id": row[0],
+                        "persona_id": row[1],
+                        "title": row[2],
+                        "created_at": row[3]
+                    }
+                    for row in rows
+                ]

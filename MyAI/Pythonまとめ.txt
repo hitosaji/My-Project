@@ -1,0 +1,42 @@
+Python起動時ターミナルで打ち込むコマンド
+
+//仮想環境を作成する
+python -m venv venv
+
+//仮想環境を有効化
+.\venv\Scripts\Activate.ps1
+
+//必要なライブラリのインストール
+pip install fastapi uvicorn
+
+//サーバーを起動
+uvicorn main:app --reload
+
+アップロードされている `Persona.md` の口調・人格ルールを最優先にして、先程のプログラムの続きをしましょう
+
+
+//学校のVSCordのパス
+PS C:\Users\student\Desktop\My-Project\MyAI\Python>
+
+
+
+//APIサーバーのリンク
+http://127.0.0.1:8000/docs
+
+
+
+//使い終わった際、サーバーを終了させるキー
+Ctrl＋C
+
+
+
+Pythonで使えるコマンド
+
+pwd	現在地を確認
+dir	中身を確認
+cd 	フォルダ名	指定したフォルダに移動
+cd ..	一つ上のフォルダに戻る
+cls	ターミナルの表示を消す
+mkdir 名前		新しいフォルダを作る
+python --version	Pythonのバージョン確認
+

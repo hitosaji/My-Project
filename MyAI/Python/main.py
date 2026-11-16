@@ -7,12 +7,43 @@ from database import (
     save_message,
     get_conversation_persona,
     get_messages
+    get_conversations
 )
+from pathlib import Path
 
 # FastAPIのインスタンスを作成
 app = FastAPI()
 # データベースを初期化
 init_db()
+
+# 人格設定ファイルの保存場所
+BASE_DIR = Path(__file__).resolve().parent.parent
+CHARACTERS_DIR = BASE_DIR / "Characters"
+
+
+# 人格IDに対応する人格設定を読み込む
+def load_persona(persona_id: str) -> str | None:
+
+    persona_path = (
+        CHARACTERS_DIR / persona_id / "Persona.md"
+    ).resolve()
+
+    # Charactersフォルダの外側を参照しないようにする
+    if not persona_path.is_relative_to(CHARACTERS_DIR.resolve()):
+        return None
+
+    # 人格設定ファイルが存在しない場合
+    if not persona_path.is_file():
+        return None
+
+    # 人格設定を読み込む
+    with open(persona_path, "r", encoding="utf-8") as file:
+        persona_prompt = file.read()
+
+    print("人格設定を読み込みました:", persona_path)
+    print("人格設定の文字数:", len(persona_prompt))
+
+    return persona_prompt
 
 
 # 受け取る文章の形式を定義
@@ -35,6 +66,12 @@ def chat(request: ChatRequest):
 
     # 受け取った文章を取得
     user_message = request.message
+
+    # 指定された人格IDから人格設定を読み込む
+    persona_prompt = load_persona(request.persona_id)
+
+    if persona_prompt is None:
+        return {"error": "指定された人格が見つかりません。"}
 
     # 仮の返答を作成
     reply = f"こんにちは！MyAIです。あなたは「{user_message}」と送ってくれましたね。"
@@ -76,10 +113,22 @@ def chat(request: ChatRequest):
         for message in history
     ]
 
-    # AIに渡す会話履歴を表示
-    print("=== AIに渡す会話履歴 ===")
-    for message in model_messages:
-        print(message)
+    # AIに渡す人格設定を先頭に追加
+    model_messages = [
+        {
+            "role": "system",
+            "content": persona_prompt
+        },
+        *model_messages
+    ]
+
+# AIに渡す会話履歴を表示
+    print("=== AIに渡すメッセージ構成 ===")
+    for i, message in enumerate(model_messages):
+        print(
+            f"{i}: role={message['role']}, "
+            f"文字数={len(message['content'])}"
+        )
 
     # AI返答の保存処理を確認
     print("=== AI返答の保存処理を実行 ===")
