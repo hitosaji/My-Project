@@ -40,3 +40,8 @@ cls	ターミナルの表示を消す
 mkdir 名前		新しいフォルダを作る
 python --version	Pythonのバージョン確認
 
+豆知識
+SQLiteの INTEGER PRIMARY KEY AUTOINCREMENT(id)の上限は最大値が9,223,372,036,854,775,807
+約922京
+参考 毎秒1,000個のIDを発行し続けても、上限に達するまで約2億9,200万年かかる
+

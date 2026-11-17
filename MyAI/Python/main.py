@@ -4,9 +4,11 @@ from pydantic import BaseModel
 from database import (
     init_db,
     create_conversation,
+    update_conversation_title,
+    delete_conversation,
     save_message,
     get_conversation_persona,
-    get_messages
+    get_messages,
     get_conversations
 )
 from pathlib import Path
@@ -45,7 +47,6 @@ def load_persona(persona_id: str) -> str | None:
 
     return persona_prompt
 
-
 # 受け取る文章の形式を定義
 class ChatRequest(BaseModel):
     message: str
@@ -57,6 +58,68 @@ class ChatRequest(BaseModel):
 def home():
     return {"message": "MyAI Server is running!"}
 
+# 保存されている会話一覧を取得するAPI
+@app.get("/conversations")
+def conversations():
+    conversation_list = get_conversations()
+    return {"conversations": conversation_list}
+
+# 会話タイトルを変更するAPI
+class TitleUpdateRequest(BaseModel):
+    title: str
+
+@app.put("/conversations/{conversation_id}/title")
+def update_title(conversation_id: int, request: TitleUpdateRequest):
+    title = request.title.strip()
+
+    if not title:
+        return {"error": "タイトルを空にすることはできません。"}
+
+    if len(title) > 30:
+        return {"error": "タイトルは30文字以内にしてください。"}
+
+    updated = update_conversation_title(conversation_id, title)
+
+    if not updated:
+        return {"error": "指定された会話は存在しません。"}
+
+    return {
+        "conversation_id": conversation_id,
+        "title": title,
+        "message": "会話タイトルを更新しました。"
+    }
+
+# 特定の会話のメッセージ履歴を取得するAPI
+@app.get("/conversations/{conversation_id}/messages")
+def conversation_messages(conversation_id: int):
+
+    # 会話が存在するか確認
+    existing_persona = get_conversation_persona(conversation_id)
+
+    if existing_persona is None:
+        return {"error": "指定された会話は存在しません。"}
+
+    # 会話履歴を取得
+    messages = get_messages(conversation_id)
+
+    return {
+        "conversation_id": conversation_id,
+        "persona_id": existing_persona,
+        "messages": messages
+    }
+
+# 会話を削除するAPI
+@app.delete("/conversations/{conversation_id}")
+def delete_conversation_api(conversation_id: int):
+    deleted = delete_conversation(conversation_id)
+
+    if not deleted:
+        return {"error": "指定された会話は存在しません。"}
+
+    return {
+        "conversation_id": conversation_id,
+        "message": "会話を削除しました。"
+    }
 
 # チャット用API
 @app.post("/chat")
@@ -79,8 +142,22 @@ def chat(request: ChatRequest):
     # 会話IDが指定されているか確認
     if request.conversation_id is None:
 
-        # 指定されていなければ新しい会話を作成
-        conversation_id = create_conversation(request.persona_id)
+        # 最初のメッセージから会話タイトルを作成
+        title = " ".join(user_message.split())
+
+        # タイトルが空の場合
+        if not title:
+            title = "新しい会話"
+
+        # タイトルが30文字を超える場合は短縮
+        if len(title) > 30:
+            title = title[:30] + "…"
+
+        # タイトルを設定して新しい会話を作成
+        conversation_id = create_conversation(
+            request.persona_id,
+            title
+        )
 
     else:
 
@@ -122,7 +199,7 @@ def chat(request: ChatRequest):
         *model_messages
     ]
 
-# AIに渡す会話履歴を表示
+    # AIに渡す会話履歴を表示
     print("=== AIに渡すメッセージ構成 ===")
     for i, message in enumerate(model_messages):
         print(

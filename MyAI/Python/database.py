@@ -39,6 +39,24 @@ def init_db():
             )
         """)
 
+        # 既存データベースに updated_at がなければ追加
+        columns = connection.execute(
+            "PRAGMA table_info(conversations)"
+        ).fetchall()
+
+        column_names = [column[1] for column in columns]
+
+        if "updated_at" not in column_names:
+            connection.execute("""
+                ALTER TABLE conversations
+                ADD COLUMN updated_at TEXT
+            """)
+
+            connection.execute("""
+                UPDATE conversations
+                SET updated_at = created_at
+            """)
+
         connection.commit()
 
  # 新しい会話を作成する
@@ -59,6 +77,18 @@ def create_conversation(persona_id: str, title: str = "新しい会話") -> int:
         # 作成された会話のIDを返す
         return cursor.lastrowid
 
+# 会話タイトルを更新
+def update_conversation_title(conversation_id: int, title: str) -> bool:
+    with sqlite3.connect(DB_PATH) as connection:
+        cursor = connection.execute("""
+            UPDATE conversations
+            SET title = ?
+            WHERE id = ?
+        """, (title, conversation_id))
+        connection.commit()
+        return cursor.rowcount > 0
+
+
 # メッセージを保存する
 def save_message(conversation_id: int, role: str, content: str) -> int:
 
@@ -73,6 +103,13 @@ def save_message(conversation_id: int, role: str, content: str) -> int:
             INSERT INTO messages (conversation_id, role, content)
             VALUES (?, ?, ?)
         """, (conversation_id, role, content))
+
+        # 会話の最終更新日時を更新
+        connection.execute("""
+            UPDATE conversations
+            SET updated_at = CURRENT_TIMESTAMP
+            WHERE id = ?
+        """, (conversation_id,))
 
         # 登録を確定
         connection.commit()
@@ -130,22 +167,40 @@ def get_messages(conversation_id: int) -> list[dict]:
             for row in rows
         ]
 
-        # 保存されている会話一覧を取得する
-        def get_conversations() -> list[dict]:
-            with sqlite3.connect(DB_PATH) as connection:
-                cursor = connection.execute("""
-                    SELECT id, persona_id, title, created_at
-                    FROM conversations
-                    ORDER BY id DESC
-                """)
-                rows = cursor.fetchall()
+ # 保存されている会話一覧を取得する
+def get_conversations() -> list[dict]:
 
-                return [
-                    {
-                        "id": row[0],
-                        "persona_id": row[1],
-                        "title": row[2],
-                        "created_at": row[3]
-                    }
-                    for row in rows
-                ]
+    # データベースに接続
+    with sqlite3.connect(DB_PATH) as connection:
+
+        # 保存されている会話を最終更新日時の新しい順に取得
+        cursor = connection.execute("""
+            SELECT id, persona_id, title, created_at, updated_at
+            FROM conversations
+            ORDER BY updated_at DESC, id DESC
+        """)
+
+        # 検索結果をすべて取得
+        rows = cursor.fetchall()
+
+        # 取得したデータを辞書形式にして返す
+        return [
+            {
+                "id": row[0],
+                "persona_id": row[1],
+                "title": row[2],
+                "created_at": row[3],
+                "updated_at": row[4]
+            }
+            for row in rows
+        ]
+        
+# 会話を削除
+def delete_conversation(conversation_id: int) -> bool:
+    with sqlite3.connect(DB_PATH) as connection:
+        cursor = connection.execute("""
+            DELETE FROM conversations
+            WHERE id = ?
+        """, (conversation_id,))
+        connection.commit()
+        return cursor.rowcount > 0
